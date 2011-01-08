@@ -1,5 +1,7 @@
 from tornado import Server
-import datetime,time
+from time import time
+from user import User
+from template_engine import template
 import sqlite3
 #users = {'Jordan':['hello', 'world']}
 header = """
@@ -9,55 +11,99 @@ header = """
 
 </head>
 <body>
-<form style="text-align:center" action="../submit" method=POST>
-Post a message: <br /><textarea name="msg"></textarea><input type="hidden" value="%s" name="current_user"><input type="hidden" value="%s" name="current_Wall"><br /><input type="submit" value="Submit"></input>
+<form style="text-align:center" action="../submit" method=POST>Specify Author: <input type="text" name="author"></input><br />
+Post a message: <br /><textarea name="msg"></textarea><input type="hidden" value="%s" name="current_Wall"><br /><input type="submit" value="Submit"></input>
 <br />
 """
 
-def adapt_datetime(ts):
-	return time.mktime(ts.timetuple())
+def age(old):
+	try:
+		UNITS = {86400:'day', 3600:'hour', 60:'minute', 1:'second'}
+		duration = int(time())-old
+		elapsed = ""
+		for unit in UNITS:
+			quotient = duration/unit
+			if quotient == 1:
+				elapsed += """%s %s """ % (str(quotient),UNITS[unit])
+			elif quotient > 1:
+				elapsed += """%s %ss """ % (str(quotient), UNITS[unit])
+			duration = duration % unit
+		if elapsed.split()[1] in ['day','days','hour','hours']:
+			print elapsed.split()
+			elapsed = " ".join(elapsed.split()[:2]) + ' '
+		return elapsed + 'ago'
+	except:
+		return 'moments ago'
 
+	
+	
+
+class Message:
+	def __init__(self, author='', time='', message=''):
+		self.author = author
+		self.time = time
+		self.message = message
+		
+	def __cmp__(self, other):
+		if self.time < other.time:
+			return -1 
+		elif self.time > other.time:
+			return 1
+		elif self.time == other.time:
+			return 0
+
+	def display(self):
+		return self.author + ": " + self.message
+			 
 class WallConnection:
-	def __init__(self, current_user, current_Wall):
-		self.current_user = current_user
+	def __init__(self, current_Wall):
+		
 		self.current_Wall = current_Wall	
 		self.connection = sqlite3.connect('./commsdb.db')
 		self.cursor = self.connection.cursor()
-		self.cursor.execute('CREATE TABLE IF NOT EXISTS "WALL" ("ID" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "username" TEXT NOT NULL , "target" TEXT NOT NULL , "date" DATETIME NOT NULL , "message" TEXT NOT NULL )')
-	def set_wall(self, current_message):
-		sqlite3.register_adapter(datetime.datetime, adapt_datetime)
-		now = datetime.datetime.now()
-		#users[current_Wall].append(current_user+' says ' + response.get_field('msg'))
-		current_message = current_message.replace("&", "&amp;") 
-		current_message = current_message.replace("<", "&lt;")
-		current_message = current_message.replace(">", "&gt;")
-		current_message = current_message.replace('"', "&quot;")
+		self.cursor.execute('CREATE TABLE IF NOT EXISTS "WALL" ("ID" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "author" TEXT NOT NULL , "target" TEXT NOT NULL , "time" INTEGER NOT NULL , "message" TEXT NOT NULL )')
+	def set_wall(self, m):
+		
+	
+		#users[current_Wall].append(author+' says ' + response.get_field('msg'))
+		m.message = m.message.replace("&", "&amp;") 
+		m.message = m.message.replace("<", "&lt;")
+		m.message = m.message.replace(">", "&gt;")
+		m.message = m.message.replace('"', "&quot;")
 		try:
-			self.cursor.execute('INSERT INTO "WALL" ("username","target","date","message") VALUES ("%s","%s","%s","%s")' % (self.current_user, self.current_Wall, now,current_message))
+			self.cursor.execute('INSERT INTO "WALL" ("author","target","time","message") VALUES ("%s","%s","%s","%s")' % (m.author, self.current_Wall, m.time,m.message))
 			self.connection.commit()
 			return True	
 		except sqlite3.OperationalError, e:
 			return e.args[0]
 	def get_wall(self):
-	
+		
 		final = []
 		data = self.cursor.execute('SELECT * FROM WALL WHERE WALL.target = "%s" ORDER BY ID DESC' % self.current_Wall)
 		for row in data:
-			final.append([row[1], row[4], row[3]])
+			
+			final.append([row[1], row[4], age(int(row[3]))])
 			
 		
 		return final
 
-		
-
 def _wall(response,current_Wall):
-	w = WallConnection(response.get_field('username'),current_Wall)
-	final = header % (w.current_Wall, w.current_user, w.current_Wall) 
-	final += str(w.get_wall())
+	user = User.get(current_Wall)
+	if user == False:
+		response.redirect("/signup")
+	else:
+		w = WallConnection(current_Wall)
+		fullname = user.get_first_name() + " " + user.get_last_name() 
+		final = header % (fullname, current_Wall) 
+		final += str(w.get_wall())
+		#context = {'wall':w}
+		#template.render_template('static/html/test.html', context, response)
+		response.write(final)
 	
-	response.write(final)
 def _submit(response):
-	w = WallConnection(response.get_field('current_user'),response.get_field('current_Wall'))
-	print w.set_wall(response.get_field('msg'))
-	response.redirect('/wall/%s?username=%s' % (w.current_Wall, w.current_user)) 
+	now = time()
+	m = Message(response.get_field('author'), now, response.get_field('msg'))
+	w = WallConnection(response.get_field('current_Wall'))
+	print w.set_wall(m)
+	response.redirect('/wall/%s' % (w.current_Wall)) 
 	
