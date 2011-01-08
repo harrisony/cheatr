@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+{% include templates/head.html %}
+<body>
+{% include templates/header.html %}
+	<h1>{{ page.title }}</h1>
+	<form method="POST" enctype="multipart/form-data">
+	<input type="hidden" name="ul_flag" value="True"/>
+	<p><strong>{{ ul_err_msg }}</strong></p>
+	First name: <input type="text" name="firstname" />
+	<br />
+	Last name: <input type="text" name="lastname" />
+	<br />
+	<input type="file" name="to_upload" size="20">
+	<br />
+	Subject: <input type="text" name="subject" />
+	<br />
+	Description: <input type="text" name="description" />
+	<br />
+	<input type="submit" name="submit" />
+	</form>
+{% include templates/footer.html %}
+</body>
+</html>

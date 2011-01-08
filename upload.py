@@ -1,12 +1,12 @@
 from tornado import Server
-
+from template_engine import template
 from time import time
 import os
 import os.path
 import mimetypes
 
 allfiles = []
-ul_error_mgs = ""
+ul_error_msg = ""
 
 FORM = """
 <html>
@@ -67,17 +67,18 @@ def file_edit(response, fileid):
     pass
 
 def chk_ul_fields(response):
-    ul_error_mgs = ""
+    ul_error_msg = ""
     filename, content_type, data = response.get_file('to_upload')
     if response.get_field("ul_flag") == "True":
         # we did submit a form
         if filename == None or content_type == None or data == None:
-            ul_error_mgs = "Please select a file to upload."
+            ul_error_msg = "Please select a file to upload."
         else:
             upload_page(response)
             return
     # we did not submit a form or it's wrong
-    response.write(FORM % (ul_error_mgs))
+    context = {"ul_err_msg": ul_error_msg}
+    template.render_template("templates/fileupload.html", context, response)
 
 all_files = {}
 
