@@ -29,5 +29,5 @@ if __name__ == "__main__":
     server.register("/fileupload", upload.chk_ul_fields)
     server.register("/filesearch", upload.file_search)
     server.register("/fileedit/(.*)", upload.file_edit)        
-    
+    server.register("/listallfiles", upload.listallfiles) 
     server.run()
