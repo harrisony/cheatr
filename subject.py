@@ -1,7 +1,5 @@
 from tornado import Server
 
-#When the template is done I can reference the python variables to the HTML data
-#fields and append this to later forms. 
 FORM="""
 <html>
 <head>
@@ -73,8 +71,20 @@ HTML = """
 </html>
 """
 
-# [name, category, units, description]
-# {"maths": [category, units, description], "english": ["English", 2, "boring"]}
+VIEW = """
+<html>
+<head>
+<body>
+<ul>
+<li><a href="http://localhost:8888/subject" + %s></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</body>
+</head>
+</html>
+"""
 
 subjects = {}
 
@@ -89,8 +99,11 @@ def subjectpage(response):
         subjects[subjectname]=[subjectcategory,subjectunits,subjectdescription]
         response.write("Saved")
 
-
 def viewsubject(response, subjectname):
     info = subjects[subjectname]
     response.write(HTML % (info[0], int(info[1]), info[2]))
 
+def listsubject(response):
+    response.write(VIEW % (subjectname))
+   
+    
