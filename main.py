@@ -4,6 +4,9 @@ from tornado import Server
 # e.g. import mymodule
 import profile
 import friends
+import subject
+
+
 if __name__ == "__main__":
     server = Server()
     # Register your urls here
@@ -15,5 +18,7 @@ if __name__ == "__main__":
     server.register('/globalfriendslist',friends.show_all_friends)
     server.register('/friends/', friends.my_friends_list)
     server.register('/friends/(.*)',friends.per_friends_list)
+    server.register("/subject", subject.subjectpage)
+    server.register("/subject/(.*)", subject.viewsubject)
 	
     server.run()
