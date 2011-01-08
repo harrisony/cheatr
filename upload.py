@@ -44,6 +44,12 @@ RESULT = """
 
 ul_file = ""
 
+def file_search(response):
+    pass
+
+def file_edit(response, fileid):
+    pass
+
 def chk_ul_fields(response):
     ul_error_mgs = ""
     filename, content_type, data = response.get_file('to_upload')
@@ -56,6 +62,7 @@ def chk_ul_fields(response):
             return
     # we did not submit a form or it's wrong
     response.write(FORM % (ul_error_mgs))
+
 def upload_page(response):
     global ul_file, content_type
     firstname = response.get_field('firstname')
@@ -76,6 +83,3 @@ def upload_page(response):
         file_url = ul_file.replace("\\", "/") # URLs don't like backslashes
         response.write(RESULT % (fullname, fullname, file_url))
 
-server = Server()
-server.register("/upload", chk_ul_fields)
-server.run()

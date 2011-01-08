@@ -6,6 +6,7 @@ import profile
 import friends
 import subject
 import comms
+import upload
 
 if __name__ == "__main__":
     server = Server()
@@ -23,4 +24,10 @@ if __name__ == "__main__":
     server.register('/wall/(.*)',comms._wall)
     server.register('/submit',comms._submit)
 
+
+    # file upload stuff
+    server.register("/fileupload", upload.chk_ul_fields)
+    server.register("/filesearch", upload.file_search)
+    server.register("/fileedit/(.*)", upload.file_edit)        
+    
     server.run()
