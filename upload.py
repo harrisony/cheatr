@@ -5,7 +5,7 @@ import os
 import os.path
 import mimetypes
 
-# notice the HTTP method in the form has been changed to POST
+allfiles = []
 ul_error_mgs = ""
 
 FORM = """
@@ -23,7 +23,7 @@ Last name: <input type="text" name="lastname" />
 <br />
 Subject: <input type="text" name="subject" />
 <br />
-Description: <input type="text" name="subject" />
+Description: <input type="text" name="description" />
 <br />
 <input type="submit" name="submit" />
 </form>
@@ -41,6 +41,22 @@ RESULT = """
 <img src="/%s" />
 </body>
 </html>"""
+
+LISTRESULT = """
+<table border = "0">
+%s
+</table>
+"""
+
+LISTRESULT2 = """
+<tr>
+<td><a href="/static/files/%s">%s</a></td>
+<td>%s</td>
+<td>%s</td>
+<td>%s</td>
+<td>%s</td>
+<td>%s</td>
+</tr>"""
 
 ul_file = ""
 
@@ -63,10 +79,14 @@ def chk_ul_fields(response):
     # we did not submit a form or it's wrong
     response.write(FORM % (ul_error_mgs))
 
+all_files = {}
+
 def upload_page(response):
     global ul_file, content_type
     firstname = response.get_field('firstname')
     lastname = response.get_field('lastname')
+    sbjct = response.get_field('subject')
+    descr = response.get_field('description')
     filename, content_type, data = response.get_file('to_upload')
     if firstname is None:
         response.write(FORM)
@@ -78,8 +98,22 @@ def upload_page(response):
             currenttime = str(int(time()))
         extension = mimetypes.guess_extension(content_type)
         ul_file = os.path.join('static', 'files', currenttime + extension)
+        #adding to list of all files
+        all_files[currenttime + extension] = [firstname+lastname, filename, content_type, sbjct, descr]
         open(ul_file, 'wb').write(data)
         fullname = '%s %s' % (firstname, lastname)
         file_url = ul_file.replace("\\", "/") # URLs don't like backslashes
         response.write(RESULT % (fullname, fullname, file_url))
 
+def listallfiles(response):
+    COMPLETELIST = ""
+    for item in all_files:
+        COMPLETELIST += LISTRESULT2 % (item, item, all_files[item][0], all_files[item][1], all_files[item][2], all_files[item][3], all_files[item][4])
+    print COMPLETELIST
+    response.write(LISTRESULT % (COMPLETELIST))
+        
+
+
+
+
+    
