@@ -88,4 +88,4 @@ class User:
             return False
             
 User.add({'username': 'james', 'firstname': 'James', 'lastname':'Curran', 'school': 'usyd', 'email':'god@it.usyd.edu.au', 'password': 'ilovejava'})
-User.add({'username': 'gman', 'firstname':'Gustav', 'lastname': 'Olafsen', 'school': 'unsw', 'email': 'gustav@isacoolperson.com', 'password': 'gus'}
+User.add({'username': 'gman', 'firstname':'Gustav', 'lastname': 'Olafsen', 'school': 'unsw', 'email': 'gustav@isacoolperson.com', 'password': 'gus'})
