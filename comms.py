@@ -17,7 +17,7 @@ Post a message: <br /><textarea name="msg"></textarea><input type="hidden" value
 def adapt_datetime(ts):
 	return time.mktime(ts.timetuple())
 
-connection = sqlite3.connect('./db.db')
+connection = sqlite3.connect('./commsdb.db')
 cursor = connection.cursor()
 cursor.execute('CREATE TABLE IF NOT EXISTS "WALL" ("ID" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "username" TEXT NOT NULL , "target" TEXT NOT NULL , "date" DATETIME NOT NULL , "message" TEXT NOT NULL )')
 class Wall:
