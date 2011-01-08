@@ -34,4 +34,3 @@ ALLFRIENDS = """<html>
 </html>"""
 FRIENDS = {'a':['a','b','d'], 'b':['c','a','d'], 'c':['c','d'], 'd': ['a','b']}
 
-LIELEMENT = "<li>%s</li>"

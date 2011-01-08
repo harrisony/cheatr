@@ -1,28 +1,29 @@
 from tornado import Server
 from friendsconstants import * 
 #from person import Person, example_person1, example_person2, example_person3    
+
 def get_friend_list(friends,bold='',sort=True):
-    friendlist = ""
-    if sort:
-        friends.sort()
-    for i in friends:
-        if i in bold:
-            friendlist += "<b>" + LIELEMENT %i + "</b>"
-        else:
-            friendlist += LIELEMENT % i
-    return friendlist
+	friendlist = ""
+	if sort:
+		friends.sort()
+	for friend in friends:
+		if friend in bold:
+			friendlist += "<a href='/profile/?user=%s'><b><li>%s</li></b></a>"%(friend,friend)
+		else:
+			friendlist += "<a href='/profile/?user=%s'><li>%s</li></a>"%(friend,friend)
+	return friendlist
 
 def per_friends_list(response, friend):
-    currentuser = response.get_field('user')
-    users_friends = FRIENDS[friend]
-    my_friends = FRIENDS[currentuser]
-    mutual_friends = []
-    for i in users_friends:
-        if i in my_friends:
-            mutual_friends.append(i)
-    htmlfriends = get_friend_list(users_friends)
-    htmlmutual = get_friend_list(mutual_friends)
-    response.write(MAINHTML % (currentuser,friend, htmlfriends,htmlmutual))
+	currentuser = response.get_field('user')
+	users_friends = FRIENDS[friend]
+	my_friends = FRIENDS[currentuser]
+	mutual_friends = []
+	for i in users_friends:
+		if i in my_friends:
+			mutual_friends.append(i)
+	htmlfriends = get_friend_list(users_friends)
+	htmlmutual = get_friend_list(mutual_friends)
+	response.write(MAINHTML % (currentuser,friend, htmlfriends,htmlmutual))
 
 def my_friends_list(response):
 	currentuser = response.get_field('user')
@@ -31,10 +32,11 @@ def my_friends_list(response):
 	else:
 		users_friends = FRIENDS[currentuser]
 		htmlMyFriends = get_friend_list(users_friends)
-		response.write(FRIENDHTML % (currentuser,htmlMyFriends))
+		response.write(FRIENDHTML % (currentuser,htmlMyFriends,))
 
 def show_all_friends(response):
 	currentuser = response.get_field('user')    
+	html = ""
 	for i in FRIENDS.keys():
 		html += "<a href='/friends/%s?user=%s'>%s</a><br />" % (i,currentuser,i)
 	response.write(ALLFRIENDS % html)
