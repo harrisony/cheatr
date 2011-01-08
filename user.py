@@ -15,7 +15,9 @@ class User:
             return Exception('No user: "%s"' % (username))
     @staticmethod
     def add(args):
-        if User.exists(args['username']):
+        if 'username' not in args:
+            return Exception('No username provided')
+        elif User.exists(args['username']):
             return Exception('There is already a user called "%s"' % (args['username']))
         else:
             _user_table[args['username']] = args
@@ -45,6 +47,12 @@ class User:
     def set_first_name(self, fname):
         self._args['firstname'] = fname
         self._firstname = self._args['firstname']
+    def set_last_name(self, lname):
+        self._args['lastname'] = lname
+        self._lastname = self._args['lastname']
+    def set_school(self, school):
+        self._args['school'] = school
+        self._school = self._args['school']
     def password_correct(self, password):
         if sha256(password).hexdigest() == self.get_password_hash():
            return True
