@@ -1,0 +1,109 @@
+/* Header Page CSS */
+
+header, footer {
+	background-color: orange;
+	display: block;
+	width: 100%;
+	text-align: left;
+	margin: 0px;
+}
+
+footer {
+	float: bottom;
+}
+
+header img {
+	
+	width: 150px;
+	height: 25px;
+	margin: 4px;
+}
+
+header a {
+	text-decoration: none;
+	padding: 0px 5px 0px 5px;
+	color: black;
+}
+
+header ul li {
+	display: inline;
+	list-style-type: none;
+	padding: 0px 5px 0px 5px;
+}
+
+header ul, nav {
+	display: inline;
+	width: 100%;
+}
+
+h1#title {
+	background-color: orange;
+	padding: 0px 5px 0px 5px;
+	margin: 0px;
+	border: 2px solid black;
+	display: block;
+}
+
+/* Subject Page CSS */
+nav#subjects {
+	background-color: orange;
+	padding: 0px 5px 0px 5px;
+	margin: 0px;
+	border: 2px solid black;
+	display: block;
+}
+
+nav#subjects ul li{
+	display: inline;
+	list-style-type: none;
+	padding: 0px 5px 0px 5px;
+}
+
+nav#subjects {
+	display: block;
+}
+
+nav#subjects li img {
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	float: top;
+}
+
+nav#subjects li a {
+	text-decoration: none;
+	display: inline-block;
+	text-align: center;
+}
+
+nav#subjects li a p {
+	width: auto;
+	display: table-row;
+	color: black;
+}
+
+article aside {
+	float: left;
+	width:200px;
+	border-right: 2px solid black;
+	padding: 0px 5px 0px 5px;
+	margin-right: 4px;
+	background-color: grey;
+}
+
+article {
+	min-height: 500px;
+	border-left: 2px solid black; 
+	border-right: 2px solid black;
+}
+
+article aside section h1 {
+	font-size: 1em;
+	background-color: white;
+	padding: 4px;
+}
+
+article section {
+	border-bottom: 2px solid black;
+}
+
