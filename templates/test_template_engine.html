@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ user.name }}</title>
+</head>
+<body>
+{% include templates/header.html %}
+	<h1>{{ page.title }}</h1>
+{% if user.name == 'James' %}<p> You are James. We will kill Domo-kun. </p>{% end if %}
+{% for f in user.friends %} <li>{{ f.name }} {{ f.age }} </li> {% end for %}	
+{% include templates/footer.html %}
+</body>
+</html>
