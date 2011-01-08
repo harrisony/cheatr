@@ -30,6 +30,22 @@ FORM="""
 <input type="radio" name="subject" value=7> Other
 </p>
 <p>
+Amount of HSC Units
+<input type="radio" name="unit" value=1> 1
+<input type="radio" name="unit" value=2> 2
+<input type="radio" name="unit" value=3> 3
+<input type="radio" name="unit" value=4> 4
+</p>
+<p>
+Description of the Course
+</p>
+<p>
+<textarea rows="3" cols="50"> </textarea>
+</p>
+<p>There are 
+60
+character's left</p>
+<p>
 <input type="reset" name="reset" value=Reset>
 <p>
 <input type='submit' value='Submit Selection'>
@@ -44,16 +60,19 @@ HTML = """
 <html>
 <head>
 <body>
-<p>%i </p>
-<p>%s</p>
-<p>%s</p>
+<p>Amount of HSC Units- %i </p>
+<p>Category- %s</p>
+<p>Overview- %s</p>
+<form method="POST">
+<input type="submit" value="Confirm Subject Creation">
+</form>
 </body>
 </head>
 </html>
 """
 
 units = 2
-overview = "this is a subject"
+overview = "This is a subject"
 category = "Mathematics"
 
 subjects = []
@@ -67,5 +86,5 @@ def subjectpage(response):
 
 
 def viewsubject(response, subjectname):
-    response.write(HTML % (units, overview, category))
+    response.write(HTML % (units, category, overview))
 
