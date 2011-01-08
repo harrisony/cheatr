@@ -51,11 +51,11 @@ class Wall:
 
 		
 
-def wall(response,current_Wall):
+def _wall(response,current_Wall):
 	w = Wall(response.get_field('username'),current_Wall)
 	final = header % (w.current_Wall, w.current_user, w.current_Wall) 
 	response.write(final + w.get_wall())
-def submit(response):
+def _submit(response):
 	w = Wall(response.get_field('current_user'),response.get_field('current_Wall'))
 	w.set_wall(response.get_field('msg'))
 	response.redirect('/wall/%s?username=%s' % (w.current_Wall, w.current_user)) 

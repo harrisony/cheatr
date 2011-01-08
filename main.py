@@ -20,7 +20,7 @@ if __name__ == "__main__":
     server.register('/friends/(.*)',friends.per_friends_list)
     server.register("/subject", subject.subjectpage)
     server.register("/subject/(.*)", subject.viewsubject)
-    server.register('/wall/(.*)',comms.wall)
-    server.register('/submit',comms.submit)
+    server.register('/wall/(.*)',comms._wall)
+    server.register('/submit',comms._submit)
 
     server.run()
