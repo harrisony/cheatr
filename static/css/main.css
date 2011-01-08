@@ -1,6 +1,6 @@
 /* Header Page CSS */
 html {
-	background-color: #FFD48E;
+	background-color: #F2EEEB;
 }
 header, footer {
 	display: block;
@@ -10,11 +10,12 @@ header, footer {
     	
 }
 header {
-	background-color: #403524;
+	background-color: #3BB2BF;
+	border-bottom: 2px solid #03588C; 
 }
 
 footer {
-	background-color: #323232;
+	background-color: #03588C;
 	float: bottom;
 }
 
@@ -47,9 +48,9 @@ h1#title {
 	font-family: lucida bright;
 	background-color: light brown;
 	padding: 0px 5px 0px 5px;
-	margin: 0px;
-	border: 2px solid black;
+	margin: 15px;
 	display: block;
+	font-size: 1.3cm; 
 }
 
 /* Subject Page CSS */
@@ -63,7 +64,7 @@ nav#subjects {
 nav#subjects ul li{
 	display: inline;
 	list-style-type: none;
-	padding: 0px 5px 0px 5px;
+	padding: 5px 6px 5px 6px;
 }
 
 nav#subjects {
@@ -88,6 +89,20 @@ nav#subjects li a p {
 	width: auto;
 	display: table-row;
 	color: black;
+}
+
+#years {
+}
+
+#years ul li {
+	padding: 5px 3px 5px 3px; 
+}
+
+#recommended {
+}
+
+#recommended ul li {
+	padding: 5px 3px 5px 3px;
 }
 
 article aside {	
@@ -119,4 +134,3 @@ article section {
 	font-family: lucida bright;
 	border-bottom: 2px solid black;
 }
-
