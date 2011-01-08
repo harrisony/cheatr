@@ -1,6 +1,6 @@
 /* Header Page CSS */
 html {
-	background-color: #433326;
+	background-color: #FFD48E;
 }
 header, footer {
 	display: block;
@@ -10,7 +10,7 @@ header, footer {
     	
 }
 header {
-	background-color: #C5A479;
+	background-color: #403524;
 }
 
 footer {
@@ -101,7 +101,9 @@ article aside {
 }
 
 article {
+	display: block;
 	background-color: white;
+	width: 100%;
 	min-height: 500px;
 	border-left: 2px solid black; 
 	border-right: 2px solid black;
@@ -109,7 +111,7 @@ article {
 
 article aside section h1 {
 	font-size: 1em;
-	background-color: #BFAF99;
+	background-color: #FFEBC3;
 	padding: 4px;
 }
 
