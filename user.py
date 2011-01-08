@@ -12,7 +12,7 @@ class User:
         if User.exists(username):
             return User(_user_table[username])
         else:
-            return Exception('No user: "%s"' % (username))
+            return None
     @staticmethod
     def add(args):
         if 'username' not in args:
@@ -22,12 +22,8 @@ class User:
         else:
             _user_table[args['username']] = args
     def __init__(self, args):
-        self._set_blank() 
-        print args
-
+        self._set_blank()
         for k,v in args.items():
-            print k,v
-            print "self._%s = '%s'" % (k,v)
             exec "self._%s = '%s'" % (k,v)
         #self._args = args
         #self._username = args['username']
@@ -92,3 +88,4 @@ class User:
             return False
             
 User.add({'username': 'james', 'firstname': 'James', 'lastname':'Curran', 'school': 'usyd', 'email':'god@it.usyd.edu.au', 'password': 'ilovejava'})
+User.add({'username': 'gman', 'firstname':'Gustav', 'lastname': 'Olafsen', 'school': 'unsw', 'email': 'gustav@isacoolperson.com', 'password': 'gus'}_
