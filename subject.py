@@ -44,7 +44,9 @@ HTML = """
 <html>
 <head>
 <body>
-%s
+<p>%i </p>
+<p>%s</p>
+<p>%s</p>
 </body>
 </head>
 </html>
@@ -65,4 +67,5 @@ def subjectpage(response):
 
 
 def viewsubject(response, subjectname):
-    response.write(HTML % ("Here is my content"))
+    response.write(HTML % (units, overview, category))
+
