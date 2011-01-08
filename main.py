@@ -5,7 +5,7 @@ from tornado import Server
 import profile
 import friends
 import subject
-
+import comms
 
 if __name__ == "__main__":
     server = Server()
@@ -20,5 +20,7 @@ if __name__ == "__main__":
     server.register('/friends/(.*)',friends.per_friends_list)
     server.register("/subject", subject.subjectpage)
     server.register("/subject/(.*)", subject.viewsubject)
-	
+    server.register('/wall/(.*)',comms.wall)
+    server.register('/submit',comms.submit)
+
     server.run()
