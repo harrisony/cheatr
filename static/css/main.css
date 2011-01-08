@@ -1,43 +1,51 @@
 /* Header Page CSS */
-
+html {
+	background-color: #433326;
+}
 header, footer {
-	background-color: orange;
 	display: block;
 	width: 100%;
 	text-align: left;
 	margin: 0px;
+    	
+}
+header {
+	background-color: #C5A479;
 }
 
 footer {
+	background-color: #323232;
 	float: bottom;
 }
 
 header img {
-	
-	width: 150px;
-	height: 25px;
+	border: none;
 	margin: 4px;
+
 }
 
 header a {
-	text-decoration: none;
+	text-decoration:none ;
 	padding: 0px 5px 0px 5px;
 	color: black;
 }
 
 header ul li {
+	font-family: lucida bright;
 	display: inline;
 	list-style-type: none;
 	padding: 0px 5px 0px 5px;
 }
 
 header ul, nav {
+	font-family: lucida bright;
 	display: inline;
 	width: 100%;
 }
 
 h1#title {
-	background-color: orange;
+	font-family: lucida bright;
+	background-color: light brown;
 	padding: 0px 5px 0px 5px;
 	margin: 0px;
 	border: 2px solid black;
@@ -46,7 +54,6 @@ h1#title {
 
 /* Subject Page CSS */
 nav#subjects {
-	background-color: orange;
 	padding: 0px 5px 0px 5px;
 	margin: 0px;
 	border: 2px solid black;
@@ -71,6 +78,7 @@ nav#subjects li img {
 }
 
 nav#subjects li a {
+	font-family: lucida bright;
 	text-decoration: none;
 	display: inline-block;
 	text-align: center;
@@ -82,16 +90,18 @@ nav#subjects li a p {
 	color: black;
 }
 
-article aside {
+article aside {	
+    font-family: lucida bright;
 	float: left;
 	width:200px;
 	border-right: 2px solid black;
 	padding: 0px 5px 0px 5px;
 	margin-right: 4px;
-	background-color: grey;
+	background-color: white;
 }
 
 article {
+	background-color: white;
 	min-height: 500px;
 	border-left: 2px solid black; 
 	border-right: 2px solid black;
@@ -99,11 +109,12 @@ article {
 
 article aside section h1 {
 	font-size: 1em;
-	background-color: white;
+	background-color: #BFAF99;
 	padding: 4px;
 }
 
 article section {
+	font-family: lucida bright;
 	border-bottom: 2px solid black;
 }
 
