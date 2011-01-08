@@ -1,5 +1,7 @@
 from tornado import Server
 
+#When the template is done I can reference the python variables to the HTML data
+#fields and append this to later forms. 
 FORM="""
 <html>
 <head>
@@ -30,17 +32,17 @@ FORM="""
 <input type="radio" name="subject" value=7> Other
 </p>
 <p>
-Amount of HSC Units
-<input type="radio" name="unit" value=1> 1
-<input type="radio" name="unit" value=2> 2
-<input type="radio" name="unit" value=3> 3
-<input type="radio" name="unit" value=4> 4
+Amount of Units or Credits
+<input type="radio" name="unit" value="1"> 1
+<input type="radio" name="unit" value="2"> 2
+<input type="radio" name="unit" value="3"> 3
+<input type="radio" name="unit" value="4"> 4
 </p>
 <p>
 Description of the Course
 </p>
 <p>
-<textarea rows="3" cols="50"> </textarea>
+<textarea rows="3" cols="50" name="description"> </textarea>
 </p>
 <p>There are 
 60
@@ -60,8 +62,8 @@ HTML = """
 <html>
 <head>
 <body>
-<p>Amount of HSC Units- %i </p>
 <p>Category- %s</p>
+<p>Amount of HSC Units- %i </p>
 <p>Overview- %s</p>
 <form method="POST">
 <input type="submit" value="Confirm Subject Creation">
@@ -71,20 +73,24 @@ HTML = """
 </html>
 """
 
-units = 2
-overview = "This is a subject"
-category = "Mathematics"
+# [name, category, units, description]
+# {"maths": [category, units, description], "english": ["English", 2, "boring"]}
 
-subjects = []
+subjects = {}
 
 def subjectpage(response):
     if response.get_field("subjectname") == None:
         response.write(FORM)
     else:
         subjectname = response.get_field("subjectname")
-        subjects.append(subjectname)
+        subjectunits = response.get_field("unit")
+        subjectdescription = response.get_field("description")
+        subjectcategory = response.get_field("subject")
+        subjects[subjectname]=[subjectcategory,subjectunits,subjectdescription]
+        response.write("Saved")
 
 
 def viewsubject(response, subjectname):
-    response.write(HTML % (units, category, overview))
+    info = subjects[subjectname]
+    response.write(HTML % (info[0], int(info[1]), info[2]))
 
