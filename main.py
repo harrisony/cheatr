@@ -7,6 +7,7 @@ import friends
 import subject
 import comms
 import upload
+import home
 
 
 if __name__ == "__main__":
@@ -14,6 +15,7 @@ if __name__ == "__main__":
     # Register your urls here
     # e.g. server.register("/foo", mymodule.foohandler)
 
+    server.register("/", home.page)
     server.register("/profile/(.*)", profile.profile)
     server.register("/signup",profile.signup)
     server.register("/update_info",profile.update)

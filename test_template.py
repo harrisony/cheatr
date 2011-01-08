@@ -9,7 +9,7 @@ class User:
 def index(response):
    user = User("James", 10)
    context = {'user':user}
-   template.render_template('static/html/template.html', context, response)
+   template.render_template('templates/template.html', context, response)
    
 server = tornado.Server()
 server.register('/', index)
