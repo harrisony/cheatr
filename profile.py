@@ -57,7 +57,7 @@ UPDATE = """
 <body>
 <h1>Update Info</h1>
 <form method="POST" action="update_info"> 
-Username: <input type="text" value="%s" name="username" /><br />
+<input type="hidden" value="%s" name="username" /><br />
 First Name: <input type="text" value="%s" name="firstname" /><br />
 Last Name: <input type="text" value="%s" name="lastname" /><br />
 Email: <input type="text" value="%s" name="email" /><br />
@@ -95,14 +95,20 @@ def signup(response):
         response.write(SIGNUP)
     #print Users
 
+def clean(string):
+    if string == None:
+        return None
+    string = string.replace('"',"'").replace('<','>')
+    return string
+
 def update(response):
-    username = response.get_field("username")
-    firstname = response.get_field("firstname")
-    lastname = response.get_field("lastname")
-    email = response.get_field("email")
-    password = response.get_field("password")
-    school = response.get_field("school")
-    name = response.get_field("name")
+    username = clean(response.get_field("username"))
+    firstname = clean(response.get_field("firstname"))
+    lastname = clean(response.get_field("lastname"))
+    email = clean(response.get_field("email"))
+    password = clean(response.get_field("password"))
+    school = clean(response.get_field("school"))
+    name = clean(response.get_field("name"))
     print username
     if username:
         newUser = {"firstname":firstname,"lastname":lastname,"email":email,"password":password,"school":school}
