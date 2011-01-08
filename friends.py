@@ -1,6 +1,6 @@
 from tornado import Server
 from friendsconstants import * 
-from person import Person, example_person1, example_person2, example_person3    
+#from person import Person, example_person1, example_person2, example_person3    
 def get_friend_list(friends,bold='',sort=True):
     friendlist = ""
     if sort:
@@ -25,21 +25,24 @@ def per_friends_list(response, friend):
     response.write(MAINHTML % (currentuser,friend, htmlfriends,htmlmutual))
 
 def my_friends_list(response):
-    currentuser = response.get_field('user')
-    users_friends = FRIENDS[currentuser]
-    htmlMyFriends =  get_friend_list(users_friends)
-    response.write(FRIENDHTML % (currentuser,htmlMyFriends))
+	currentuser = response.get_field('user')
+	if currentuser not in FRIENDS:
+		response.write("User " + currentuser + " not found")
+	else:
+		users_friends = FRIENDS[currentuser]
+		htmlMyFriends = get_friend_list(users_friends)
+		response.write(FRIENDHTML % (currentuser,htmlMyFriends))
+
 def show_all_friends(response):
-    currentuser = response.get_field('user')
-    html = ""
-    for i in FRIENDS.keys():
-        html += "<a href='/friends/%s?user=%s'>%s</a><br />" % (i,currentuser,i)
-    response.write(ALLFRIENDS % html)
+	currentuser = response.get_field('user')    
+	for i in FRIENDS.keys():
+		html += "<a href='/friends/%s?user=%s'>%s</a><br />" % (i,currentuser,i)
+	response.write(ALLFRIENDS % html)
     
-if __name__ == "__main__":
-    server = Server()
-    server.register(r'/globalfriendslist',show_all_friends)
-    server.register(r'/friends/', my_friends_list)
-    server.register(r'/friends/(.*)',per_friends_list)
-    server.run()
+#if __name__ == "__main__":
+    #server = Server()
+    #server.register(r'/globalfriendslist',show_all_friends)
+    #server.register(r'/friends/', my_friends_list)
+    #server.register(r'/friends/(.*)',per_friends_list)
+    #server.run()
 
