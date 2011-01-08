@@ -32,5 +32,6 @@ ALLFRIENDS = """<html>
 </ul>
 </body>
 </html>"""
-FRIENDS = {'a':['a','b','d'], 'b':['c','a','d'], 'c':['c','d'], 'd': ['a','b']}
+
+FRIENDS = {'gman':['smythey','svet'], 'smythey':['gman','svet'], 'svet':['gman','smythey']}
 

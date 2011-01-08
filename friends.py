@@ -2,6 +2,14 @@ from tornado import Server
 from friendsconstants import * 
 #from person import Person, example_person1, example_person2, example_person3    
 
+def get_friends(username):
+	if username in FRIENDS:
+		friendsList = FRIENDS[username]
+	else:
+		friendsList = []
+	return friendsList
+
+
 def get_friend_list(friends,bold='',sort=True):
 	friendlist = ""
 	if sort:
