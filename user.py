@@ -89,3 +89,5 @@ class User:
             
 User.add({'username': 'james', 'firstname': 'James', 'lastname':'Curran', 'school': 'usyd', 'email':'god@it.usyd.edu.au', 'password': 'ilovejava'})
 User.add({'username': 'gman', 'firstname':'Gustav', 'lastname': 'Olafsen', 'school': 'unsw', 'email': 'gustav@isacoolperson.com', 'password': 'gus'})
+User.add({'username': 'smythey', 'firstname': 'Johan', 'lastname': 'Smythe', 'school': 'usyd', 'email': 'smythey@usyd.edu.au', 'password': 'iloveusyd'})
+User.add({'username': 'svet', 'firstname': 'Svetlana', 'lastname': 'Roshenkev', 'school': 'school of fail', 'email': 'a@example.com', 'password': 'ytrewq'})
