@@ -736,6 +736,11 @@ class GoogleMixin(OpenIdMixin, OAuthMixin):
     def _oauth_get_user(self, access_token, callback):
         OpenIdMixin.get_authenticated_user(self, callback)
 
+
+class NcssMixin(GoogleMixin):
+  _OPENID_ENDPOINT = "https://www.google.com/a/ncss.edu.au/o8/ud"
+
+
 class FacebookMixin(object):
     """Facebook Connect authentication.
 
@@ -1110,5 +1115,3 @@ def _oauth_parse_response(body):
     special = ("oauth_token", "oauth_token_secret")
     token.update((k, p[k][0]) for k in p if k not in special)
     return token
-
-

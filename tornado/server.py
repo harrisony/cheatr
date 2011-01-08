@@ -26,6 +26,8 @@ if __name__ == "__"main__":
     server.register("/", index)
 
 """
+import os
+import sys
 
 class Server(object):
     def __init__(self, hostname="", port=8888, static="static"):
@@ -41,7 +43,7 @@ class Server(object):
         self.static = static
         self.handlers = []
 
-    def register(self, path, handler):
+    def register(self, path, handler, **kwargs):
         import types
         import tornado.web
         import tornado.websocket
@@ -69,11 +71,23 @@ class Server(object):
                     raise TypeError("handler %s expects %s, but path has %s" % 
                                     (name, args_desc, groups_desc))
 
+            get_handler = kwargs.get('get', handler)
+            post_handler = kwargs.get('post', handler)
+            put_handler = kwargs.get('put', handler)
+            delete_handler = kwargs.get('delete', handler)
+
             class Handler(tornado.web.RequestHandler):
                 def get(self, *args):
-                    check_handler_arguments(handler, args)
-                    handler(self, *args)
+                    check_handler_arguments(get_handler, args)
+                    get_handler(self, *args)
+
                 def post(self, *args):
+                    handler = post_handler
+                    method = self.get_field('_method', '')
+                    if method.lower() == 'put':
+                      handler = put_handler
+                    elif method.lower() == 'delete':
+                      handler = delete_handler
                     check_handler_arguments(handler, args)
                     handler(self, *args)
 
@@ -98,6 +112,31 @@ class Server(object):
         self.handlers.append((path, h))
 
     def run(self):
+      if os.environ.get("RUN_MAIN") == "true":
+        self._actually_run()
+      else:
+        try:
+          sys.exit(self._restart_with_reloader())
+        except KeyboardInterrupt:
+          pass
+        
+    def _restart_with_reloader(self):
+      while True:
+        args = [sys.executable] + sys.argv
+        if sys.platform == "win32":
+          args = ['"%s"' % arg for arg in args]
+        new_environ = os.environ.copy()
+        new_environ["RUN_MAIN"] = "true"
+        exit_code = os.spawnve(os.P_WAIT, sys.executable, args, new_environ)
+        if exit_code != 3:
+		if exit_code != 0:
+			yn = raw_input('Server terminated abnormally, restart? [Yn]')
+			if not yn or yn.upper() == 'Y':
+				continue
+		return exit_code
+
+    def _actually_run(self):
+
         import logging
         import tornado.options
 

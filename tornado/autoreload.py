@@ -64,39 +64,14 @@ def _reload_on_update(io_loop, modify_times):
         if path.endswith(".pyc") or path.endswith(".pyo"):
             path = path[:-1]
         try:
-            modified = os.stat(path).st_mtime
+            stat = os.stat(path)
+            modified = stat.st_mtime
+            if sys.platform == 'win32':
+              modified = -stat.st_ctime
         except:
             continue
         if path not in modify_times:
             modify_times[path] = modified
             continue
         if modify_times[path] != modified:
-            logging.info("%s modified; restarting server", path)
-            _reload_attempted = True
-            for fd in io_loop._handlers.keys():
-                try:
-                    os.close(fd)
-                except:
-                    pass
-            if hasattr(signal, "setitimer"):
-                # Clear the alarm signal set by
-                # ioloop.set_blocking_log_threshold so it doesn't fire
-                # after the exec.
-                signal.setitimer(signal.ITIMER_REAL, 0, 0)
-            try:
-                os.execv(sys.executable, [sys.executable] + sys.argv)
-            except OSError:
-                # Mac OS X versions prior to 10.6 do not support execv in
-                # a process that contains multiple threads.  Instead of
-                # re-executing in the current process, start a new one
-                # and cause the current process to exit.  This isn't
-                # ideal since the new process is detached from the parent
-                # terminal and thus cannot easily be killed with ctrl-C,
-                # but it's better than not being able to autoreload at
-                # all.
-                # Unfortunately the errno returned in this case does not
-                # appear to be consistent, so we can't easily check for
-                # this error specifically.
-                os.spawnv(os.P_NOWAIT, sys.executable,
-                          [sys.executable] + sys.argv)
-                sys.exit(0)
+          sys.exit(3) # Have the surrounding shell restart.
