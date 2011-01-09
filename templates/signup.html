@@ -4,21 +4,55 @@
 <body>
 {% include templates/header.html %}
 	<h1>{{ title }}</h1>
-<article>
-<aside>
-	<section>
-		<p>Account Info</p>
-	</section>
-	<section>
-		<p>Friends</p>
-	</section>
-	<section>
-		<p>Chat</p>
-	</section>
+	
+<style>
 
-</aside>
+	form input {
+	border: 1px solid #03588C;
+	-moz-box-shadow: 0px 0px 6px #03588C;
+	}
+	
+	#content {
+	font-family: lucida bright;
+	margin-left: 750px;
+	margin-top: 50px;
+	border-left: 3px solid black;
+	}
+	
+	input[type="submit"] {
+	background-color: white;
+	}
+	
+</style>
+	
+<article>
+
+
 <div id="content">
 {{ content }}
+<form action="/signup" method="post">
+	<label for="username">Username: </label>
+	<input type="text" name="username" />
+	<p>
+	<label for="firstname">First Name: </label>
+	<input type="text" name="firstname" />
+	<p>
+	<label for="lastname">Last Name: </label>
+	<input type="text" name="lastname" />
+	<p>
+	<label for="email">Email: </label>
+	<input type="text" name="email" />
+	<p>
+	<label for="password">Create a Password: </label>
+	<input type="password" name="password" />
+	<p>
+	<label for="school">Current School: </label>
+	<input type="text" name="school" />
+	<p>
+	<input type="submit" name="submit" value="Sign Up!" />
+	
+	
+</form>
 </div>
 </article>
 {% include templates/footer.html %}
