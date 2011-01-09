@@ -109,7 +109,8 @@ nav#subjects li a p {
     padding: 205px 197px 205px 197px;
 }
 
-#upload {
+#subject_upload ul li {
+	display: inline-block;
 }
 
 #upload {
@@ -125,7 +126,6 @@ nav#subjects li a p {
 
 article aside {	
     font-family: lucida bright;
-	float: left;
 	width:200px;
 	border-right: 2px solid black;
 	padding: 0px 5px 0px 5px;
@@ -133,8 +133,16 @@ article aside {
 	background-color: white;
 }
 
+div {
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+}
+
 article {
-	display: block;
+	display: -webkit-box;
+	display: -moz-box;
+	-webkit-box-orientation: horizontal;
+	-moz-box-orientation: horizontal;
 	background-color: white;
 	width: 100%;
 	min-height: 500px;
