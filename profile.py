@@ -53,8 +53,7 @@ Upload Profile Picture:<br>
 def profile(response, username):
     user = User.get(username)
     name = clean(response.get_field("user"))
-    if name:
-        response.redirect("/?user=" + name)
+
     print username
     if user is not None:
         firstname = user.get_first_name()
