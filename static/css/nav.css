@@ -2,6 +2,10 @@
 	position: relative;
 }
 
+header nav ul li:hover {
+	background-color: #9dd8df;
+}
+
 #account ul {
 	display: none;
 	background-color: #3BB2BF;
