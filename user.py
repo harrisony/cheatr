@@ -60,6 +60,7 @@ class User:
     def set_mutiple(self, args):
         mapping = {'firstname': self.set_first_name, 'lastname': self.set_last_name, 'email': self.set_email, 'school': self.set_school,
                    'password': self.set_password}
+        args.pop('username')  # handles when people give me stuff they shouldn't :)
         for k,v in args.items():
             func = mapping[k]
             func(v)
@@ -87,7 +88,6 @@ class User:
         else:
             return False
             
-User.add({'username': 'james', 'firstname': 'James', 'lastname':'Curran', 'school': 'usyd', 'email':'god@it.usyd.edu.au', 'password': 'ilovejava'})
-User.add({'username': 'gman', 'firstname':'Gustav', 'lastname': 'Olafsen', 'school': 'unsw', 'email': 'gustav@isacoolperson.com', 'password': 'gus'})
+#User.add({'username': 'gman', 'firstname':'Gustav', 'lastname': 'Olafsen', 'school': 'unsw', 'email': 'gustav@isacoolperson.com', 'password': 'gus'})
 User.add({'username': 'smythey', 'firstname': 'Johan', 'lastname': 'Smythe', 'school': 'usyd', 'email': 'smythey@usyd.edu.au', 'password': 'iloveusyd'})
-User.add({'username': 'svet', 'firstname': 'Svetlana', 'lastname': 'Roshenkev', 'school': 'school of fail', 'email': 'a@example.com', 'password': 'ytrewq'})
+#User.add({'username': 'svet', 'firstname': 'Svetlana', 'lastname': 'Roshenkev', 'school': 'school of fail', 'email': 'a@example.com', 'password': 'ytrewq'})
