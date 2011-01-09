@@ -11,35 +11,6 @@ Users = { "Nick": {"firstname":"Nicholas","lastname":"Cooke","email":"nicholas.c
 newUser = {"username": "Nick", "firstname":"Nick","lastname":"Cooke","email":"email","password":"password","school":"school"}
 User.add(newUser)
 
-OUTPUT = """
-<html>
-<head><title>%s's Profile</title>
-<style>
-p {
-    padding:0;
-    margin:0;
-}
-</style>
-<nav>
-<ul>
-<li><a href='/'>Home</a></li>
-<li>Resources
-<ul>
-<li><a href='/'>Notes</a></li>
-<li><a href='/'>Past Papers</a></li>
-</ul>
-</head>
-<body>
-<h1>%s's Profile</h1>
-<img src='%s'>
-<p>First Name: %s</p>
-<p>Last Name: %s</p>
-<p>Email: %s</p>
-<p>School: %s</p>
-<p><a href="../update_info?name=%s" >Update Info</a></p>
-</body>
-</html>
-"""
 
 SIGNUP = """
 <html>
@@ -87,15 +58,18 @@ Upload Profile Picture:<br>
 
 def profile(response, username):
     user = User.get(username)
+    print "USER: " + user.get_profile_pic_path()
     if user is not None:
         firstname = user.get_first_name()
         lastname = user.get_last_name()
         email = user.get_email()
         school = user.get_school()
         picture = user.get_profile_pic_path()
+        print "PICTURE IS: " + picture
         fullname = firstname + " " + lastname
         #response.write(OUTPUT % (username,username, picture,firstname,lastname,email,school,username))
-        context = {"title":fullname, "user":username, "content":"<p>Hello</p>"}
+        context = {"title":fullname, "user":username, "content":"Content", "profile_pic_location":picture,
+                   "email":email, "school":school}
         template.render_template("templates/profile.html", context, response)
     else:
         response.redirect("../signup")
@@ -137,18 +111,24 @@ def update(response):
     filename, content_type, data = response.get_file('photo')
         
     if username:
+        #
         print "username is " + username
         
         extension = mimetypes.guess_extension(content_type)
         photo_path = os.path.join('static', 'photos', username + extension)
         open(photo_path, 'wb').write(data)
         fullname = '%s %s' % (username, lastname)
+        print "PHOTO PATH: " + photo_path
         photo_url = photo_path.replace("\\","/")
-        
-        newUser = {"username": username, "firstname":firstname,"lastname":lastname,"email":email,"password":password,"school":school}
+        user = User.get(username)
+        print "PHOTO IS: " + photo_url
+	#print user
+        newUser = {"username": username, "firstname":firstname,"lastname":lastname,
+                   "email":email,"password":password,"school":school, "profilepath":photo_url}
+        print "NEW USER: " + str(newUser)
         #user = User.get(username)
         #print "User is " + user
-        user.set_mutiple(newUser)
+        user.set_first_name(firstname)
         #User.add(newUser)
         #set_mutiple
         #x = User.get(username)
