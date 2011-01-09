@@ -7,9 +7,9 @@ class User:
       self.age = age
 
 def index(response):
-   user = User("James", 10)
+   user = User("James", 11)
    context = {'user':user}
-   template.render_template('templates/template.html', context, response)
+   template.render_template('templates/test_template_engine.html', context, response)
    
 server = tornado.Server()
 server.register('/', index)
