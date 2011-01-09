@@ -52,15 +52,28 @@ class IfNode(Node):
          self.group.render(context, response)
 
 class ForNode(Node):
-   def __init__(self, items, collection, group):
-      super(IfNode, self).__init__()
-      self.items = items
+   def __init__(self, item, collection, group):
+      super(ForNode, self).__init__()
+      self.item = item
       self.collection = collection
       self.group = group
    def render(self, context, response):
-      if eval(self.predicate,{},context):
-         self.group.render(context, response)
-
+      collection = eval(self.collection, {}, context)
+      if self.item:
+         for item in collection:
+            context[self.item] = item
+            self.group.render(context, response)
+      
+class Token(object):
+   def __init__(self, type, args):
+      self.type = type
+      self.args = args
+   def arg(self, item=0):
+      try:
+         return self.args[item]
+      except:
+         raise
+         
 class TokenStream(object):
    def __init__(self,token_list):
       self.token_list = token_list
@@ -102,37 +115,39 @@ def tokenize(contents):
    tokens = []
    upto = 0
    for match in re.finditer(PATTERN, contents):
-      tokens.append((contents[upto:match.start()],"html"))
+      tokens.append(Token("html", (contents[upto:match.start()],)))
       if match.group('expr'):
          expr = match.group('expr').strip()
-         tokens.append((expr,"expr"))
+         tokens.append(Token("expr", (expr,)))
       elif match.group('tag'):
          tag,arg = match.group('tag').strip().split(" ",1)
          if tag == 'include':
-            tokens.append((arg,"include"))
+            tokens.append(Token("include",(arg,)))
          elif tag == 'if':
-            tokens.append((arg,"if"))
+            tokens.append(Token("if",(arg,)))
          elif tag == 'end':
-            tokens.append((arg,"end"))
+            tokens.append(Token("end",(arg,)))
          elif tag == 'for':
             items,collection = re.search(FORPATTERN,arg).groups()
-            tokens.append((items,collection,"for"))
+            tokens.append(Token("for", (items,collection)))
       upto = match.end()
-   tokens.append((contents[upto:],"html"))
+   tokens.append(Token("html", (contents[upto:],)))
    tokens = TokenStream(tokens)
    return tokens
 
 def parse_group(tokens):
    group = GroupNode()
    while tokens.valid():
-      if tokens.peek()[1] == "html":
-         group.add_child(HTMLNode(tokens.next()[0]))
-      elif tokens.peek()[1] == "expr":
-         group.add_child(ExprNode(tokens.next()[0]))
-      elif tokens.peek()[1] == "include":
-         group.add_child(IncludeNode(tokens.next()[0]))
-      elif tokens.peek()[1] == "if":
+      if tokens.peek().type == "html":
+         group.add_child(HTMLNode(tokens.next().arg()))
+      elif tokens.peek().type == "expr":
+         group.add_child(ExprNode(tokens.next().arg()))
+      elif tokens.peek().type == "include":
+         group.add_child(IncludeNode(tokens.next().arg()))
+      elif tokens.peek().type == "if":
          group.add_child(parse_if(tokens))
+      elif tokens.peek().type == "for":
+         group.add_child(parse_for(tokens))
       else:
          break
    return group
@@ -142,19 +157,19 @@ def parse_if(tokens):
    group = parse_group(tokens)
    if tokens.valid():
       endif_token = tokens.next()
-      if endif_token[1] != "end" or endif_token[0] != "if":
+      if endif_token.type != "end" or endif_token.arg() != "if":
          raise TemplateException("EndTagException: Mismatched End Tag")
    else:
       raise TemplateException("EndTagException: Missing {% end if %}")
-   return IfNode(if_token[0], group)
+   return IfNode(if_token.arg(), group)
 
 def parse_for(tokens):
    for_token = tokens.next()
    group = parse_group(tokens)
    if tokens.valid():
       endfor_token = tokens.next()
-      if endfor_token[1] != "end" or endfor_token[0] != "for":
+      if endfor_token.type != "end" or endfor_token.arg() != "for":
          raise TemplateException("EndTagException: Mismatched End Tag")
    else:
       raise TemplateException("EndTagException: Missing {% end for %}")
-   return ForNode(for_token[0], group)
+   return ForNode(for_token.arg(), for_token.arg(1), group)
