@@ -5,7 +5,7 @@ import user
 def page(response):
     currentuser = user.User.get(response.get_field("user"))
     if currentuser == None:
-        response.redirect("/signup.html")
+        response.redirect("/signup")
     else:        
         context = {'title': 'Home Page',
                    'user': currentuser.get_username(),
