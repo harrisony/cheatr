@@ -18,11 +18,16 @@ class User:
         if 'username' not in args:
             return Exception('No username provided')
         elif User.exists(args['username']):
-            return Exception('There is already a user called "%s"' % (args['username']))
+            raise Exception('There is already a user called "%s"' % (args['username']))
         else:
             _user_table[args['username']] = args
     def __init__(self, args):
         self._set_blank()
+        print args
+        if 'password' in args: 
+            self._passwordhash = sha256(args['password']).hexdigest()
+            args.pop('password')
+        
         for k,v in args.items():
             exec "self._%s = '%s'" % (k,v)
         #self._args = args
@@ -31,7 +36,6 @@ class User:
         #self._last_name = args['lastname']
         #self._email = args['email']
         #self._school = args['school']
-        #self._password_hash = sha256(args['password'])
     def _set_blank(self):
         self._args = {}
         self._username = ''
@@ -54,7 +58,7 @@ class User:
     def get_school(self):
         return self._school
     def get_password_hash(self):
-        return self._password_hash.hexdigest()
+        return self._passwordhash
     def get_profile_pic_path(self):
         return self._profilepicpath
     def set_mutiple(self, args):
@@ -81,8 +85,8 @@ class User:
         self._args['school'] = school
         self._school = school
     def set_password(self, pword):
-        self._args['password'] = sha256(password).hexdigest()
-        self._password = sha256(password).hexdigest()
+        self._args['passwordhash'] = sha256(pword).hexdigest()
+        self._passwordhash = sha256(pword).hexdigest()
     def password_correct(self, password):
         if sha256(password).hexdigest() == self.get_password_hash():
            return True
