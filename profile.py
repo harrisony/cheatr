@@ -53,7 +53,7 @@ def profile(response, username):
     user = User.get(username)
     username = clean(response.get_field("user"))
     if username:
-        
+        response.redirect("/?user=" + username)
     print username
     if user is not None:
         firstname = user.get_first_name()
@@ -69,7 +69,7 @@ def profile(response, username):
                    "email":email, "school":school, "css": "profile"}
         template.render_template("templates/profile.html", context, response)
     else:
-        response.redirect("../signup")
+        response.redirect("/signup")
         
 def signup(response):
     username = response.get_field("username")
