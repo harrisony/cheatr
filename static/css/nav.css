@@ -26,6 +26,5 @@ header nav ul li:hover {
 }
 
 nav ul {
-	position: absolute;
 	float: right;
 }
