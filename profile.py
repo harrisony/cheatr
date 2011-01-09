@@ -64,12 +64,13 @@ def profile(response, username):
         lastname = user.get_last_name()
         email = user.get_email()
         school = user.get_school()
-        picture = user.get_profile_pic_path()
+        #picture = user.get_profile_pic_path()
+        picture = "/static/photos/gman.jpe"
         print "PICTURE IS: " + picture
         fullname = firstname + " " + lastname
         #response.write(OUTPUT % (username,username, picture,firstname,lastname,email,school,username))
         context = {"title":fullname, "user":username, "content":"Content", "profile_pic_location":picture,
-                   "email":email, "school":school}
+                   "email":email, "school":school, "css": "profile"}
         template.render_template("templates/profile.html", context, response)
     else:
         response.redirect("../signup")
@@ -142,8 +143,10 @@ def update(response):
         email = user.get_email()
         #password = user.get_password()
         school = user.get_school()
-        response.write(UPDATE % (name,firstname,lastname,email,school))
-
+        #response.write(UPDATE % (name,firstname,lastname,email,school))
+        fullname = firstname + " " + lastname
+        context = {"title":fullname}
+        template.render_template("templates/update.html", context, response)
 
 
 
