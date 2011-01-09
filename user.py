@@ -63,7 +63,7 @@ class User:
         return self._profilepicpath
     def set_mutiple(self, args):
         mapping = {'firstname': self.set_first_name, 'lastname': self.set_last_name, 'email': self.set_email, 'school': self.set_school,
-                   'password': self.set_password}
+                   'password': self.set_password, 'profilepicpath': self.set_profile_pic_path}
         if 'username' in args: 
             args.pop('username')
         for k,v in args.items():
