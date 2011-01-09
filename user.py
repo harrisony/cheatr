@@ -60,7 +60,8 @@ class User:
     def set_mutiple(self, args):
         mapping = {'firstname': self.set_first_name, 'lastname': self.set_last_name, 'email': self.set_email, 'school': self.set_school,
                    'password': self.set_password}
-        args.pop('username')  # handles when people give me stuff they shouldn't :)
+        if 'username' in args: 
+            args.pop('username')
         for k,v in args.items():
             func = mapping[k]
             func(v)
