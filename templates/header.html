@@ -6,10 +6,19 @@
 					<a href="/private_messages">Private Messages</a>
 				</li>
 				<li>
-					<a href="/profile">Profile</a>
+					<a href="/profile/{{ user }}">Profile</a>
 				</li>
-				<li>	
+				
+				<li id ='account'>	
 					<a href="/account">Account</a>
+					<ul>
+						<li>
+							<a href='/changepassword'>Change Password</a>
+						</li>
+						<li>
+							<a href='/logout'>Logout</a>
+						</li>
+					</ul>
 				</li>
 			</ul>
 		</nav>

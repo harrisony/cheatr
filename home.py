@@ -8,6 +8,7 @@ def page(response):
         response.redirect("/signup.html")
     else:        
         context = {'title': 'Home Page',
+                   'user': currentuser.get_username(),
                    'firstname': currentuser.get_first_name(),
                    'lastname' : currentuser.get_last_name()}
         

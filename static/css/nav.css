@@ -1,0 +1,22 @@
+#account {
+	position: relative;
+}
+
+#account ul {
+	display: none;
+	background-color: #3BB2BF;
+	border-bottom: 2px solid #03588C; 
+	border-top: 2px solid #03588C; 
+	padding: 0px;
+	width: 180px;
+}
+
+#account ul  li {
+	display: block;
+	padding: 4px;
+}
+
+#account:hover ul {
+	display: block;
+	position: absolute;
+}
