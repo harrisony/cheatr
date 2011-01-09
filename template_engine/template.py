@@ -35,10 +35,10 @@ class HTMLNode(Node):
       response.write(self.content)
 
 class IncludeNode(Node):
-   def __init__(self, filepath):
+   def __init__(self, filepath, scope):
       super(IncludeNode, self).__init__()
       self.filepath = filepath
-      self.root = compile_template(self.filepath)
+      self.root = compile_template(self.filepath, scope)
    def render(self, context, response):
       self.root.render(context, response)
 
@@ -86,16 +86,29 @@ class TokenStream(object):
    def valid(self):
       return self.index < len(self.token_list)
 
+class Scope(object):
+   def __init__(self, parent, filepath):
+      self.filepath = filepath
+      self.parent = parent
+   def valid_path(self, include_path):
+      if self.filepath == include_path:
+         return False
+      elif self.parent:
+         return self.parent.valid_path(include_path)
+      else:
+         return True
+         
+      
 def render_template(filepath,context, response):
-   root = compile_template(filepath)
+   root = compile_template(filepath, Scope(None, filepath))
    root.render(context, response)
 
-def compile_template(filepath):
+def compile_template(filepath, scope):
    try:
       template_file = open(filepath, 'rU')
       contents = template_file.read()
       template_file.close()
-      return parse_template(contents)
+      return parse_template(contents, scope)
    except IOError:
       raise TemplateException("IncludeException: " + filepath + " not found")
    except Exception:
@@ -104,9 +117,9 @@ def compile_template(filepath):
       print e
       raise #TemplateException("IncludeException: " + filepath + " ")
 
-def parse_template(contents):
+def parse_template(contents, scope):
    tokens = tokenize(contents)
-   return parse_group(tokens)
+   return parse_group(tokens, scope)
 
 PATTERN = "\{\{(?P<expr>.*?)\}\}|\{\%(?P<tag>.*?)\%\}"
 FORPATTERN = "(?P<items>.*?)\s+in\s+(?P<collection>.*)"
@@ -122,7 +135,7 @@ def tokenize(contents):
       elif match.group('tag'):
          tag,arg = match.group('tag').strip().split(" ",1)
          if tag == 'include':
-            tokens.append(Token("include",(arg,)))
+            tokens.append(Token("include",(arg.split()[0],)))
          elif tag == 'if':
             tokens.append(Token("if",(arg,)))
          elif tag == 'end':
@@ -135,7 +148,7 @@ def tokenize(contents):
    tokens = TokenStream(tokens)
    return tokens
 
-def parse_group(tokens):
+def parse_group(tokens, scope):
    group = GroupNode()
    while tokens.valid():
       if tokens.peek().type == "html":
@@ -143,18 +156,25 @@ def parse_group(tokens):
       elif tokens.peek().type == "expr":
          group.add_child(ExprNode(tokens.next().arg()))
       elif tokens.peek().type == "include":
-         group.add_child(IncludeNode(tokens.next().arg()))
+         group.add_child(parse_include(tokens.next().arg(), scope))
       elif tokens.peek().type == "if":
-         group.add_child(parse_if(tokens))
+         group.add_child(parse_if(tokens, scope))
       elif tokens.peek().type == "for":
-         group.add_child(parse_for(tokens))
+         group.add_child(parse_for(tokens, scope))
       else:
          break
    return group
 
-def parse_if(tokens):
+def parse_include(filepath, scope):   
+   if scope.valid_path(filepath):
+      
+      return IncludeNode(filepath, scope)
+   else:
+      return HTMLNode("SCREW YOU, YOU INFINITE LOOPER! I SPENT VALUABLE TIME TRYING TO STOP YOUR BLOODY INFINITE LOOP! >:C")
+   
+def parse_if(tokens, scope):
    if_token = tokens.next()
-   group = parse_group(tokens)
+   group = parse_group(tokens, scope)
    if tokens.valid():
       endif_token = tokens.next()
       if endif_token.type != "end" or endif_token.arg() != "if":
@@ -163,9 +183,9 @@ def parse_if(tokens):
       raise TemplateException("EndTagException: Missing {% end if %}")
    return IfNode(if_token.arg(), group)
 
-def parse_for(tokens):
+def parse_for(tokens, scope):
    for_token = tokens.next()
-   group = parse_group(tokens)
+   group = parse_group(tokens, scope)
    if tokens.valid():
       endfor_token = tokens.next()
       if endfor_token.type != "end" or endfor_token.arg() != "for":
