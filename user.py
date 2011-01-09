@@ -23,7 +23,6 @@ class User:
             _user_table[args['username']] = args
     def __init__(self, args):
         self._set_blank()
-        print args
         if 'password' in args: 
             self._passwordhash = sha256(args['password']).hexdigest()
             args.pop('password')
@@ -63,7 +62,7 @@ class User:
         return self._profilepicpath
     def set_mutiple(self, args):
         mapping = {'firstname': self.set_first_name, 'lastname': self.set_last_name, 'email': self.set_email, 'school': self.set_school,
-                   'password': self.set_password, 'profilepicpath': self.set_profile_pic_path}
+                   'password': self.set_password, 'profilepath': self.set_profile_pic_path}
         if 'username' in args: 
             args.pop('username')
         for k,v in args.items():
