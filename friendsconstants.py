@@ -23,6 +23,7 @@ FRIENDHTML = """<html>
 </body>
 </html>
 """
+
 ALLFRIENDS = """<html>
 <head><title>All users</title></head>
 <body>
@@ -33,5 +34,6 @@ ALLFRIENDS = """<html>
 </body>
 </html>"""
 
-FRIENDS = {'gman':['smythey','svet'], 'smythey':['gman','svet'], 'svet':['gman','smythey']}
+
+FRIENDS = {'gman':['smythey'], 'smythey':['gman']}
 
