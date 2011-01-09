@@ -1,29 +1,80 @@
 <!DOCTYPE html>
-{% include templates/head.html %}
+<html>
+	{% include templates/head.html %}
 
-<body>
-{% include templates/header.html %}
+	<body>
 
-<h1>{{ title }}</h1>
-<article>
-<aside>
+		{% include templates/header.html %}
+		
+		<aside>
+		
+			<section id="years">
+				<h1>Past Papers</h1>
+				<ul>
+					{% for year in range(2000,2010) %}
+					<li>
+						{{ year }}
+					</li>
+					{% end for %}
+					
+				</ul>
+			</section>
+			<section id="years">
+				<h1>Recommended Papers</h1>
+				<ul>
+					{% for year in range(2000,2010) %}
+					<li>
+						{{ year }}
+					</li>
+					{% end for %}
+					
+				</ul>
+			</section>
+		
+			<section id="upload">
+				<p>This is where the upload section goes</p>
+			</section>
+			
+			
+			<section id="papers">
+				Discussions
+			</section>
+			
+			<section id="external links">
+				External Links
+			</section>
 
-</aside>
-<div id="content">
-<h1>Subject Details</h1>
-<p>Category- {{info1}}</p>
-<p>Amount of HSC Units- {{info2}} </p>
-<p>Overview- {{info3}}</p>
-<form method="POST">
-<!--if subject is in subject list then disable the button -->
-<!--(below as this page allows to view AND build subjects -->
-<input type="submit" value="Confirm Subject Creation">
-</form>
-</div>
-</article>
+		</aside>
+	
+		<article>
+		
+			<h1 id='title'>{{ subjectname }}</h1>
+			<nav id='subjects'>
+				<ul>
+					{% for subject in subjectlist %}
+					<li>
+						<a href=''> <img src=''> {{ subject }}</a>
+					</li>
+					{% end for %}
+				</ul>			
+			</nav>
+			
+			
+			<div id="content">
+				<h1>Subject Details</h1>
+				{% for detail in info %} 
+				<p>Category- {{detail}}</p>
+				{% end for %}
+				<form method="POST">
+					<!--if subject is in subject list then disable the button -->
+					<!--(below as this page allows to view AND build subjects -->
+					<input type="submit" value="Confirm Subject Creation">
+				</form>
+			</div>
+		</article>
 
-     
-{% include templates/footer.html %}
-</body>
+			 
+		{% include templates/footer.html %}
+	</body>
 
 </html>
