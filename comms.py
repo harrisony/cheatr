@@ -1,17 +1,18 @@
 from tornado import Server
 from time import time
 from user import User
+from friends import *
 from template_engine import template
 import sqlite3
 #users = {'Jordan':['hello', 'world']}
 header = """
 <html>
 <head>
-<title>%s's Wall</title>
+<title>%s</title>
 
 </head>
 <body>
-<form style="text-align:center" action="../submit" method=POST>Specify Author: <input type="text" name="author"></input><br />
+<form style="text-align:center" action="../submit?user=%s" method=POST></input><br />
 Post a message: <br /><textarea name="msg"></textarea><input type="hidden" value="%s" name="current_Wall"><br /><input type="submit" value="Submit"></input>
 <br />
 """
@@ -64,12 +65,8 @@ class WallConnection:
 		self.cursor.execute('CREATE TABLE IF NOT EXISTS "WALL" ("ID" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "author" TEXT NOT NULL , "target" TEXT NOT NULL , "time" INTEGER NOT NULL , "message" TEXT NOT NULL )')
 	def set_wall(self, m):
 		
-	
 		#users[current_Wall].append(author+' says ' + response.get_field('msg'))
-		m.message = m.message.replace("&", "&amp;") 
-		m.message = m.message.replace("<", "&lt;")
-		m.message = m.message.replace(">", "&gt;")
-		m.message = m.message.replace('"', "&quot;")
+		m.message = m.message.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 		try:
 			self.cursor.execute('INSERT INTO "WALL" ("author","target","time","message") VALUES ("%s","%s","%s","%s")' % (m.author, self.current_Wall, m.time,m.message))
 			self.connection.commit()
@@ -79,12 +76,29 @@ class WallConnection:
 	def get_wall(self):
 		
 		final = []
-		data = self.cursor.execute('SELECT * FROM WALL WHERE WALL.target = "%s" ORDER BY ID DESC' % self.current_Wall)
+		data = self.cursor.execute('SELECT * FROM WALL WHERE WALL.target = "%s" ORDER BY time DESC' % self.current_Wall)
 		for row in data:
 			
 			final.append([row[1], row[4], age(int(row[3]))])
 			
 		
+		return final
+		
+class FeedConnection: 
+	def __init__(self, current_User):
+		self.current_User = current_User	
+		self.connection = sqlite3.connect('./commsdb.db')
+		self.cursor = self.connection.cursor()
+		self.cursor.execute('CREATE TABLE IF NOT EXISTS "WALL" ("ID" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "author" TEXT NOT NULL , "target" TEXT NOT NULL , "time" INTEGER NOT NULL , "message" TEXT NOT NULL )')
+	def get_feed(self):
+		
+		final = []
+		friendsList = get_friends(self.current_User)
+		data = self.cursor.execute('SELECT * FROM WALL ORDER BY time DESC')
+		for row in data:
+			for i in friendsList:
+				if i == row[1] or row[1] == self.current_User:  
+					final.append([row[1], row[4], age(int(row[3]))])		
 		return final
 
 def _wall(response,current_Wall):
@@ -94,16 +108,28 @@ def _wall(response,current_Wall):
 	else:
 		w = WallConnection(current_Wall)
 		fullname = user.get_first_name() + " " + user.get_last_name() 
-		final = header % (fullname, current_Wall) 
+		final = header % (fullname+'\'s Wall', response.get_field('user'), current_Wall) 
 		final += str(w.get_wall())
 		#context = {'wall':w}
 		#template.render_template('static/html/test.html', context, response)
 		response.write(final)
-	
+
 def _submit(response):
 	now = time()
-	m = Message(response.get_field('author'), now, response.get_field('msg'))
+	m = Message(response.get_field('user'), now, response.get_field('msg'))
 	w = WallConnection(response.get_field('current_Wall'))
 	print w.set_wall(m)
-	response.redirect('/wall/%s' % (w.current_Wall)) 
-	
+	response.redirect('/wall/%s?user=%s' % (w.current_Wall,response.get_field('user'))) 
+
+def _feed(response):
+	user = User.get(response.get_field('user'))
+	if user == False:
+		response.redirect("/signup")
+	else:
+		f = FeedConnection(response.get_field('user'))
+		fullname = user.get_first_name() + " " + user.get_last_name() 
+		final = header % ('News Feed',response.get_field('user'), response.get_field('user')) 
+		final += str(f.get_feed())
+		#context = {'wall':w}
+		#template.render_template('static/html/test.html', context, response)
+		response.write(final)
