@@ -24,11 +24,17 @@ class User(object):
             return Exception('No username provided')
         elif User.exists(args['username']):
             raise Exception('There is already a user called "%s"' % (args['username']))
+        else:          
+            q = User(args,nu=True)
+    
+    def __init__(self, inp,nu=False):
+        if nu:
+            #TODO: insert encrypted password hash
+            print inp
+            self._run_db("INSERT INTO users VALUES(?,?,?,?,?,?,?);", (inp['username'], sha256(inp['password']).hexdigest(), inp['firstname'], inp['lastname'], inp['email'], '', inp['school']))
         else:
-            _user_table[args['username']] = args
-    def __init__(self, username):
-        self._username = username
-        self._update_db(username)
+            self._username = inp
+            self._update_db(inp)
     def _run_db(self, command, variables):
         conn = sqlite3.connect('users.sqlite')
         c = conn.cursor()
@@ -41,7 +47,7 @@ class User(object):
     def _update_db(self,username):
         self._set_blank()
         x = self._run_db("SELECT * FROM users WHERE username = ?;", (username,))
-        self._username, self._passwordhash, self._firstname, self._lastname, self._email, self._profilepicpath, self._school = x[0]
+        (self._username, self._passwordhash, self._firstname, self._lastname, self._email, self._profilepicpath, self._school) = x[0]
     def _set_blank(self):
         self._args = {}
         self._username = ''
