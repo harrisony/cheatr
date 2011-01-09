@@ -10,7 +10,8 @@ def page(response):
         context = {'title': 'Home Page',
                    'user': currentuser.get_username(),
                    'firstname': currentuser.get_first_name(),
-                   'lastname' : currentuser.get_last_name()}
+                   'lastname' : currentuser.get_last_name(),
+                   'subjects' : ['Maths', 'English']}
         
         template.render_template("templates/home.html", context, response)
 

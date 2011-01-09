@@ -180,5 +180,14 @@ article aside section h1 {
 
 article section {
 	font-family: lucida bright;
-	border-bottom: 2px solid black;
+}
+
+#content section {
+	display: block;
+	background-color: #03588C;
+}
+
+.subject {
+	list-style-type: none;
+	display: inline;
 }
