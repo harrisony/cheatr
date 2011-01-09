@@ -1,5 +1,5 @@
-#account {
-	position: absolute;
+#account{
+	position: relative;
 }
 
 header nav ul li:hover {
@@ -10,21 +10,17 @@ header nav ul li:hover {
 	display: none;
 	background-color: #3BB2BF;
 	padding: 0px;
-	width: 180px;
+	width: 130px;
 	-moz-box-shadow: 3px 3px 4px #262626;
 	-webkit-box-shadow: 3px 3px 4px #262626;
+	position: absolute;
 }
 
 #account ul  li {
 	display: block;
-	padding: 4px;
 }
 
 #account:hover ul {
 	display: block;
-	position: absolute;
-}
-
-nav ul {
-	float: right;
+	
 }

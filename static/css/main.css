@@ -5,11 +5,12 @@ html {
 header, footer {
 	display: block;
 	margin: 0px;
-    	
+    text-align:right;
 }
 header {
 	background-color: #3BB2BF;
-	border-bottom: 2px solid #03588C; 
+	border-bottom: 2px solid #03588C;
+	height: 60px;
 }
 
 footer {
@@ -24,6 +25,7 @@ footer {
 header img {
 	border: none;
 	margin: 4px;
+	float:left;
 }
 
 header a {
@@ -39,20 +41,26 @@ header ul li {
 	padding: 0px 5px 0px 5px;
 }
 
-header ul, nav {
+nav ul {
 	font-family: lucida bright;
-	display: inline-block;
+	display: inline;
 	width: 100%;
-	float: right; 
+	margin-right: 80px;
 }
 
-h1#title {
+
+h1{
 	font-family: lucida bright;
-	background-color: light brown;
 	padding: 0px 5px 0px 5px;
 	margin: 15px;
-	display: block;
-	font-size: 1.3cm; 
+	display: inline;
+	width: auto;
+	font-size: 0.9cm; 
+	color: #8EE6C0;
+}
+
+div#title { 
+	border: 1px solid black;
 }
 
 /* Subject Page CSS */
@@ -137,7 +145,7 @@ nav#subjects li a p {
 
 article aside {	
     font-family: lucida bright;
-	width:200px;
+	width:250px;
 	border-left: 2px solid black;
 	border-right: 2px solid black;
 	padding: 0px 5px 0px 5px;
