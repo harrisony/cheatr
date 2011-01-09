@@ -1,5 +1,14 @@
 from tornado import Server
 from template_engine import template
+import sqlite3
+connection=sqlite3.connect("subject_database.sqlite")
+cursor=connection.cursor()
+cursor.execute("""CREATE TABLE IF NOT EXISTS subjectlist (
+                id INTEGER,
+               subject STRING,
+               category INTEGER,
+               unit INTEGER,
+               description STRING);""")
 
 subjects = {"English":[2,3,"dfg"], "Maths 2 Unit":[2,3,"dfg"], "Maths Extension 1":[2,3,"dfg"], "Maths Extension 2":[2,3,"dfg"]}
 
@@ -10,7 +19,7 @@ def subjectpage(response):
         not response.get_field("description")):
         template.render_template("templates/subject_create_template.html",
                                  {"notification":
-                                      "One or more of the fields are missing! "},
+                                      "One or more of the fields are missing! ","enablebutton":True},
                                  response)
     else:
         subjectname = response.get_field("subjectname")
@@ -29,6 +38,6 @@ def viewsubject(response, subjectname):
 
 def listsubject(response):
     info1 = str(subjects)
-    template.render_template("templates/subject_list_template.html",{"subjectlist":str(subjects)},response)
+    template.render_template("templates/subject_list_template.html",{"subjectlist":subjects.keys()},response)
     #info = subjects[subjectname]
     targetsubject=response.get_field("subjectselected")

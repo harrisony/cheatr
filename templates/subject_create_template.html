@@ -12,6 +12,9 @@
 <section>
 <h1>Subject Creation Field</h1>
 <form method="POST">
+{% if enablebutton==False %}
+	{{notification}}
+{% end if %}
 <input type="text" name="subjectname" value=""/> :Subject Name
 <p>
 <input type="radio" name="subject" value=1> Mathematics
@@ -19,7 +22,6 @@
 <p>
 <input type="radio" name="subject" value=2> Computing
 </p>
-<p>{{notification}}</p>
 <p>
 <input type="radio" name="subject" value=3> Science
 </p>

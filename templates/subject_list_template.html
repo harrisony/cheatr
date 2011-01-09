@@ -9,10 +9,15 @@
 </aside>
 <div id="content">
 <h1>Subject List</h1>
-<li><a href="http://localhost:8888/subject" + {{subject_name}}></li>
-<!--for i in subjectlist:-->
-<!--<p><a href="localhost:8888/subject/"+i></a></p>-->
-<p>{{subjectlist}}</p>
+<!--<li><a href="http://localhost:8888/subject" + {{subject_name}}></li>-->
+
+<!--{% if len(subjectlist)>2 %}-->
+
+<!--{% end if %}-->
+
+{% for i in subjectlist %}
+	<p><a href="/subject/{{ i }}">{{ i }}</a></p>
+{% end for %}
 </div>
 </article>
 
