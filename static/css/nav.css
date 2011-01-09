@@ -22,5 +22,10 @@ header nav ul li:hover {
 
 #account:hover ul {
 	display: block;
-	
+	position: absolute;
+	left: 0px;
+}
+
+nav ul {
+	float: right;
 }
