@@ -67,7 +67,7 @@ nav#subjects ul li{
 	padding: 5px 6px 5px 6px;
 }
 
-nav#subjects {
+nav#subjects, #upload {
 	display: block;
 }
 
@@ -103,6 +103,24 @@ nav#subjects li a p {
 
 #recommended ul li {
 	padding: 5px 3px 5px 3px;
+}
+
+#papers {
+    padding: 205px 197px 205px 197px;
+}
+
+#upload {
+}
+
+#upload {
+	padding: 25px 21px 25px 21px; 
+}
+
+#external links {
+}
+
+#external links {
+	padding: 15px 11px 15px 11px;
 }
 
 article aside {	
