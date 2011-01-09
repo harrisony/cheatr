@@ -1,15 +1,8 @@
 from tornado import Server
-from user import User
+from dbuser import User
 import os
 import mimetypes
 from template_engine import template
-
-Users = { "Nick": {"firstname":"Nicholas","lastname":"Cooke","email":"nicholas.cooke1@gmail.com","password":"abc123","school":"Model Farms High"},
-          "Jennifer": {"firstname":"Jennifer","lastname":"Truong","email":"jenni_truong@hotmail.com","password":"password","school":"St George Girls High"}}
-
-
-newUser = {"username": "Nick", "firstname":"Nick","lastname":"Cooke","email":"email","password":"password","school":"school"}
-User.add(newUser)
 
 
 SIGNUP = """
@@ -58,6 +51,10 @@ Upload Profile Picture:<br>
 
 def profile(response, username):
     user = User.get(username)
+    username = clean(response.get_field("user"))
+    if username:
+        
+    print username
     if user is not None:
         firstname = user.get_first_name()
         lastname = user.get_last_name()
@@ -93,7 +90,7 @@ def signup(response):
         #response.write(SIGNUP)
         title = "Sign Up"
         context = {"title":title,}
-        template.render_template("templates/update.html", context, response)
+        template.render_template("templates/signup.html", context, response)
 
 def clean(string):
     if string == None:
