@@ -43,7 +43,7 @@ class User:
         self._email = ''
         self._school = ''
         self._passwordhash = ''
-        self._profilepicpath = ''
+        self._profilepath = ''
     def __repr__(self):
         return "<Person username:%s>" % self._username
     def get_username(self):
@@ -59,7 +59,7 @@ class User:
     def get_password_hash(self):
         return self._passwordhash
     def get_profile_pic_path(self):
-        return self._profilepicpath
+        return self._profilepath
     def set_mutiple(self, args):
         mapping = {'firstname': self.set_first_name, 'lastname': self.set_last_name, 'email': self.set_email, 'school': self.set_school,
                    'password': self.set_password, 'profilepath': self.set_profile_pic_path}
@@ -79,7 +79,7 @@ class User:
         self._lastname = lname
     def set_profile_pic_path(self, path):
         self._args['profilepath'] = path
-        self._profile_pic_path = path
+        self._profilepath = path
     def set_school(self, school):
         self._args['school'] = school
         self._school = school
