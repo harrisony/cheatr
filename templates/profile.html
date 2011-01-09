@@ -9,8 +9,10 @@
 	<section>
 		<p>Account Info</p>
 		<ul>
-			<li><img src="{{ profile_pic_location }}" width ="180px" /></li>
-			<li>Username: {{ username }}</li>
+			
+			{% if profile_pic_location != "" %}<li><img src="{{ profile_pic_location }}" width ="180px" /></li>{% end if %}
+			{% if profile_pic_location == "" %}<li><img src="/static/photos/default_male.jpg" width ="180px" /></li>{% end if %}
+			<li>Username: {{ user }}</li>
 			<li>Email: {{ email }}</li>
 			<li><strong>Education</strong>
 				<ul>
@@ -38,14 +40,13 @@
 					<li>Website: {{ website }}</li>
 				</ul>
 			</li>
-			
-		
-		
 		</ul>
-		
 	</section>
 	<section>
 		<p>Friends</p>
+		<ul>
+		{% for f in friends %}<li class="friend"><a href="/profile/{{ f }}">{{ f }}</a></li>{% end for %}
+		</ul>
 	</section>
 	<section>
 		<p>Chat</p>
