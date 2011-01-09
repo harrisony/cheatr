@@ -58,7 +58,6 @@ Upload Profile Picture:<br>
 
 def profile(response, username):
     user = User.get(username)
-    print "USER: " + user.get_profile_pic_path()
     if user is not None:
         firstname = user.get_first_name()
         lastname = user.get_last_name()
