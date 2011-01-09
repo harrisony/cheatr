@@ -10,7 +10,6 @@ header nav ul li:hover {
 	display: none;
 	background-color: #3BB2BF;
 	border-bottom: 2px solid #03588C; 
-	border-top: 2px solid #03588C; 
 	padding: 0px;
 	width: 180px;
 }
@@ -28,4 +27,8 @@ header nav ul li:hover {
 nav ul {
 	position: absolute;
 	float: right;
+}
+
+nav ul li ul li {
+	border-top: 2px solid #03588C; 
 }
