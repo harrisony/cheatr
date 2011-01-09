@@ -91,7 +91,10 @@ def signup(response):
         print x
         response.redirect("/profile/" + username)
     else:
-        response.write(SIGNUP)
+        #response.write(SIGNUP)
+        title = "Sign Up"
+        context = {"title":title,}
+        template.render_template("templates/update.html", context, response)
 
 def clean(string):
     if string == None:
