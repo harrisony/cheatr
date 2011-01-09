@@ -35,5 +35,5 @@ ALLFRIENDS = """<html>
 </html>"""
 
 
-FRIENDS = {'gman':['smythey'], 'smythey':['gman']}
+
 
