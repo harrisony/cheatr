@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% include templates/head.html %}
+<body>
+{% include templates/header.html %}
+<h1>{{ title }}</h1>
+<article>
+<aside>
+
+</aside>
+<h1>Subject Creation Field</h1>
+<div id="content">
+<section>
+<form method="POST">
+<input type="text" name="subjectname" value=""/> :Subject Name
+<p>
+<input type="radio" name="subject" value=1> Mathematics
+</p>
+<p>
+<input type="radio" name="subject" value=2> Computing
+</p>
+<p>{{notification*5}}</p>
+<p>
+<input type="radio" name="subject" value=3> Science
+</p>
+<p>
+<input type="radio" name="subject" value=4> Social Science
+</p>
+<p>
+<input type="radio" name="subject" value=5> English/Philosophy
+</p>
+<p>
+<input type="radio" name="subject" value=6> Languages
+</p>
+<p>
+<input type="radio" name="subject" value=7> Other
+</p>
+</section>
+<p>
+Amount of Units or Credits
+<input type="radio" name="unit" value="1"> 1
+<input type="radio" name="unit" value="2"> 2
+<input type="radio" name="unit" value="3"> 3
+<input type="radio" name="unit" value="4"> 4
+</p>
+<p>
+Description of the Course
+</p>
+<p>
+<textarea rows="3" cols="50" name="description"> </textarea>
+</p>
+<p>There are 
+60
+character's left</p>
+<p>
+<input type="reset" name="reset" value=Reset>
+<p>
+<input type='submit' value='Submit Selection'>
+</p>
+</form>
+</div>
+</article>
+
+     
+{% include templates/footer.html %}
+</body>
+</html>

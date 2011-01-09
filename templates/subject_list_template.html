@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% include templates/head.html %}
+<body>
+{% include templates/header.html %}
+<h1>{{ title }}</h1>
+<article>
+<aside>
+
+</aside>
+<h1>Subject List</h1>
+<div id="content">
+<li><a href="http://localhost:8888/subject" + {{subject_name}}></li>
+<form method="POST">
+<!--for i in subjectlist:-->
+<p><a href="localhost:8888/subject/"+i></a></p>
+</form>
+</div>
+</article>
+
+     
+{% include templates/footer.html %}
+</body>
+</html>

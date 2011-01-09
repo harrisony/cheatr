@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% include templates/head.html %}
+
+<body>
+{% include templates/header.html %}
+
+<h1>{{ title }}</h1>
+<article>
+<aside>
+
+</aside>
+<h1>Subject Details</h1>
+<div id="content>
+<p>Category- {{info1}}</p>
+<p>Amount of HSC Units- {{info2}} </p>
+<p>Overview- {{info3}}</p>
+<form method="POST">
+<!--if subject is in subject list then disable the button -->
+<!--(below as this page allows to view AND build subjects -->
+<input type="submit" value="Confirm Subject Creation">
+</form>
+</div>
+</article>
+
+     
+{% include templates/footer.html %}
+</body>
+
+</html>
