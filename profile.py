@@ -2,6 +2,7 @@ from tornado import Server
 from dbuser import User
 import os
 import mimetypes
+import friends
 from template_engine import template
 
 
@@ -51,9 +52,9 @@ Upload Profile Picture:<br>
 
 def profile(response, username):
     user = User.get(username)
-    username = clean(response.get_field("user"))
-    if username:
-        response.redirect("/?user=" + username)
+    name = clean(response.get_field("user"))
+    if name:
+        response.redirect("/?user=" + name)
     print username
     if user is not None:
         firstname = user.get_first_name()
@@ -66,8 +67,10 @@ def profile(response, username):
         fullname = firstname + " " + lastname
         #response.write(OUTPUT % (username,username, picture,firstname,lastname,email,school,username))
         context = {"title":fullname, "user":username, "content":"Content", "profile_pic_location":picture,
-                   "email":email, "school":school, "css": "profile"}
+                   "email":email, "school":school, "css": "profile", "friends":friends.get_friends(username)}
         template.render_template("templates/profile.html", context, response)
+        
+        
     else:
         response.redirect("/signup")
         
@@ -111,17 +114,16 @@ def update(response):
     filename, content_type, data = response.get_file('photo')
         
     if username:
-        #
-        print "username is " + username
-        
-        extension = mimetypes.guess_extension(content_type)
-        photo_path = os.path.join('static', 'photos', username + extension)
-        open(photo_path, 'wb').write(data)
+        try:
+            extension = mimetypes.guess_extension(content_type)
+            photo_path = os.path.join('static', 'photos', username + extension)
+            open(photo_path, 'wb').write(data)
+            photo_url = photo_path.replace("\\","/")
+        except:
+            photo_url = "/static/photos/default_male.jpg"
         fullname = '%s %s' % (username, lastname)
-        print "PHOTO PATH: " + photo_path
-        photo_url = photo_path.replace("\\","/")
+        
         user = User.get(username)
-        print "PHOTO IS: " + photo_url
 	#print user
         newUser = {"username": username, "firstname":firstname,"lastname":lastname,
                    "email":email,"password":password,"school":school, "profilepath":photo_url}
@@ -137,6 +139,7 @@ def update(response):
     else:
         name = response.get_field("name")
         user = User.get(name)
+        password = user.get_password_hash()
         firstname = user.get_first_name()
         lastname = user.get_last_name()
         email = user.get_email()
@@ -144,7 +147,8 @@ def update(response):
         school = user.get_school()
         #response.write(UPDATE % (name,firstname,lastname,email,school))
         title = "Updating " + firstname + " " + lastname
-        context = {"title":title, "user":name}
+        context = {"title":title, "user":name, "username":name, "firstname":firstname,
+                   "lastname":lastname, "email":email, "school":school,"password":password}
         template.render_template("templates/update.html", context, response)
 
 
