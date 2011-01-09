@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+{% include templates/head.html %}
+<body>
+{% include templates/header.html %}
+	<h1>{{ title }}</h1>
+<article>
+<aside>
+	<section>
+		<p>Account Info</p>
+	</section>
+	<section>
+		<p>Friends</p>
+	</section>
+	<section>
+		<p>Chat</p>
+	</section>
+
+</aside>
+<div id="content">
+{{ content }}
+</div>
+</article>
+{% include templates/footer.html %}
+</body>
+</html>
