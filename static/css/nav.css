@@ -9,9 +9,10 @@ header nav ul li:hover {
 #account ul {
 	display: none;
 	background-color: #3BB2BF;
-	border-bottom: 2px solid #03588C; 
 	padding: 0px;
 	width: 180px;
+	-moz-box-shadow: 3px 3px 4px #262626;
+	-webkit-box-shadow: 3px 3px 4px #262626;
 }
 
 #account ul  li {
@@ -27,8 +28,4 @@ header nav ul li:hover {
 nav ul {
 	position: absolute;
 	float: right;
-}
-
-nav ul li ul li {
-	border-top: 2px solid #03588C; 
 }
