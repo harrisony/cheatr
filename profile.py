@@ -1,8 +1,12 @@
 from tornado import Server
 from user import User
+import os
+import mimetypes
+from template_engine import template
 
 Users = { "Nick": {"firstname":"Nicholas","lastname":"Cooke","email":"nicholas.cooke1@gmail.com","password":"abc123","school":"Model Farms High"},
           "Jennifer": {"firstname":"Jennifer","lastname":"Truong","email":"jenni_truong@hotmail.com","password":"password","school":"St George Girls High"}}
+
 
 newUser = {"username": "Nick", "firstname":"Nick","lastname":"Cooke","email":"email","password":"password","school":"school"}
 User.add(newUser)
@@ -27,6 +31,7 @@ p {
 </head>
 <body>
 <h1>%s's Profile</h1>
+<img src='%s'>
 <p>First Name: %s</p>
 <p>Last Name: %s</p>
 <p>Email: %s</p>
@@ -60,13 +65,20 @@ UPDATE = """
 <head><title>Update Info</title></head>
 <body>
 <h1>Update Info</h1>
-<form method="POST" action="update_info"> 
+<form method="POST" action="update_info" enctype="multipart/form-data"> 
 <input type="text" value="%s" name="username" hidden="true" /><br />
 First Name: <input type="text" value="%s" name="firstname" /><br />
 Last Name: <input type="text" value="%s" name="lastname" /><br />
 Email: <input type="text" value="%s" name="email" /><br />
 Create a Password: <input type="password" value="" name="password" /><br />
 Current School: <input type="text" value="%s" name="school" /><br />
+<br>
+<br>
+Upload Profile Picture:<br>
+
+<input type="file" name="photo" size="20">
+
+<br>
 <input type="Submit" value="Update" name="submit" />
 </form>
 </body>
@@ -80,7 +92,11 @@ def profile(response, username):
         lastname = user.get_last_name()
         email = user.get_email()
         school = user.get_school()
-        response.write(OUTPUT % (username,username,firstname,lastname,email,school,username))
+        picture = user.get_profile_pic_path()
+        fullname = firstname + " " + lastname
+        #response.write(OUTPUT % (username,username, picture,firstname,lastname,email,school,username))
+        context = {"title":fullname, "user":username, "content":"<p>Hello</p>"}
+        template.render_template("templates/profile.html", context, response)
     else:
         response.redirect("../signup")
         
@@ -108,23 +124,35 @@ def clean(string):
     string = string.replace('"',"'").replace('<','>')
     return string
 
-def update(response):
+photo = ''
 
+def update(response):
+    global photo, content_type
     username = clean(response.get_field("username"))
     firstname = clean(response.get_field("firstname"))
     lastname = clean(response.get_field("lastname"))
     email = clean(response.get_field("email"))
     password = clean(response.get_field("password"))
     school = clean(response.get_field("school"))
-
+    filename, content_type, data = response.get_file('photo')
+        
     if username:
         print "username is " + username
+        
+        extension = mimetypes.guess_extension(content_type)
+        photo_path = os.path.join('static', 'photos', username + extension)
+        open(photo_path, 'wb').write(data)
+        fullname = '%s %s' % (username, lastname)
+        photo_url = photo_path.replace("\\","/")
+        
         newUser = {"username": username, "firstname":firstname,"lastname":lastname,"email":email,"password":password,"school":school}
-        user = User.get(username)
+        #user = User.get(username)
         #print "User is " + user
         user.set_mutiple(newUser)
+        #User.add(newUser)
         #set_mutiple
         #x = User.get(username)
+        
         response.redirect("/profile/" + username)
     else:
         name = response.get_field("name")
@@ -135,3 +163,13 @@ def update(response):
         #password = user.get_password()
         school = user.get_school()
         response.write(UPDATE % (name,firstname,lastname,email,school))
+
+
+
+
+   # def index(response):
+    
+
+    #else:
+     #   response.write(RESULT %(username, username, photo_url))
+        
