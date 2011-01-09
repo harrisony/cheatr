@@ -144,8 +144,8 @@ def update(response):
         #password = user.get_password()
         school = user.get_school()
         #response.write(UPDATE % (name,firstname,lastname,email,school))
-        fullname = firstname + " " + lastname
-        context = {"title":fullname}
+        title = "Updating " + firstname + " " + lastname
+        context = {"title":title, "user":name}
         template.render_template("templates/update.html", context, response)
 
 
