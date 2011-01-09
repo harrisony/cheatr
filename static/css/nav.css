@@ -6,6 +6,14 @@ header nav ul li:hover {
 	background-color: #9dd8df;
 }
 
+header nav ul li {
+	margin: 2px;
+	background-color: #3BB2BF;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
 #account ul {
 	display: none;
 	background-color: #3BB2BF;
@@ -24,8 +32,6 @@ header nav ul li:hover {
 	display: block;
 	position: absolute;
 	left: 0px;
-}
-
-nav ul {
-	float: right;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
