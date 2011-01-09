@@ -7,14 +7,38 @@ import sqlite3
 #users = {'Jordan':['hello', 'world']}
 header = """
 <html>
-<head>
-<title>%s</title>
-
-</head>
+	<head>
+		<title>%s</title>
+<script src="../static/js/prototype.js"></script>	
+		
+	</head>
 <body>
-<form style="text-align:center" action="../submit?user=%s" method=POST></input><br />
-Post a message: <br /><textarea name="msg"></textarea><input type="hidden" value="%s" name="current_Wall"><br /><input type="submit" value="Submit"></input>
-<br />
+	<form id="message" style="text-align:center" action="/submit?user=%s" method=POST></input><br />
+	Post a message: <br /><textarea name="msg"></textarea><input type="hidden" value="%s" name="current_Wall"><br /><input type="submit" value="Submit" ></input>
+	<br />
+</body>
+
+	<script type="text/javascript">	
+	Event.observe(window, 'load',init,false);
+	function init(){
+	Event.observe('message','submit',submit);
+	}
+	
+		function submit(e){
+			$('message').request({
+				onComplete: function(){ 
+				
+				}
+			}); 
+			Event.stop(e)
+		}
+		new Ajax.PeriodicalUpdater('content', '/%s', {
+			method: 'get', frequency: 20, decay: 0
+		});
+
+		
+			</script>
+			<div id ="content">
 """
 
 def age(old):
@@ -108,8 +132,10 @@ def _wall(response,current_Wall):
 	else:
 		w = WallConnection(current_Wall)
 		fullname = user.get_first_name() + " " + user.get_last_name() 
-		final = header % (fullname+'\'s Wall', response.get_field('user'), current_Wall) 
-		final += str(w.get_wall())
+		currentUrl = 'wall/'+current_Wall+'?user='+response.get_field('user')
+		
+		final = header % (fullname+'\'s Wall', response.get_field('user'), current_Wall, currentUrl) 
+		final += str(w.get_wall()) + '</div>'
 		#context = {'wall':w}
 		#template.render_template('static/html/test.html', context, response)
 		response.write(final)
@@ -128,8 +154,9 @@ def _feed(response):
 	else:
 		f = FeedConnection(response.get_field('user'))
 		fullname = user.get_first_name() + " " + user.get_last_name() 
-		final = header % ('News Feed',response.get_field('user'), response.get_field('user')) 
-		final += str(f.get_feed())
+		currentUrl = 'feed/'+'?user='+response.get_field('user')
+		final = header % ('News Feed',response.get_field('user'), response.get_field('user'), currentUrl) 
+		final += str(f.get_feed()) + '</div>'
 		#context = {'wall':w}
 		#template.render_template('static/html/test.html', context, response)
 		response.write(final)
