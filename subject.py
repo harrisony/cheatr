@@ -1,8 +1,7 @@
 from tornado import Server
 from template_engine import template
 
-subjects = {}
-subjectlist=["English", "Maths 2 Unit", "Maths Extension 1", "Maths Extension 2"]
+subjects = {"English":[2,3,"dfg"], "Maths 2 Unit":[2,3,"dfg"], "Maths Extension 1":[2,3,"dfg"], "Maths Extension 2":[2,3,"dfg"]}
 
 def subjectpage(response):
     if (not response.get_field("subjectname") or
@@ -29,6 +28,7 @@ def viewsubject(response, subjectname):
                              response)
 
 def listsubject(response):
-    template.render_template("templates/subject_list_template.html",{"subject_name":subjectname},response)
+    info1 = str(subjects)
+    template.render_template("templates/subject_list_template.html",{"subjectlist":str(subjects)},response)
     #info = subjects[subjectname]
     targetsubject=response.get_field("subjectselected")
