@@ -10,7 +10,7 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS subjectlist (
                unit INTEGER,
                description STRING);""")
 
-subjects = {"English":[2,3,"dfg"], "Maths 2 Unit":[2,3,"dfg"], "Maths Extension 1":[2,3,"dfg"], "Maths Extension 2":[2,3,"dfg"]}
+subjects = {"English":[2,3,"ghahd"], "Maths 2 Unit":[2,3,"dfg"], "Maths Extension 1":[2,3,"dfg"], "Maths Extension 2":[2,3,"dfg"]}
 
 def subjectpage(response):
     if (not response.get_field("subjectname") or
@@ -32,8 +32,7 @@ def subjectpage(response):
 def viewsubject(response, subjectname):
     info = subjects[subjectname]
     template.render_template("templates/subject_view_template.html",
-                             {"info1":info[0], "info2":int(info[1]),
-                              "info3":info[2]},
+                             {"subjectname":subjectname, "info":info, "subjectlist":subjects.keys()},
                              response)
 
 def listsubject(response):
