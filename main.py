@@ -27,6 +27,7 @@ if __name__ == "__main__":
     server.register("/subjects", subject.listsubject)
     server.register('/wall/(.*)',comms._wall)
     server.register('/feed/',comms._feed)
+    server.register('/feed',comms._feed)
     server.register('/submit',comms._submit)
 
 
