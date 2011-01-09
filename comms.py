@@ -65,10 +65,16 @@ class WallConnection:
 	def get_wall(self):
 		
 		final = []
-		data = self.cursor.execute('SELECT * FROM WALL WHERE WALL.target = "%s" ORDER BY time DESC' % self.current_Wall)
+		data = self.cursor.execute('SELECT * FROM WALL ORDER BY time DESC')
+		if not data:
+			return 0
 		for row in data:
-			
-			final.append([row[1], row[4], age(int(row[3]))])
+			current_Row = [[row[0],row[1],row[4],age(int(row[3]))]];
+			if row[2] == self.current_Wall:
+				author = User.get(row[1])
+				fullname = author.get_first_name() + " " + author.get_last_name()
+				current_Row[0][1] = fullname
+				final.append(current_Row[0])
 			
 		
 		return final
@@ -83,11 +89,29 @@ class FeedConnection:
 		
 		final = []
 		friendsList = get_friends(self.current_User)
-		data = self.cursor.execute('SELECT * FROM WALL ORDER BY time DESC')
+		data = self.cursor.execute('SELECT * FROM WALL ORDER BY time DESC LIMIT 40;')
+		if not data:
+			return 0
 		for row in data:
-			for i in friendsList:
-				if i == row[1] or row[1] == self.current_User:  
-					final.append([row[1], row[4], age(int(row[3]))])		
+			current_Row = [[row[0],row[1],row[4],age(int(row[3]))]]		
+			for user in friendsList:
+				if user == row[1]:
+					if current_Row not in final:
+						author = User.get(current_Row[0][1])
+
+						fullname = author.get_first_name() + " " + author.get_last_name()
+						current_Row[0][1] = fullname	
+						final.append(current_Row[0])
+						
+			if row[1] == self.current_User:
+				author = User.get(current_Row[0][1])
+				fullname = author.get_first_name() + " " + author.get_last_name()
+				current_Row[0][1] = fullname	
+				final.append(current_Row[0])
+				
+						
+				#	elif row[0] not in final[0]:
+				#		print final[0]
 		return final
 		
 		
@@ -97,6 +121,7 @@ def _getWallData(response):
 	w = WallConnection(current_Wall)
 
 	context = {"posts":w.get_wall()}
+
 	template.render_template('templates/wallcontent.html', context, response)
 		
 		
@@ -106,32 +131,34 @@ def _getWallData(response):
 		
 def _getFeedData(response):
 	f = FeedConnection(response.get_field('user'))
-	response.write(str(f.get_feed()))
-	context = {"posts":w.get_feed()}
+	context = {"posts":f.get_feed()}
 	template.render_template('templates/wallcontent.html', context, response)
 	
 def _wall(response,current_Wall):
 	
 	user = User.get(current_Wall)
-	if user == False:
+	if user == None:
 		response.redirect("/signup")
+		return
 	fullname = user.get_first_name() + " " + user.get_last_name() 
 	context = {'title': fullname+'\'s Wall', 'username': response.get_field('user'), 'wallorfeed':'wallupdate','current_Wall':current_Wall}
 	template.render_template('templates/wall.html', context, response)
 
 
 def _submit(response):
+
 	now = time()
 	m = Message(response.get_field('user'), now, response.get_field('msg'))
 	w = WallConnection(response.get_field('current_Wall'))
-	print w.set_wall(m)
-	response.redirect('/wall/%s?user=%s' % (w.current_Wall,response.get_field('user'))) 
+	w.set_wall(m)
+	return
+	 
 
 def _feed(response):
 	user = User.get(response.get_field('user'))
 	if user == False:
 		response.redirect("/signup")
 	else:
-		context = {'title':'Feed','username':response.get_field('user'),'wallorfeed':'feedupdate','current_Wall':''}
+		context = {'title':'Feed','username':response.get_field('user'),'wallorfeed':'feedupdate','current_Wall':response.get_field('user')}
 		template.render_template('templates/wall.html', context, response)
 		

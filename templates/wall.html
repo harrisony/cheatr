@@ -5,7 +5,7 @@
 		
 	</head>
 	<form id="message" style="text-align:center" action="/submit?user={{username}}" method=POST></input><br />
-	Post a message: <br /><textarea name="msg"></textarea><input type="hidden" value="{{current_Wall}}" name="current_Wall"><br /><input type="submit" value="Submit" ></input>
+	Post a message: <br /><textarea id="msg" name="msg"></textarea><input type="hidden" value="{{current_Wall}}" name="current_Wall"><br /><input type="submit" value="Submit" ></input>
 	<br />
 	<div id="content"></div>
 	
@@ -15,17 +15,22 @@
 	function init(){
 	Event.observe('message','submit',submit);
 	new Ajax.PeriodicalUpdater('content', '/{{wallorfeed}}', {
-		method: 'get', frequency: 20, decay: 0,
+		method: 'post', frequency: 20, decay: 0,
 		parameters: {'current_Wall':'{{current_Wall}}','user':'{{username}}'},
-		onSuccess: function(e){
-			
-			//e.responseText;
-		}
-	});
+		});
 	}
 	
 		function submit(e){
-			$('message').request(); 
+$('message').request();
+	new Ajax.Updater('content','/{{wallorfeed}}',{
+			method: 'post',
+			parameters: {'current_Wall':'{{current_Wall}}','user':'{{username}}'}});			
+$('message').msg.clear();	
+		
+	
+
+					
+		
 			Event.stop(e)
 		}
 	
