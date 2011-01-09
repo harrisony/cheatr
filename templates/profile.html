@@ -1,63 +1,61 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<link rel='stylesheet' href='static/css/main.css' type='text/css'
-	</head>
-	<body>
-	<header>
-	<a href=''><img src='' alt='Cheatr'></a>
-		<nav>
-			<ul>
-				<li>
-					<a href="/private_messages">Private Messages</a>
-				</li>
-				<li>
-					<a href="/profile">Profile</a>
-				</li>
-				<li>	
-					<a href="/account">Account</a>
-				</li>
-			</ul>
-		</nav>
-	</header>
+{% include templates/head.html %}
+<body>
+{% include templates/header.html %}
+	<h1>{{ title }}</h1>
+<article>
+<aside>
+	<section>
+		<p>Account Info</p>
+		<ul>
+			<li><img src="{{ profile_pic_location }}" width ="180px" /></li>
+			<li>Username: {{ username }}</li>
+			<li>Email: {{ email }}</li>
+			<li><strong>Education</strong>
+				<ul>
+					<li>School: {{ school }}</li>
+					<li>Subjects: {{ subjects }}</li>
+					<li>State: {{ state }}</li>
+					<li>Grade: {{ grade }}</li>
+				</ul>
+			</li>
+			<li><strong>Activities And Interests</strong>
+				<ul>
+					<li>Favourite Music: {{ favourite music }}</li>
+					<li>Favourite TV Shows: {{ favourite tv shows }}</li>
+					<li>Favourite Sports: {{ favourite sports }}</li>
+					<li>Hobbies: {{ hobbies }}</li>
+					<li>Activities: {{ activities }}</li>
+					<li>Interests: {{ interests }}</li>
+				</ul>
+			</li>
+			<li><strong>About Me</strong>
+				<ul>
+					<li>About Me: {{ about me }}</li>
+					<li>Birthday: {{ birthday }}</li>
+					<li>Age: {{ age }}</li>
+					<li>Website: {{ website }}</li>
+				</ul>
+			</li>
+			
 		
-		<article>
-				<aside>
 		
-		 <section id= "account info">
-		 </section>
-		 
-		 <section id= "friends">
-		 </section>
-		 
-		 <section id= "chat">
-		 </section>
-		 
-		</aside>
-		<section id= "username">
-		</section>
+		</ul>
 		
-		<section id= "subjects">
-		</section>
-		
-		<section id= "wall">
-		</section>
-		
+	</section>
+	<section>
+		<p>Friends</p>
+	</section>
+	<section>
+		<p>Chat</p>
+	</section>
 
-		
-		</article>
-	
-		
-		
-		
-		<footer>
-		<a href="" >about</a>
-		<a href="" >privacy</a>
-		<a href="" >terms</a>
-		<a href="" >help</a>
-		</footer>
-	</body>
+</aside>
+<div id="content">
+{{ content }}
+</div>
+</article>
+{% include templates/footer.html %}
+</body>
 </html>
- 
- 
- 
