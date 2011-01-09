@@ -5,41 +5,7 @@ from friends import *
 from template_engine import template
 import sqlite3
 #users = {'Jordan':['hello', 'world']}
-header = """
-<html>
-	<head>
-		<title>%s</title>
-<script src="../static/js/prototype.js"></script>	
-		
-	</head>
-<body>
-	<form id="message" style="text-align:center" action="/submit?user=%s" method=POST></input><br />
-	Post a message: <br /><textarea name="msg"></textarea><input type="hidden" value="%s" name="current_Wall"><br /><input type="submit" value="Submit" ></input>
-	<br />
-</body>
 
-	<script type="text/javascript">	
-	Event.observe(window, 'load',init,false);
-	function init(){
-	Event.observe('message','submit',submit);
-	}
-	
-		function submit(e){
-			$('message').request({
-				onComplete: function(){ 
-				
-				}
-			}); 
-			Event.stop(e)
-		}
-		new Ajax.PeriodicalUpdater('content', '/%s', {
-			method: 'get', frequency: 20, decay: 0
-		});
-
-		
-			</script>
-			<div id ="content">
-"""
 
 def age(old):
 	try:
@@ -53,8 +19,7 @@ def age(old):
 			elif quotient > 1:
 				elapsed += """%s %ss """ % (str(quotient), UNITS[unit])
 			duration = duration % unit
-		if elapsed.split()[1] in ['day','days','hour','hours']:
-			print elapsed.split()
+		if elapsed.split()[1] in ['day','days','hour','hours','minute','minutes']:
 			elapsed = " ".join(elapsed.split()[:2]) + ' '
 		return elapsed + 'ago'
 	except:
@@ -124,21 +89,36 @@ class FeedConnection:
 				if i == row[1] or row[1] == self.current_User:  
 					final.append([row[1], row[4], age(int(row[3]))])		
 		return final
+		
+		
+def _getWallData(response):
+	
+	current_Wall = response.get_field('current_Wall')
+	w = WallConnection(current_Wall)
 
+	context = {"posts":w.get_wall()}
+	template.render_template('templates/wallcontent.html', context, response)
+		
+		
+	#final = header % (fullname+'\'s Wall', currentUrl) 
+	#final += str(w.get_wall()) + '</div>'
+		
+		
+def _getFeedData(response):
+	f = FeedConnection(response.get_field('user'))
+	response.write(str(f.get_feed()))
+	context = {"posts":w.get_feed()}
+	template.render_template('templates/wallcontent.html', context, response)
+	
 def _wall(response,current_Wall):
+	
 	user = User.get(current_Wall)
 	if user == False:
 		response.redirect("/signup")
-	else:
-		w = WallConnection(current_Wall)
-		fullname = user.get_first_name() + " " + user.get_last_name() 
-		currentUrl = 'wall/'+current_Wall+'?user='+response.get_field('user')
-		
-		final = header % (fullname+'\'s Wall', response.get_field('user'), current_Wall, currentUrl) 
-		final += str(w.get_wall()) + '</div>'
-		#context = {'wall':w}
-		#template.render_template('static/html/test.html', context, response)
-		response.write(final)
+	fullname = user.get_first_name() + " " + user.get_last_name() 
+	context = {'title': fullname+'\'s Wall', 'username': response.get_field('user'), 'wallorfeed':'wallupdate','current_Wall':current_Wall}
+	template.render_template('templates/wall.html', context, response)
+
 
 def _submit(response):
 	now = time()
@@ -152,11 +132,6 @@ def _feed(response):
 	if user == False:
 		response.redirect("/signup")
 	else:
-		f = FeedConnection(response.get_field('user'))
-		fullname = user.get_first_name() + " " + user.get_last_name() 
-		currentUrl = 'feed/'+'?user='+response.get_field('user')
-		final = header % ('News Feed',response.get_field('user'), response.get_field('user'), currentUrl) 
-		final += str(f.get_feed()) + '</div>'
-		#context = {'wall':w}
-		#template.render_template('static/html/test.html', context, response)
-		response.write(final)
+		context = {'title':'Feed','username':response.get_field('user'),'wallorfeed':'feedupdate','current_Wall':''}
+		template.render_template('templates/wall.html', context, response)
+		
