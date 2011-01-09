@@ -1,5 +1,5 @@
 #account {
-	position: relative;
+	position: absolute;
 }
 
 header nav ul li:hover {
@@ -22,5 +22,9 @@ header nav ul li:hover {
 
 #account:hover ul {
 	display: block;
+	position: absolute;
+}
+
+nav ul {
 	position: absolute;
 }
