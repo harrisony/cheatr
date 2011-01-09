@@ -17,15 +17,12 @@ header {
 footer {
 	background-color: #03588C;
 	float: bottom;
-	border: 1px solid black;
-	font-size: 15px;
-	padding: 4px;
-	width: auto;
 }
 
 header img {
 	border: none;
 	margin: 4px;
+
 }
 
 header a {
@@ -144,11 +141,9 @@ article aside {
 	padding: 0px 5px 0px 5px;
 	margin-right: 4px;
 	background-color: white;
-	height: inherit;
-	display: block;
 }
 
-div#content{
+div {
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
 }
