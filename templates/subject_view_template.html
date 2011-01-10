@@ -31,6 +31,11 @@
 			</section>
 			<section id="members">
 			<h1>members</h1>
+			{% if subject.has_member(user) %}
+				{% for member in subject.get_members() %}
+				<p>{{ member.get_first_name() }} {{ member.get_last_name() }}</p>
+				{% end for %}
+			{% end if %}
 			</section>
 		</aside>
 		<div id="study">
@@ -45,22 +50,18 @@
 					</ul>
 				</nav>
 				<section id="top-resources">
-					<nav class="page-nav">
-						
-					</nav>
+					{% include templates/page_navigation.html %}
 					<section>
 						{% for resource in top_resources %}
-							<p>{{ resource }}</p>
+							<p>{{ resource.name }}</p>
 						{% end for %}
 					</section>
 				</section>
 				<section id="all-resources">
-					<nav class="page-nav">
-						
-					</nav>
+					{% include templates/page_navigation.html %}
 					<section>
 						{% for resource in all_resources %}
-							<p>{{ resource }}</p>
+							<p>{{ resource.name }}</p>
 						{% end for %}
 					</section>
 				</section>

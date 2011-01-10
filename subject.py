@@ -49,7 +49,7 @@ def viewsubject(response, subjectid, resourcetype, page):
         resourcetype = 'all'
     if not page:
         page = 1
-    info = database_subject.get_subject(subjectid)
+    info = database_subject.get_subject(int(subjectid))
     lower = (int(page) - 1 )*10 + 1
     upper = int(page)*10
     top_resources = ['top1','top2','top3']
