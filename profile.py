@@ -62,6 +62,9 @@ def profile(response, username):
         lastname = user.get_last_name()
         email = user.get_email()
         school = user.get_school()
+        interests = {"activities":None, "tv":None}
+        about = {"birthday":None, "age":None, "website":None}
+        education = {"school":None,"subjects":None,"state":None,"grade":None}
         #picture = user.get_profile_pic_path()
         picture = user.get_profile_pic_path()
         print "PICTURE IS: " + picture
@@ -72,7 +75,7 @@ def profile(response, username):
         context = {"title":fullname, "user":username, 'wallorfeed':'wallupdate',
 				   'current_User':user.get_username(),'current_Wall':username, "profile_pic_location":picture,
                    "email":email, "school":school, "css": "profile", "friends":friends.get_friends(username), "User": User,
-				  }
+                   "interests": interests, "about": about, "education":education}
         template.render_template("templates/profile.html", context, response)
         
 def signup(response):

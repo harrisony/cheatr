@@ -15,28 +15,23 @@
 			<li>Email: {{ email }}</li>		
 			<li id="submenu">Education
 				<ul>
-					<li>School: {{ school }}</li>
-					<li>Subjects: {{ subjects }}</li>
-					<li>State: {{ state }}</li>
-					<li>Grade: {{ grade }}</li>
+					{% for thing in education.keys() %}					
+						<li>{{ thing.capitalize() }}: {{ education[thing] }}</li>
+					{% end for %}
 				</ul>
 			</li>
 			<li id="submenu">Activities And Interests
 				<ul>
-					<li>Favourite Music: {{ favourite music }}</li>
-					<li>Favourite TV Shows: {{ favourite tv shows }}</li>
-					<li>Favourite Sports: {{ favourite sports }}</li>
-					<li>Hobbies: {{ hobbies }}</li>
-					<li>Activities: {{ activities }}</li>
-					<li>Interests: {{ interests }}</li>
+					{% for interest in interests.keys() %}					
+						<li>Favourite {{ interest.capitalize() }}: {{ interests[interest] }}</li>
+					{% end for %}
 				</ul>
 			</li>
 			<li id="submenu">About Me
 				<ul>
-					<li>About Me: {{ about me }}</li>
-					<li>Birthday: {{ birthday }}</li>
-					<li>Age: {{ age }}</li>
-					<li>Website: {{ website }}</li>
+					{% for thing in about.keys() %}					
+						<li>{{ thing.capitalize() }}: {{ about[thing] }}</li>
+					{% end for %}
 				</ul>
 			</li>
 		</ul>

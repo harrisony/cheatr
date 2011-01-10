@@ -12,15 +12,16 @@ aside section ul li#submenu {
 	background-color: #3BB2BF;
 }
 
-aside section li#submenu>ul {
+aside section li#submenu ul {
 	background-color: white;
-	display: none;
 	margin:0px;
 	overflow:hidden;
+	height: 0px;
 }
 
-aside section li#submenu:hover>ul {
-	display: block;
+aside section li#submenu:hover ul {
+	height: auto;
+	-webkit-transition: height 1s linear;
 }
 
 .friend img{
