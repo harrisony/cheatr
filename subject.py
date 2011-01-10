@@ -83,7 +83,7 @@ def viewsubject(response, subjectid, resourcetype, page):
                 new_all.append(s)
         all_resources = new_all[lower:upper]
 
-    template.render_template("templates/subject_view_template.html",{"user":user,"subject":info,"top_resources":top_resources,"all_resources":all_resources},response)
+    template.render_template("templates/subject_view_template.html",{"user":user,"subject":info,"top_resources":top_resources,"all_resources":all_resources,"current_Wall":subjectid,'wallorfeed':'wallupdate'},response)
 
 def mysubjects(response):
     user = auth.get_user(response)
