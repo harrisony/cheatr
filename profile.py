@@ -73,7 +73,7 @@ def profile(response, username):
         
         #response.write(OUTPUT % (username,username, picture,firstname,lastname,email,school,username))
         context = {"title":fullname, 'wallorfeed':'wallupdate',
-                   'user':user.get_username(),'current_Wall':user.get_username(), "profile_pic_location":picture,
+                   'user':user,'current_Wall':user.get_username(), "profile_pic_location":picture,
                    "email":email, "school":school, "css": "profile", "friends":friends.get_friends(user.get_username()), "User": User,
                    "interests": interests, "about": about, "education":education}
         template.render_template("templates/profile.html", context, response)

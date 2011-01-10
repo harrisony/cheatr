@@ -2,7 +2,7 @@
 
 	<h1> News Feed </h1>	
 
-	<form id="message" style="text-align:center" action="/submit?user={{user}}" method=POST></input><br />
+	<form id="message" style="text-align:center" action="/submit?user={{user.get_username()}}" method=POST></input><br />
 	Post a message: <br /><textarea id="msg" name="msg"></textarea><input type="hidden" value="{{current_Wall}}" name="current_Wall"><br /><input type="submit" value="Submit" ></input>
 	<br />
 	<div id="wallcontent"></div>
@@ -14,7 +14,7 @@
 	Event.observe('message','submit',submit);
 	new Ajax.PeriodicalUpdater('wallcontent', '/{{wallorfeed}}', {
 		method: 'post', frequency: 20, decay: 0,
-		parameters: {'current_Wall':'{{current_Wall}}','user':'{{user}}'},
+		parameters: {'current_Wall':'{{current_Wall}}','user':'{{user.get_username()}}'},
 		});
 	}
 	
@@ -22,7 +22,7 @@
 $('message').request();
 	new Ajax.Updater('wallcontent','/{{wallorfeed}}',{
 			method: 'post',
-			parameters: {'current_Wall':'{{current_Wall}}','user':'{{user}}'}});			
+			parameters: {'current_Wall':'{{current_Wall}}','user':'{{user.get_username()}}'}});			
 $('message').msg.clear();	
 		
 	

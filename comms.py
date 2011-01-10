@@ -50,7 +50,7 @@ class WallConnection:
 	def __init__(self, current_Wall):
 		
 		self.current_Wall = current_Wall	
-		self.connection = sqlite3.connect('./commsdb.db')
+		self.connection = sqlite3.connect('./commsdb.sqlite')
 		self.cursor = self.connection.cursor()
 		self.cursor.execute('CREATE TABLE IF NOT EXISTS "WALL" ("ID" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "author" TEXT NOT NULL , "target" TEXT NOT NULL , "time" INTEGER NOT NULL , "message" TEXT NOT NULL )')
 	def set_wall(self, m):
