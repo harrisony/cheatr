@@ -62,7 +62,7 @@ def _do_upload(response):
     dbfiles.addFile(serverfilename, username, filename, sbjct, descr, categor)
     open(ul_file, 'wb').write(data)
     #Response after file upload success
-    context = {"css": "fileupload", "title": "File Uploader", "ori_file_name": filename, "server_file_location": currenttime+extension}
+    context = {"css": "fileupload", "title": "File Uploader", "ori_file_name": filename, "server_file_location": currenttime+extension, "user":""}
     template.render_template("templates/uploadconfirmed.html", context, response)
 
 def file_search(response):
@@ -95,12 +95,8 @@ def listmyfiles(response):
         return
     else:
         username = user.get_username()
-<<<<<<< .mine
     print username
-    context = {"allfiles": dbfiles.getFilesUser(username)}
-=======
-    context = {"allfiles": dbfiles.getFilesUser("124"), "user":user}
->>>>>>> .r300
+    context = {"allfiles": dbfiles.getFilesUser(username), 'user':user}
     print context
     template.render_template("templates/listallfiles.html", context, response)
     
