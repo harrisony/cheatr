@@ -6,3 +6,8 @@
     display:inline;
     float:right;
 }
+
+div#content ul li img {
+	width: 50px;
+	height: auto;
+}
