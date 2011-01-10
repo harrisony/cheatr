@@ -4,6 +4,7 @@ from time import time
 import os
 import mimetypes
 import dbfiles
+import auth
 username = "svet"
 ul_error_msg = ""
 ul_file = ""
