@@ -1,5 +1,6 @@
 from hashlib import sha1
 import sqlite3
+from database subject import Subject
 try:
     import cPickle as pickle
 except:
@@ -64,6 +65,7 @@ class User(object):
         self._passwordhash = ''
         self._profilepicpath = ''
         self._subjects = []
+        self._profileinfo = {}
     def __repr__(self):
         return "<Person username:%s>" % self._username
     def get_username(self):
@@ -82,6 +84,14 @@ class User(object):
         return self._profilepicpath
     def get_subjects(self):
         return tuple(self._subjects)
+    def is_friend_of(self, inp):
+        if isinstanceof(inp, User):
+            # user
+            return True
+        elif isinstanceof(inp,Subject):
+            return True
+        else:
+            return False
     def set_multiple(self, args):
         mapping = {'firstname': self.set_first_name, 'lastname': self.set_last_name, 'email': self.set_email, 'school': self.set_school,
                    'password': self.set_password, 'profilepath': self.set_profile_pic_path}
