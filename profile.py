@@ -12,25 +12,25 @@ def profile(response, username):
     user = auth.get_user(response)
     if user == None:
         return
-
+    username = User.get(username)
     if user is not None:
-        firstname = user.get_first_name()
-        lastname = user.get_last_name()
-        email = user.get_email()
-        school = user.get_school()
+        firstname = username.get_first_name()
+        lastname = username.get_last_name()
+        email = username.get_email()
+        school = username.get_school()
         interests = {"activities":None, "tv":None}
         about = {"birthday":None, "age":None, "website":None}
         education = {"school":None,"subjects":None,"state":None,"grade":None}
-        picture = user.get_profile_pic_path()
+        picture = username.get_profile_pic_path()
         if not picture:
             picture = "/static/images/default_avatar.jpeg"
         print "PICTURE IS: " + picture
         fullname = firstname + " " + lastname
         
         context = {"title":fullname, 'wallorfeed':'wallupdate',
-                   "username":user.get_username(),'current_Wall':user.get_username(), "profile_pic_location":picture,
-                   "email":email, "school":school, "css": "profile", "friends":friends.get_friends(user.get_username()), "user": user,
-                   "interests": interests, "about": about, "education":education,"user":user,'can_use_wall':can_use_wall(user,user.get_username())}
+                   "username":username.get_username(),'current_Wall':username.get_username(), "profile_pic_location":picture,
+                   "email":email, "school":school, "css": "profile", "friends":friends.get_friends(username.get_username()), "user": user,
+                   "interests": interests, "about": about, "education":education,"user":user,'can_use_wall':can_use_wall(user,username.get_username())}
         template.render_template("templates/profile.html", context, response)
         
 def signup(response):
