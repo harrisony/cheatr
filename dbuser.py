@@ -5,7 +5,7 @@ try:
     import cPickle as pickle
 except:
     import pickle
-from friends import get_friends
+import friends
 class User(object):
     @staticmethod
     def exists(username): 
@@ -81,7 +81,6 @@ class User(object):
         return self._username
     def get_first_name(self):
         return self._firstname
-        
     def get_last_name(self):
         return self._lastname
     def get_email(self):
@@ -94,7 +93,19 @@ class User(object):
         return self._profilepicpath
     def get_subjects(self):
         return tuple(self._subjects)
-
+    def is_friend_of(self, inp):
+        if type(inp) == int:
+            if inp in self._subjects:
+                return True
+            else:
+                return False
+        elif type(inp) == str:
+            if friends.is_friend(inp,self._username):
+                return True
+            else:
+                return False
+        else:
+            return False
     def set_multiple(self, args):
         mapping = {'firstname': self.set_first_name, 'lastname': self.set_last_name, 'email': self.set_email, 'school': self.set_school,
                    'password': self.set_password, 'profilepath': self.set_profile_pic_path}
