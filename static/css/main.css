@@ -1,5 +1,12 @@
 /* Header Page CSS */
+@font-face {
+	font-family: calibri;
+	src: url('../font/CALIBRI.ttf');
+}
 html {
+
+
+
 	background-color: #F2EEEB;
 }
 header, footer {
@@ -35,14 +42,14 @@ header a {
 }
 
 header ul li {
-	font-family: lucida bright;
+	font-family: calibri;
 	display: inline;
 	list-style-type: none;
 	padding: 0px 5px 0px 5px;
 }
 
 nav ul {
-	font-family: lucida bright;
+	font-family: calibri;
 	display: inline;
 	width: 100%;
 	margin-right: 80px;
@@ -50,7 +57,7 @@ nav ul {
 
 
 h1{
-	font-family: lucida bright;
+	font-family: calibri;
 	padding: 0px 5px 0px 5px;
 	margin: 15px;
 	display: inline;
@@ -89,7 +96,7 @@ nav#subjects li img {
 }
 
 nav#subjects li a {
-	font-family: lucida bright;
+	font-family: calibri;
 	text-decoration: none;
 	display: inline-block;
 	text-align: center;
@@ -144,7 +151,7 @@ nav#subjects li a p {
 
 
 article aside {	
-    font-family: lucida bright;
+    font-family: calibri;
 	width:250px;
 	border-left: 2px solid black;
 	border-right: 2px solid black;
@@ -158,6 +165,7 @@ article aside {
 div#content{
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
+	font-family: calibri;
 }
 
 article {
@@ -179,7 +187,7 @@ article aside section h1 {
 }
 
 article section {
-	font-family: lucida bright;
+	font-family: calibri;
 }
 
 #content section {
