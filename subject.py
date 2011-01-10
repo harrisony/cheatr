@@ -56,21 +56,33 @@ def rankcmp(file1, file2):
 def viewsubject(response, subjectid, resourcetype, page):
     auth.require_user(response)
     if not resourcetype:
-        resourcetype = 'all'
+        resourcetype = 'All'
     if not page:
         page = 1
     user = auth.get_user(response)
     info = database_subject.get_subject(int(subjectid))
     lower = (int(page) - 1 )*10
     upper = int(page)*10 - 1
-    top_resources = dbfiles.getFilesSubject(subjectid)
+    
+    top_resources = dbfiles.getFilesSubject(int(subjectid))
     sorted(top_resources, key=attrgetter('rank'), reverse=True)
-    top_resources = top_resources[lower:upper]
-	#top_resources = database_subject.get_resources(subject,resourcetype,lower,upper,True)
-    all_resources = dbfiles.getFilesSubject(subjectid)
-    sorted(all_resources, key=attrgetter('name'))
-    all_resources = all_resources[lower:upper]
-	#all_resources = database_subject.get_resources(subject,resourcetype,lower,upper,False)
+    #eliminate those without the correct type
+    new_top = []
+    if len(top_resources):
+        for s in top_resources:
+            if s.category == resourcetype or resourcetype == 'All':
+                new_top.append(s)
+        top_resources = new_top[lower:upper]
+
+    all_resources = dbfiles.getFilesSubject(int(subjectid))
+    sorted(all_resources, key=attrgetter('ori_filename'))
+    if len(all_resources):
+        new_all = []
+        for s in all_resources:
+            if s.category == resourcetype or resourcetype == 'All':
+                new_all.append(s)
+        all_resources = new_all[lower:upper]
+
     template.render_template("templates/subject_view_template.html",{"user":user,"subject":info,"top_resources":top_resources,"all_resources":all_resources},response)
 
 def mysubjects(response):

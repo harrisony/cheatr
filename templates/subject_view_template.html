@@ -43,10 +43,10 @@
 				<h1>Resources</h1>
 				<nav class="type-nav">
 					<ul>
-						<li><a href="/subject/{{ subject.id }}/all/1">All</a></li>
-						<li><a href="/subject/{{ subject.id }}/notes/1">Notes</a></li>
-						<li><a href="/subject/{{ subject.id }}/exercises/1">Exercises</a></li>
-						<li><a href="/subject/{{ subject.id }}/papers/1">Past Papers</a></li>
+						<li><a href="/subject/{{ subject.id }}/All/1">All</a></li>
+						<li><a href="/subject/{{ subject.id }}/Notes/1">Notes</a></li>
+						<li><a href="/subject/{{ subject.id }}/Exercises/1">Exercises</a></li>
+						<li><a href="/subject/{{ subject.id }}/Papers/1">Past Papers</a></li>
 					</ul>
 				</nav>
 				
@@ -55,7 +55,7 @@
 					{% include templates/page_navigation.html %}
 					<section>
 						{% for resource in top_resources %}
-							<p>{{ resource.name }}</p>
+							<p>{{ resource.ori_filename }}</p>
 						{% end for %}
 					</section>
 				</section>
@@ -63,7 +63,7 @@
 					{% include templates/page_navigation.html %}
 					<section>
 						{% for resource in all_resources %}
-							<p>{{ resource.name }}</p>
+							<p>{{ resource.ori_filename }}</p>
 						{% end for %}
 					</section>
 				</section>
