@@ -9,7 +9,7 @@ username = "svet"
 ul_error_msg = ""
 ul_file = ""
 
-def chk_ul_fields(response):
+def file_upload(response):
     ul_error_msg = ""
     filename, content_type, data = response.get_file('to_upload')
     if response.get_field("ul_flag") == "True":
@@ -27,7 +27,7 @@ def chk_ul_fields(response):
     context = {"css": "fileupload", "title": "File Uploader", "ul_err_msg": ul_error_msg}
     template.render_template("templates/fileupload.html", context, response)
 
-def upload(response):
+def _do_upload(response):
     global ul_file, content_type
     sbjct = response.get_field('subject')
     descr = response.get_field('description')
