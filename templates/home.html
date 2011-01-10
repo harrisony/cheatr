@@ -20,12 +20,6 @@
 </aside>
 
 <div id='content'>
-	<section id='subjects'>
-		Subjects
-		<ul>
-			{% for subject in subjects %}<li class="subject">{{ ' ' }}<a href='/{{ subject }}.html'><img src='/static/images/{{ subject }}-icon.png'></a></li>{% end for %}
-		</ul>
-	</section>
 {% include templates/wall.html %}
 </div>
 </article>
