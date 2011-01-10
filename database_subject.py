@@ -52,12 +52,11 @@ def create_subject(name, KLA, grade, jurisdiction, description):
 def list_of_subjects():
 	connection=sqlite3.connect("subject_database.db")
 	cursor=connection.cursor()
-	cursor.execute("SELECT id, name FROM subjectlist")
+	cursor.execute("SELECT * FROM subjectlist")
 	result = cursor.fetchall()
+	tempoutput = []
+	for row in result:
+		tempoutput.append(subject(row))
 	cursor.close() 
-	return result
-
-
-
-
-
+	return tempoutput
+	

@@ -25,7 +25,7 @@ def createpage(response):
 			database_subject.create_subject(name,KLA,grade,jurisdiction,description)
 			response.write("Saved")
 	else:
-		response.write("You are not logged in")
+		response.redirect("/")
 
 def createsubject(response):
     if (not response.get_field("subjectname") or

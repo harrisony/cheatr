@@ -8,7 +8,7 @@
 
 </aside>
 <div id="content">
-<h1>Subject List</h1>
+<h1>Subject List</h1><br />
 <!--<li><a href="http://localhost:8888/subject" + {{subject_name}}></li>-->
 
 <!--{% if len(subjectlist)>2 %}-->
@@ -16,8 +16,14 @@
 <!--{% end if %}-->
 
 {% for i in subjectlist %}
-	<p><a href="/subject/{{ i[0] }}">{{ i[1] }}</a></p>
+	<p><a href="/subject/{{ i.get_id() }}">{{ i.get_name() }}</a><br />
+	{{ i.get_grade()}}. Jurisdiction: {{ i.get_jurisdiction() }}.</p>
+	<br />
 {% end for %}
+<form action="/subject">
+<br /> 
+<input type="submit" value="Add a Subject">
+</form>
 </div>
 </article>
 
