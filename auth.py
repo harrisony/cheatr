@@ -7,7 +7,7 @@ def loginpage(response):
     if not page:
         page = "/"
     context = {"title":"Login", "output":"", "user":"", "username":"","page":page, "css":"login"}    
-    if username:
+    if username and User.get(username):
         user = User.get(username)
         context["output"] = "Hello " + user.get_first_name()
         context["user"] = username
