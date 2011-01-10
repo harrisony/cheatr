@@ -91,7 +91,7 @@ class FeedConnection:
 	def __init__(self, response):
 		User = get_user(response);
 		self.current_User = User.get_username()
-		self.connection = sqlite3.connect('./commsdb.db')
+		self.connection = sqlite3.connect('./commsdb.sqlite')
 		self.cursor = self.connection.cursor()
 		self.cursor.execute('CREATE TABLE IF NOT EXISTS "WALL" ("ID" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "author" TEXT NOT NULL , "target" TEXT NOT NULL , "time" INTEGER NOT NULL , "message" TEXT NOT NULL )')
 	def get_feed(self):

@@ -260,9 +260,16 @@ text-align:left;
 }
 
 form textarea {
-	border: 1px solid #03588C;
-	-webkit-box-shadow: 0px 0px 6px #03588C;
-	-moz-box-shadow: 0px 0px 6px #03588C;
+	background-color:white;
+	margin:0px auto 15px auto;
+
+	min-height:50px;
+	-webkit-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	-moz-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	border-radius:2px;
+	border:1px solid #eee;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+	background: -moz-linear-gradient(top,  #fff,  #eee);
 }
 
 input[type="submit"] {
