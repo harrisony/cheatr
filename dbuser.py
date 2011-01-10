@@ -102,7 +102,7 @@ class User(object):
         self._run_db("UPDATE users SET school = ? WHERE username = ?;", (school,self._username))
         self._school = school
     def set_password(self, pword):
-        self._run_db("UPDATE users SET 'passwordhash = ? WHERE username = ?;", (sha1(pword).hexdigest()),self._username)
+        self._run_db("UPDATE users SET password = ? WHERE username = ?;", (sha1(pword).hexdigest(),self._username))
         self._passwordhash = sha1(pword).hexdigest()
     def add_subject(self, sid):
         self._run_db("INSERT INTO users_subjects VALUES(?,?);", (self._username, sid))
