@@ -95,7 +95,12 @@ def listmyfiles(response):
         return
     else:
         username = user.get_username()
+<<<<<<< .mine
+    print username
+    context = {"allfiles": dbfiles.getFilesUser(username)}
+=======
     context = {"allfiles": dbfiles.getFilesUser("124"), "user":user}
+>>>>>>> .r300
     print context
     template.render_template("templates/listallfiles.html", context, response)
     
