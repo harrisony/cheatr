@@ -19,6 +19,7 @@ if __name__ == "__main__":
     server.register("/", home.page)
     server.register("/login", auth.loginpage)
     server.register("/logout",auth.logout)
+    server.register("/profile/", profile.profile)
     server.register("/profile/(.*)", profile.profile)
     server.register("/signup",profile.signup)
     server.register("/update_info",profile.update)
