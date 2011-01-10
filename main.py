@@ -31,6 +31,7 @@ if __name__ == "__main__":
     server.register('/friends/?', friends.my_friends)
     #server.register("/friends/(.*)/?", friends.remove_friend)
     server.register("/subject/create/?", subject.createsubject)
+    server.register("/subject/(.*)/(.*)/?", subject.subjectmembership)
     server.register("/subject/?", subject.mysubjects)
     server.register("/subject/([^\/]*)/?([^\/]*)/?([^\/]*)/?", subject.viewsubject)
     server.register("/subjects", subject.listsubject)

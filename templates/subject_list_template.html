@@ -14,7 +14,7 @@
 		<div id="subjects">
 			{% for i in subjectlist %}
 				<div>
-				<p><a href="/subject/{{ i.get_id() }}">{{ i.get_name() }}</a></p>
+				<p><a href="/subject/{{ i.get_id() }}">{{ i.get_name().replace("_"," ") }}</a></p>
 				<p>{{ i.get_grade()}}, {{ i.get_jurisdiction() }}.</p>
 				</div>
 			{% end for %}

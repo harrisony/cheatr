@@ -102,6 +102,11 @@ def listsubject(response):
     template.render_template("templates/subject_list_template.html",{"user":user, "css":"subject","subjectlist":database_subject.list_of_subjects()},response)
     targetsubject=response.get_field("subjectselected")
 
-
-	
+def subjectmembership(response, action, subjectid):
+    user = auth.get_user(response)
+    if action == 'join':
+        user.add_subject(subjectid)
+    elif action == 'leave':
+        user.remove_subject(subjectid)
+    response.redirect("/subject/"+subjectid)
 	

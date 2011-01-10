@@ -12,13 +12,13 @@
 			<section id="subject-info">
 				
 				<div id="membership">
-					{% if not user.is_in_subject(current_Wall) %}
+					{% if not user.is_in_subject(int(subject.id)) %}
 					<form method="POST" action="/subject/join/{{ subject.id }}">
-						<input type="submit" value="Join Subject">
+						<input type="submit" value="Join Subject" />
 					</form>
 					{% end if %}
-					{% if user.is_in_subject(current_Wall) %}
-					<form method="POST" action="/subject/join/{{ subject.id }}">
+					{% if user.is_in_subject(int(subject.id)) %}
+					<form method="POST" action="/subject/leave/{{ subject.id }}">
 						<input type="submit" value="Leave Subject">
 					</form>
 					{% end if %}
@@ -32,8 +32,8 @@
 				</dl>
 			</section>
 			<section id="members">
-			<h1>members</h1>
 			{% if subject.has_member(user) %}
+			<h1>members</h1>
 				{% for member in subject.get_members() %}
 				<p>{{ member.get_first_name() }} {{ member.get_last_name() }}</p>
 				{% end for %}
