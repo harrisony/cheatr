@@ -3,7 +3,7 @@ from template_engine import template
 import database_subject
 
 
-subjects = {"English":[2,3,"ghahd"], "Maths 2 Unit":[2,3,"dfg"], "Maths Extension 1":[2,3,"dfg"], "Maths Extension 2":[2,3,"dfg"]}
+#subjects = {"English":[2,3,"ghahd"], "Maths 2 Unit":[2,3,"dfg"], "Maths Extension 1":[2,3,"dfg"], "Maths Extension 2":[2,3,"dfg"]}
 
 
 def subjectpage(response):
