@@ -144,14 +144,14 @@ def _wall(response,current_Wall):
 	if user == None:
 		return
 	fullname = user.get_first_name() + " " + user.get_last_name() 
-	context = {'title': fullname+'\'s Wall', 'username': get_user(response), 'wallorfeed':'wallupdate','current_Wall':current_Wall}
+	context = {'title': fullname+'\'s Wall', 'username': get_user(response).get_username(), 'wallorfeed':'wallupdate','current_Wall':current_Wall}
 	template.render_template('templates/wall.html', context, response)
 
 
 def _submit(response):
 
 	now = time()
-	m = Message(get_user(response), now, response.get_field('msg'))
+	m = Message(get_user(response).get_username(), now, response.get_field('msg'))
 	w = WallConnection(response.get_field('current_Wall'))
 	w.set_wall(m)
 	return
@@ -162,6 +162,6 @@ def _feed(response):
 	if user == False:
 		response.redirect("/signup")
 	else:
-		context = {'title':'Feed','username':get_user(response),'wallorfeed':'feedupdate','current_Wall':get_user(response)}
+		context = {'title':'Feed','username':get_user(response).get_username(),'wallorfeed':'feedupdate','current_Wall':get_user(response)}
 		template.render_template('templates/wall.html', context, response)
 		

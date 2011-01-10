@@ -12,12 +12,12 @@ def page(response):
         response.redirect("/login")
     else:        
         context = {'title': 'Home Page',
-                   'user': user.get_username(),
+                   
                    'firstname': user.get_first_name(),
                    'lastname' : user.get_last_name(),
                    'subjects' : ['maths', 'english', 'physics', 'chemistry'],
 				   'wallorfeed':'feedupdate',
-				   'current_User':user.get_username(),
+				   'user':user,
 				   'current_Wall':user.get_username()
 				   }
 
