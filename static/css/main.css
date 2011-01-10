@@ -15,6 +15,8 @@ header, footer {
     text-align:right;
 }
 header {
+	-moz-border-radius-topleft:10px;
+	-moz-border-radius-topright:10px;
 	background-color: #3BB2BF;
 	border-bottom: 2px solid #03588C;
 	height: 60px;

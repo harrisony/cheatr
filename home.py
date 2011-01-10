@@ -11,7 +11,10 @@ def page(response):
                    'user': currentuser.get_username(),
                    'firstname': currentuser.get_first_name(),
                    'lastname' : currentuser.get_last_name(),
-                   'subjects' : ['Maths', 'English']}
+                   'subjects' : ['Maths', 'English'],
+				   'wallorfeed':'feedupdate',
+				   'current_Wall':response.get_field('user')
+				   }
         
         template.render_template("templates/home.html", context, response)
 
