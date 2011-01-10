@@ -261,3 +261,8 @@ form textarea {
 input[type="submit"] {
 	background-color: white;
 }
+
+#profile_pic {
+	width: 180px;
+	height: auto;
+}

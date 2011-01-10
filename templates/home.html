@@ -6,7 +6,10 @@
 <article>
 
 <aside>
-
+<a href='/profile/'>
+	<img id='profile_pic' src='{{user.get_profile_pic_path()}}'>
+	<h3>{{firstname}} {{lastname}} ({{user.get_username()}})</h3>
+</a>
 </aside>
 
 <div id='content'>
