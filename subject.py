@@ -49,6 +49,7 @@ def viewsubject(response, subjectid, resourcetype, page):
         resourcetype = 'all'
     if not page:
         page = 1
+    user = auth.get_user(response)
     info = database_subject.get_subject(int(subjectid))
     lower = (int(page) - 1 )*10 + 1
     upper = int(page)*10
@@ -56,11 +57,12 @@ def viewsubject(response, subjectid, resourcetype, page):
 	#top_resources = database_subject.get_resources(subject,resourcetype,lower,upper,True)
     all_resources = ['all1','all2','all3']
 	#all_resources = database_subject.get_resources(subject,resourcetype,lower,upper,False)
-    template.render_template("templates/subject_view_template.html",{"subject":info,"top_resources":top_resources,"all_resources":all_resources},response)
+    template.render_template("templates/subject_view_template.html",{"user":user,"subject":info,"top_resources":top_resources,"all_resources":all_resources},response)
 
 def mysubjects(response):
 	pass
 
 def listsubject(response):
-    template.render_template("templates/subject_list_template.html",{"subjectlist":database_subject.list_of_subjects()},response)
+    user = auth.get_user(response)
+    template.render_template("templates/subject_list_template.html",{"user":user,"subjectlist":database_subject.list_of_subjects()},response)
     targetsubject=response.get_field("subjectselected")
