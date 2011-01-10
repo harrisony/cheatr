@@ -9,8 +9,6 @@ header, footer {
     text-align:right;
 }
 header {
-
-	
 	background-color:white;
 	margin:0px auto 15px auto;
 
@@ -21,7 +19,7 @@ header {
 	border:1px solid #eee;
 	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
 	background: -moz-linear-gradient(top,  #fff,  #eee);
-	height: 40px;
+	height: 95px;
 }
 
 footer {
