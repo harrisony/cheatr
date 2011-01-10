@@ -5,18 +5,6 @@
 {% include templates/header.html %}
 	<h1>{{ title }}</h1>
 <article>
-<aside>
-	<section>
-		<p>Account Info</p>
-	</section>
-	<section>
-		<p>Friends</p>
-	</section>
-	<section>
-		<p>Chat</p>
-	</section>
-
-</aside>
 <div id="content">
 	<form method="POST" action="update_info" enctype="multipart/form-data"> 
 		First Name: <input type="text" value="{{ firstname }}" name="firstname" /><br />
@@ -25,7 +13,7 @@
 		Change Password: <input type="password" name="password" /><br />
 		Current School: <input type="text" value="{{ school }}" name="school" /><br />
 
-		Upload Profile Picture:<br>
+		Upload Profile Picture:
 		<input type="file" placeholder="Hello" name="photo" size="20"><br>
 		<input type="Submit" value="Update" name="submit" />
 	</form>

@@ -1,15 +1,6 @@
-article img#mainlogo {
-	height: 200px;
-	display: block;
-}
-
-article aside{
-	width: auto;
-	 border: 0px solid black;
-}
-
 form input {
 	border: 1px solid #03588C;
+	-webkit-box-shadow: 0px 0px 6px #03588C;
 	-moz-box-shadow: 0px 0px 6px #03588C;
 	margin: 6px;
 	font-size: 18px;
@@ -17,7 +8,7 @@ form input {
 
 form {
 	text-align: right;
-	width: 400px;
+	width: 535px;
 	display: block;
 	background-color: #D9D8F0;
 }
@@ -30,9 +21,8 @@ form label {
 #content {
 	font-family: lucida bright;
 	padding: 5px;
-	margin-top: 50px;
 	border-left: 3px solid black;
-	text-align: center;
+	text-align: left;
 }
 
 input[type="submit"] {
