@@ -9,6 +9,21 @@ article aside{
 form input {
 	border: 1px solid #03588C;
 	-moz-box-shadow: 0px 0px 6px #03588C;
+	text-align: right;
+	margin: 6px;
+	font-size: 18px;
+}
+
+form {
+	text-align: right;
+	width: 350px;
+	display: block;
+	background-color: #D9D8F0;
+}
+
+form label {
+	text-align: left;
+	font-size: 17px;
 }
 
 #content {
@@ -16,6 +31,7 @@ form input {
 	padding: 5px;
 	margin-top: 50px;
 	border-left: 3px solid black;
+	text-align: center;
 }
 
 input[type="submit"] {
