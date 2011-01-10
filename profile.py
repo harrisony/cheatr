@@ -66,7 +66,7 @@ def profile(response, username):
         fullname = firstname + " " + lastname
         #response.write(OUTPUT % (username,username, picture,firstname,lastname,email,school,username))
         context = {"title":fullname, "user":username, "content":"Content", "profile_pic_location":picture,
-                   "email":email, "school":school, "css": "profile", "friends":friends.get_friends(username)}
+                   "email":email, "school":school, "css": "profile", "friends":friends.get_friends(username), "User": User}
         template.render_template("templates/profile.html", context, response)
         
         
