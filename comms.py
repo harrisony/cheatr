@@ -56,7 +56,7 @@ class WallConnection:
 	def set_wall(self, m):
 		
 		#users[current_Wall].append(author+' says ' + response.get_field('msg'))
-		m.message = m.message.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+		#m.message = m.message.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 		try:
 			self.cursor.execute('INSERT INTO "WALL" ("author","target","time","message") VALUES ("%s","%s","%s","%s")' % (m.author, self.current_Wall, m.time,m.message))
 			self.connection.commit()
@@ -76,7 +76,7 @@ class WallConnection:
 				author = User.get(row[1])
 				fullname = author.get_first_name() + " " + author.get_last_name()
 				path = author.get_profile_pic_path()
-				if path == '':
+				if not path:
 					current_Row[0][5] = '/static/images/default_avatar.jpeg'
 				else:
 					current_Row[0][5] = path
@@ -98,7 +98,7 @@ class FeedConnection:
 		
 		final = []
 		friendsList = get_friends(self.current_User)
-		data = self.cursor.execute('SELECT * FROM WALL ORDER BY time DESC LIMIT 40;')
+		data = self.cursor.execute('SELECT * FROM WALL ORDER BY time DESC LIMIT 15;')
 		if not data:
 			return 0
 		for row in data:
@@ -106,13 +106,16 @@ class FeedConnection:
 			for user in friendsList:
 				if user == row[1]:
 					if current_Row not in final:
+						print current_Row[0]
 						author = User.get(current_Row[0][1])
+						
 
 						fullname = author.get_first_name() + " " + author.get_last_name()
 						current_Row[0][1] = fullname
 						#set the picture
 						path = author.get_profile_pic_path()
-						if path == '':
+						
+						if not path:
 							current_Row[0][5] = '/static/images/default_avatar.jpeg'
 							
 						else:
@@ -122,8 +125,14 @@ class FeedConnection:
 			if row[1] == self.current_User:
 				author = User.get(current_Row[0][1])
 				fullname = author.get_first_name() + " " + author.get_last_name()
-				current_Row[0][1] = fullname	
-				final.append(current_Row[0])
+				current_Row[0][1] = fullname
+				path = author.get_profile_pic_path()
+				if not path:
+					current_Row[0][5] = '/static/images/default_avatar.jpeg'
+							
+				else:
+					current_Row[0][5] = path				
+					final.append(current_Row[0])
 				
 						
 				#	elif row[0] not in final[0]:
