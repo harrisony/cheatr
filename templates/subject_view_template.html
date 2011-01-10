@@ -3,12 +3,14 @@
 	{% include templates/head.html %}
 
 	<body>
-
+		
 		{% include templates/header.html %}
+		<h1 id='title'>{{ subject.name }}</h1>
 		<article>
 		<aside id="info">
+			<div id="profilepic"
 			<section id="subject-info">
-				<h1 id='title'>{{ subject.name }}</h1>
+				
 				<div id="membership">
 					{% if not user.is_in_subject(current_Wall) %}
 					<form method="POST">
@@ -37,11 +39,10 @@
 				{% end for %}
 			{% end if %}
 			</section>
+			</div>
 		</aside>
 		<div id="study">
-			<section id="resources">
-				<h1>Resources</h1>
-				<nav class="type-nav">
+			<nav style="top:0;">
 					<ul>
 						<li><a href="/subject/{{ subject.id }}/All/1">All</a></li>
 						<li><a href="/subject/{{ subject.id }}/Notes/1">Notes</a></li>
@@ -49,6 +50,9 @@
 						<li><a href="/subject/{{ subject.id }}/Papers/1">Past Papers</a></li>
 					</ul>
 				</nav>
+			<section id="resources">
+				<h1>Resources</h1>
+				
 				
 				<section id="top-resources">
 					<section>
@@ -59,12 +63,14 @@
 				</section>
 				
 			</section>
+			<div style="width:950px;">
 			<section id="social">
 				<section id="wall">
 					<h1>Wall</h1>
 					{% include templates/wall.html %}
 				</section>
 			</section>
+			</div>
 			<section id="links">
 			</section>
 		</div>
