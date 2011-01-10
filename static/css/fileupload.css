@@ -34,3 +34,9 @@ ul, li {
 	text-align: left;
 	marign-left: 10px;
 }
+
+a {
+	color: #333;
+	font-family: Nobile;
+	font-size: 18px;
+}
