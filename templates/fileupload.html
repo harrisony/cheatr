@@ -5,9 +5,6 @@
 {% include templates/header.html %}
 	<h1>{{ title }}</h1>
 <article>
-<aside>
-Aside of main content
-</aside>
 <div id="content">
 	<div id="uploadform">
 	<form method="POST" enctype="multipart/form-data">
@@ -28,9 +25,9 @@ Aside of main content
 			{% end for %}
 		</ul>
 		<label>Description:</label>
-		<input type="text" name="description">
+		<input type="text" name="description"><br>
 		<label>File:</label>
-		<input type="file" 	name="to_upload" size="66">
+		<input type="file" id="file" name="to_upload" size="66">
 		<input type="submit" name="submit" value="Upload">
 	</form>
 </div>

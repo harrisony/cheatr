@@ -1,27 +1,36 @@
 form {
 	width: 700px;
-/*	background-color: #D9D8F0; */
+	background-color: #D9D8F0; 
 	border-radius: 10px;
+	padding: 10px;
+	margin: 20px;
 }
 
 input, label {
 	display: inline-block;
-}
-
-label {
-	width: 150px;
-	text-align: right;
-}
-
-input {
-	width: 500px;
-}
-
-input[type=submit] {
 	width: auto;
 }
 
+label {
+		font-family: Nobile;
+	text-align: left;
+}
+
+input {
+	width: auto;
+}
+
+input[type=submit]{
+	background-color: white;
+}
+
+input[type=text] {
+	width: 500px;
+}
+
 ul, li {
+	font-family: Nobile;
+	padding-left: 20px;
 	text-align: left;
 	marign-left: 10px;
 }
