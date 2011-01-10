@@ -172,8 +172,9 @@ div#content{
 }
 
 section#subjects ul img {
-	height: 64px;
-	width: 64px;
+	margin: 3px;
+	height: 45px;
+	width: 45px;
 	text-decoration: none;
 }
 
@@ -204,9 +205,6 @@ article section {
 	background-color: #03588C;
 }
 
-
-
-
 /* news feed */
 #wall_content_data img {
 	width:50px;
@@ -225,12 +223,6 @@ article section {
 #wall_content_data em {
 	font-weight:bold;
 }
-
-
-
-
-
-
 
 .subject {
 	list-style-type: none;
