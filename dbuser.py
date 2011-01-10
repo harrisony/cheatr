@@ -93,11 +93,13 @@ class User(object):
     def get_subjects(self):
         return tuple(self._subjects)
     def is_friend_of(self, inp):
-        if isinstance(inp, User):
-            # user
-            return True
-        elif isinstance(inp,Subject):
-            return True
+        if type(inp) == int:
+            if inp in self._subjects:
+                return True
+            else:
+                return False
+        elif type(inp) == str:
+            raise Exception("WTF YOU DOING FOOL!")
         else:
             return False
     def set_multiple(self, args):
