@@ -10,13 +10,18 @@ header, footer {
 }
 header {
 
-background: #ebf1f6; /* old browsers */
-background: -moz-linear-gradient(top, #ebf1f6 0%, #abd3ee 48%, #89c3eb 91%, #d5ebfb 100%); /* firefox */
+	
+	background-color:white;
+	margin:0px auto 15px auto;
 
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ebf1f6), color-stop(48%,#abd3ee), color-stop(91%,#89c3eb), color-stop(100%,#d5ebfb)); /* webkit */
-
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', endColorstr='#d5ebfb',GradientType=0 ); /* ie */
-	height: 60px;
+	min-height:50px;
+	-webkit-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	-moz-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	border-radius:2px;
+	border:1px solid #eee;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+	background: -moz-linear-gradient(top,  #fff,  #eee);
+	height: 40px;
 }
 
 footer {
@@ -76,6 +81,7 @@ div#title {
 
 /* Subject Page CSS */
 nav#subjects {
+	
 	margin: 0px;
 	display: block;
 }
@@ -87,6 +93,7 @@ nav#subjects ul li{
 }
 
 nav#subjects, #upload {
+
 	display: block;
 }
 
