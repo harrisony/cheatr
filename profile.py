@@ -60,7 +60,7 @@ def clean(string):
     return string
 
 photo = ''
-
+update = """
 def update(response):
     auth.require_user(response)
     user = auth.get_user(response)
@@ -94,11 +94,13 @@ def update(response):
         fullname = '%s %s' % (firstname, lastname)
         newUser = {"username": username, "firstname":firstname,"lastname":lastname,
                    "email":email,"password":password,"school":school, "profilepath":photo_url}
+        context = {"title":title, "user":username, "username":username, "firstname":firstname,
+                   "lastname":lastname, "email":email, "school":school,"password":password}
         print "NEW USER: " + str(newUser)
         #user.set_first_name(firstname)
         user.set_multiple(newUser)
-        
-        response.redirect("/profile/")
+        template.render_template("templates/update.html", context, response)
+        #response.redirect("/profile/")
     else:
         password = user.get_password_hash()
         firstname = user.get_first_name()
@@ -111,3 +113,4 @@ def update(response):
         context = {"title":title, "user":username, "username":username, "firstname":firstname,
                    "lastname":lastname, "email":email, "school":school,"password":password}
         template.render_template("templates/update.html", context, response)
+"""

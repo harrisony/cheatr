@@ -6,7 +6,8 @@
 	<h1>{{ title }}</h1>
 <article>
 <div id="content">
-	<form method="POST" action="update_info" enctype="multipart/form-data"> 
+	<form method="POST" action="update" enctype="multipart/form-data"> 
+		<input type="hidden" name="username" value="{{ username }}" />
 		First Name: <input type="text" value="{{ firstname }}" name="firstname" /><br />
 		Last Name: <input type="text" value="{{ lastname }}" name="lastname" /><br />
 		Email: <input type="text" value="{{ email }}" name="email" /><br />
