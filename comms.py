@@ -131,7 +131,7 @@ def _getWallData(response):
 		
 		
 def _getFeedData(response):
-	f = FeedConnection(response.get_field('user'))
+	f = FeedConnection(get_user(response))
 	context = {"posts":f.get_feed()}
 	template.render_template('templates/wallcontent.html', context, response)
 	
@@ -142,24 +142,24 @@ def _wall(response,current_Wall):
 		response.redirect("/signup")
 		return
 	fullname = user.get_first_name() + " " + user.get_last_name() 
-	context = {'title': fullname+'\'s Wall', 'username': response.get_field('user'), 'wallorfeed':'wallupdate','current_Wall':current_Wall}
+	context = {'title': fullname+'\'s Wall', 'username': get_user(response), 'wallorfeed':'wallupdate','current_Wall':current_Wall}
 	template.render_template('templates/wall.html', context, response)
 
 
 def _submit(response):
 
 	now = time()
-	m = Message(response.get_field('user'), now, response.get_field('msg'))
+	m = Message(get_user(response), now, response.get_field('msg'))
 	w = WallConnection(response.get_field('current_Wall'))
 	w.set_wall(m)
 	return
 	 
 
 def _feed(response):
-	user = User.get(response.get_field('user'))
+	user = User.get(get_user(response))
 	if user == False:
 		response.redirect("/signup")
 	else:
-		context = {'title':'Feed','username':response.get_field('user'),'wallorfeed':'feedupdate','current_Wall':response.get_field('user')}
+		context = {'title':'Feed','username':get_user(response),'wallorfeed':'feedupdate','current_Wall':get_user(response)}
 		template.render_template('templates/wall.html', context, response)
 		
