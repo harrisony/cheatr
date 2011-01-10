@@ -6,7 +6,7 @@ def loginpage(response):
     page = response.get_field("page")
     if not page:
         page = "/"
-    context = {"title":"Login", "output":"", "username":"", "page":page}    
+    context = {"title":"Login", "output":"", "username":"", "page":page, "css":"signup"}    
     if username:
         user = User.get(username)
         context["output"] = "Hello " + user.get_first_name()
@@ -19,6 +19,9 @@ def loginpage(response):
     template.render_template("templates/login.html", context, response)
 
 def login(response, context):
+    page = response.get_field("page")
+    if not page:
+        page = "/"
     username = response.get_field("username")
     password = response.get_field("password")
 
@@ -26,13 +29,12 @@ def login(response, context):
         user = User.get(username)
         context["firstname"] = user.get_first_name()
         context["username"] = username
+        context["css"] = "signup"
         if user.password_correct(password):
-            page = response.get_field("page")
             message = "username: " + username + " password: " + password
             firstname = user.get_first_name()
             context["output"] = message
             response.set_cookie("User",username)
-            response.redirect(page)
         else:
             message = "Wrong Password"
             firstname = user.get_first_name()
@@ -40,6 +42,7 @@ def login(response, context):
     else:
         message = "User does not exist"
         context["output"] = message
+        response.redirect("page")
 
 def logout(response):
     require_user(response)
