@@ -7,7 +7,12 @@
 
 <aside>
 <a href='/profile/'>
-	<img id='profile_pic' src='{{user.get_profile_pic_path()}}'>
+	{% if user.get_profile_pic_path() %}
+		<img id='profile_pic' src='{{user.get_profile_pic_path()}}'>
+	{% end if %}
+	{% if not user.get_profile_pic_path() %}
+		<img id='profile_pic' src='/static/images/default_avatar.jpeg'>
+	{% end if %}
 	<h3>{{firstname}} {{lastname}} ({{user.get_username()}})</h3>
 </a>
 </aside>
