@@ -2,6 +2,7 @@ from tornado import Server
 from time import time
 from user import User
 from friends import *
+from auth import *
 from template_engine import template
 import sqlite3
 #users = {'Jordan':['hello', 'world']}
@@ -71,6 +72,7 @@ class WallConnection:
 		for row in data:
 			current_Row = [[row[0],row[1],row[4],age(int(row[3]))]];
 			if row[2] == self.current_Wall:
+				
 				author = User.get(row[1])
 				fullname = author.get_first_name() + " " + author.get_last_name()
 				current_Row[0][1] = fullname
@@ -80,8 +82,9 @@ class WallConnection:
 		return final
 		
 class FeedConnection: 
-	def __init__(self, current_User):
-		self.current_User = current_User	
+	def __init__(self, response):
+		User = get_user(response);
+		self.current_User = User.get_username()
 		self.connection = sqlite3.connect('./commsdb.db')
 		self.cursor = self.connection.cursor()
 		self.cursor.execute('CREATE TABLE IF NOT EXISTS "WALL" ("ID" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "author" TEXT NOT NULL , "target" TEXT NOT NULL , "time" INTEGER NOT NULL , "message" TEXT NOT NULL )')
@@ -116,7 +119,7 @@ class FeedConnection:
 		
 		
 def _getWallData(response):
-	
+
 	current_Wall = response.get_field('current_Wall')
 
 	w = WallConnection(current_Wall)
@@ -131,15 +134,14 @@ def _getWallData(response):
 		
 		
 def _getFeedData(response):
-	f = FeedConnection(get_user(response))
+	f = FeedConnection(response)
 	context = {"posts":f.get_feed()}
 	template.render_template('templates/wallcontent.html', context, response)
 	
 def _wall(response,current_Wall):
-	
+	require_user(response)
 	user = User.get(current_Wall)
 	if user == None:
-		response.redirect("/signup")
 		return
 	fullname = user.get_first_name() + " " + user.get_last_name() 
 	context = {'title': fullname+'\'s Wall', 'username': get_user(response), 'wallorfeed':'wallupdate','current_Wall':current_Wall}
