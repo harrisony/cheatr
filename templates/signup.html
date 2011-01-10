@@ -5,33 +5,11 @@
 {% include templates/header.html %}
 	<h1>{{ title }}</h1>
 	
-<style>
-	
-	article img#mainlogo {
-	}
-
-	form input {
-	border: 1px solid #03588C;
-	-moz-box-shadow: 0px 0px 6px #03588C;
-	}
-	
-	#content {
-	font-family: lucida bright;
-	padding: 5px;
-	margin-left: 200px;
-	margin-top: 50px;
-	border-left: 3px solid black;
-	}
-	
-	input[type="submit"] {
-	background-color: white;
-	}
-	
-</style>
 	
 <article>
-
-<img src="/static/images/logo.png" id="mainlogo"/>
+<aside>
+	<img src="/static/images/logo.png" id="mainlogo">
+</aside>
 <div id="content">
 <form action="/signup" method="post">
 	<label for="username">Username: </label>

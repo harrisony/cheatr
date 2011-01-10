@@ -1,0 +1,23 @@
+article img#mainlogo {
+	height: 200px;
+}
+
+article aside{
+	 border: 0px solid black;
+}
+
+form input {
+	border: 1px solid #03588C;
+	-moz-box-shadow: 0px 0px 6px #03588C;
+}
+
+#content {
+	font-family: lucida bright;
+	padding: 5px;
+	margin-top: 50px;
+	border-left: 3px solid black;
+}
+
+input[type="submit"] {
+	background-color: white;
+}

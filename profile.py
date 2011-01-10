@@ -93,7 +93,7 @@ def signup(response):
     else:
         #response.write(SIGNUP)
         title = "Sign Up"
-        context = {"title":title,}
+        context = {"title":title, "css":"signup"}
         template.render_template("templates/signup.html", context, response)
 
 def clean(string):
