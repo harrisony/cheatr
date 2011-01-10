@@ -6,7 +6,7 @@
 		<li>
 			<img src="/static/images/{{ f.category }}.png">
 			<a href="/static/files/{{ f.fileid }}" target="_blank">{{ f.ori_filename }}</a>
-			<p>Text</p>
+			<p>{{ f.description }}</p>
 		</li>
 	{% end for %}
 </ul>
