@@ -44,7 +44,7 @@ class User(object):
     def __init__(self, inp,nu=False):
         if nu:
             print inp
-            self._run_db("INSERT INTO users VALUES(?,?,?,?,?,?,?);", (inp['username'], sha1(inp['password']).hexdigest(), inp['firstname'], inp['lastname'], inp['email'], '', inp['school']))
+            self._run_db("INSERT INTO users VALUES(?,?,?,?,?,?,?,?);", (inp['username'], sha1(inp['password']).hexdigest(), inp['firstname'], inp['lastname'], inp['email'], '/static/images/default_avatar.jpeg', inp['school'], pickle.dumps({})))
         else:
             self._username = inp
             self._update_db(inp)
@@ -60,7 +60,8 @@ class User(object):
     def _update_db(self,username):
         self._set_blank()
         x = self._run_db("SELECT * FROM users WHERE username = ?;", (username,))
-        (self._username, self._passwordhash, self._firstname, self._lastname, self._email, self._profilepicpath, self._school) = x[0]
+        (self._username, self._passwordhash, self._firstname, self._lastname, self._email, self._profilepicpath, self._school) = x[0][:-1]
+        self._profileinfo = pickle.loads(x[0][-1].encode('ascii','replace'))
         x = self._run_db("SELECT subject_id FROM users_subjects WHERE username = ?;", (username,))
         self._subjects = [i[0] for i in x]
     def _set_blank(self):
@@ -86,6 +87,8 @@ class User(object):
         return self._email
     def get_school(self):
         return self._school
+    def get_profile_info(self):
+        return self._profileinfo
     def get_password_hash(self):
         return self._passwordhash
     def get_profile_pic_path(self):
@@ -113,6 +116,12 @@ class User(object):
         for k,v in args.items():
             func = mapping[k]
             func(v)
+    def set_profile_info(self, args):
+        for k,v in args.items():
+            self._profileinfo[k] = v
+        print pickle.dumps(self._profileinfo)
+        self._run_db("UPDATE users SET profileinfo = ? WHERE username = ?;", (pickle.dumps(self._profileinfo), self._username))
+        
     def set_email(self, email):
         self._run_db("UPDATE users SET email = ? WHERE username = ?;", (email,self._username))
         self._email = email
