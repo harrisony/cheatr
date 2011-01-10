@@ -11,7 +11,7 @@
 		<ul>			
 			{% if profile_pic_location != "" %}<li><img src="{{ profile_pic_location }}" width ="180px" /></li>{% end if %}
 			{% if profile_pic_location == "" %}<li><img src="/static/photos/Default/default_male.jpg" width ="180px" /></li>{% end if %}
-			<li>Username: {{ current_Wall }}</li>
+			<li>Username: {{ username }}</li>
 			<li>Email: {{ email }}</li>		
 			<li id="submenu">Education
 				<ul>
