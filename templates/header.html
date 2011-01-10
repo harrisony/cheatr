@@ -36,5 +36,12 @@
 					</ul>
 				</li>
 			</ul>
+                        
+            {% if user %}
+                <p id="logged_in">You are currently logged in as {{ user.get_username() }}.</p>
+            {% end if %}
+		</nav>
+
+        
 		</nav>
 </header>
