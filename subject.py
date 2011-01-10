@@ -86,7 +86,15 @@ def viewsubject(response, subjectid, resourcetype, page):
     template.render_template("templates/subject_view_template.html",{"user":user,"subject":info,"top_resources":top_resources,"all_resources":all_resources},response)
 
 def mysubjects(response):
-	pass
+    user = auth.get_user(response)
+    subjectlist = user.get_subjects()
+    tmp_list = []
+    for sub in subjectlist:
+        sub = database_subject.get_subject(sub)
+        tmp_list.append(sub)
+    subjectlist = tmp_list
+    template.render_template("templates/subject_list_template.html",{"user":user,"subjectlist":subjectlist},response)
+    targetsubject=response.get_field("subjectselected")
 
 def listsubject(response):
     user = auth.get_user(response)

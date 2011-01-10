@@ -10,12 +10,12 @@
 			<section id="subject-info">
 				<h1 id='title'>{{ subject.name }}</h1>
 				<div id="membership">
-					{% if 1 %}
+					{% if not user.is_friend_of(subject) %}
 					<form method="POST">
 						<input type="submit" value="Join Subject">
 					</form>
 					{% end if %}
-					{% if not 1 %}
+					{% if user.is_friend_of(subject) %}
 					<form method="POST">
 						<input type="submit" value="Leave Subject">
 					</form>
