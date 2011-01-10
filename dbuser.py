@@ -1,6 +1,6 @@
 from hashlib import sha1
 import sqlite3
-from database subject import Subject
+from database_subject import Subject
 try:
     import cPickle as pickle
 except:
