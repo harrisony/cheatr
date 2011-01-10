@@ -1,0 +1,20 @@
+form {
+	width: 600px;
+}
+
+input, label {
+	display: inline-block;
+}
+
+label {
+	width: 100px;
+	text-align: right;
+}
+
+input {
+	width: 490px;
+}
+
+input[type=submit] {
+	width: auto;
+}
