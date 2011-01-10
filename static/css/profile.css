@@ -1,41 +1,48 @@
-	aside section ul {
-		list-style-type: none;
-		padding: 0px;
-	}
-	
-	aside section ul li {
-		text-decoration: underline;
-	}
-	
-	aside section ul li ul {
-		display: none;
-		margin:0px;
-	}
-	
-	aside section ul li:hover ul {
-		display: block;
-	}
-	
-	.friend img{
-		width: 50px;
-		border: 2px solid black;
-		display: block;
-	}
-	
-	.friend {
-		display: inline-block;
-		margin: 3px;
-		text-align: center;
-	}
-	
-	.friend a {
-		color: black;
-	}
-	
-	.friend:hover a {
-		color:white;
-	}
-	
-	.friend:hover {
-		background-color: #03588C;
-	}
+
+aside section>ul {
+	list-style-type: none;
+	padding: 0px;
+}
+
+aside section  li {
+	margin: 3px;
+}
+
+aside section ul li#submenu {
+	background-color: #3BB2BF;
+}
+
+aside section li#submenu>ul {
+	background-color: white;
+	display: none;
+	margin:0px;
+	overflow:hidden;
+}
+
+aside section li#submenu:hover>ul {
+	display: block;
+}
+
+.friend img{
+	width: 50px;
+	border: 2px solid black;
+	display: block;
+}
+
+.friend {
+	display: inline-block;
+	margin: 3px;
+	text-align: center;
+}
+
+.friend a {
+	color: black;
+}
+
+.friend:hover a {
+	color:white;
+}
+
+.friend:hover {
+	background-color: #03588C;
+}

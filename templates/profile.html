@@ -14,7 +14,7 @@
 			{% if profile_pic_location == "" %}<li><img src="/static/photos/default_male.jpg" width ="180px" /></li>{% end if %}
 			<li>Username: {{ user }}</li>
 			<li>Email: {{ email }}</li>		
-			<li><strong>Education</strong>
+			<li id="submenu">Education
 				<ul>
 					<li>School: {{ school }}</li>
 					<li>Subjects: {{ subjects }}</li>
@@ -22,7 +22,7 @@
 					<li>Grade: {{ grade }}</li>
 				</ul>
 			</li>
-			<li><strong>Activities And Interests</strong>
+			<li id="submenu">Activities And Interests
 				<ul>
 					<li>Favourite Music: {{ favourite music }}</li>
 					<li>Favourite TV Shows: {{ favourite tv shows }}</li>
@@ -32,7 +32,7 @@
 					<li>Interests: {{ interests }}</li>
 				</ul>
 			</li>
-			<li><strong>About Me</strong>
+			<li id="submenu">About Me
 				<ul>
 					<li>About Me: {{ about me }}</li>
 					<li>Birthday: {{ birthday }}</li>
