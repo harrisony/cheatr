@@ -55,8 +55,8 @@ def profile(response, username):
     user = User.get(username)
     auth.require_user(response)
     name = auth.get_user(response)
-    if name: user = name
-
+    if not user: user = name
+    
     if user is not None:
         firstname = user.get_first_name()
         lastname = user.get_last_name()
