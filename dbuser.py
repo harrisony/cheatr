@@ -141,7 +141,7 @@ class User(object):
         self._subjects.append(sid)
     def remove_subject(self, sid):
         self._run_db("DELETE FROM users_subjects WHERE username = ? AND subject_id = ?", (self._username, sid))
-        del self._subjects[self._subjects.index(sid)]
+        del self._subjects[self._subjects.index(int(sid))]
     def password_correct(self, password):
         if sha1(password).hexdigest() == self.get_password_hash():
            return True
