@@ -56,7 +56,7 @@ def viewsubject(response, subjectid, resourcetype, page):
 	#top_resources = database_subject.get_resources(subject,resourcetype,lower,upper,True)
     all_resources = ['all1','all2','all3']
 	#all_resources = database_subject.get_resources(subject,resourcetype,lower,upper,False)
-    template.render_template("templates/subject_view_template.html",{"subjectlist":info,"top_resources":top_resources,"all_resources":all_resources},response)
+    template.render_template("templates/subject_view_template.html",{"subject":info,"top_resources":top_resources,"all_resources":all_resources},response)
 
 def mysubjects(response):
 	pass

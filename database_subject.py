@@ -8,6 +8,12 @@ import sqlite3
 class subject:
 	def __init__(self,row):
 		self.row = row
+		self.id = row[0]
+		self.name = row[1]
+		self.KLA = row[2]
+		self.grade = row[3]
+		self.jurisdiction = row[4]
+		self.description = row[5]
 
 	def get_id(self):
 		return self.row[0]

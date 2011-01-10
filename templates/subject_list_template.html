@@ -2,7 +2,7 @@
 {% include templates/head.html %}
 <body>
 {% include templates/header.html %}
-<h1>{{ title }}</h1>
+<h1>Subjects</h1>
 <article>
 <aside>
 
@@ -17,7 +17,7 @@
 
 {% for i in subjectlist %}
 	<p><a href="/subject/{{ i.get_id() }}">{{ i.get_name() }}</a><br />
-	{{ i.get_grade()}}. Jurisdiction: {{ i.get_jurisdiction() }}.</p>
+	{{ i.get_grade()}}, {{ i.get_jurisdiction() }}.</p>
 	<br />
 {% end for %}
 <form action="/subject">
