@@ -5,22 +5,28 @@ import os
 import mimetypes
 import dbfiles
 import auth
-username = "svet"
 ul_error_msg = ""
 ul_file = ""
+user = None
+username = ""
 
-def file_upload(response):
+def file_upload(response): 
+    auth.require_user(response)
+    user = auth.get_user(response)
+    if user == None:
+        return
+    else:
+        username = user.get_username()
     ul_error_msg = ""
     filename, content_type, data = response.get_file('to_upload')
     if response.get_field("ul_flag") == "True":
         # we did submit a form
         if filename == None or content_type == None or data == None:
             ul_error_msg = "Please select a file to upload."
-            print "no file"
         else:
             #A form was submitted with content. Proceed with upload
-            "a form was submitted"
-            upload(response)
+            print "a form was submitted"
+            _do_upload(response)
             return
     # we did not submit a form or it's wrong
     print "loading page first time"
@@ -40,6 +46,7 @@ def _do_upload(response):
     serverfilename = currenttime + extension
     ul_file = os.path.join('static', 'files', serverfilename)
     #adding to list of all files
+    print "username", username
     dbfiles.addFile(serverfilename, username, filename, sbjct, descr)
     open(ul_file, 'wb').write(data)
     #Response after file upload success
@@ -47,9 +54,21 @@ def _do_upload(response):
     template.render_template("templates/uploadconfirmed.html", context, response)
 
 def file_search(response):
-    pass
+    auth.require_user(response)
+    user = auth.get_user(response)
+    if user == None:
+        return
+    else:
+        username = user.get_username()
+
 
 def file_edit(response, fileid):
+    auth.require_user(response)
+    user = auth.get_user(response)
+    if user == None:
+        return
+    else:
+        username = user.get_username()
     context = {"css": "fileupload",
                "title": "Edit File Info",
                "thefileid": fileid,
@@ -59,12 +78,29 @@ def file_edit(response, fileid):
     template.render_template("templates/editfileinfo.html", context, response)
 
 def listmyfiles(response):
+    auth.require_user(response)
+    user = auth.get_user(response)
+    if user == None:
+        return
+    else:
+        username = user.get_username()
     context = {"allfiles": dbfiles.getFilesUser("124")}
     print context
     template.render_template("templates/listallfiles.html", context, response)
     
 def listuserfiles(response):
+    auth.require_user(response)
+    user = auth.get_user(response)
+    if user == None:
+        return
+    else:
+        username = user.get_username()
     pass
 
 def listsubjectfiles(response):
-    pass
+    auth.require_user(response)
+    user = auth.get_user(response)
+    if user == None:
+        return
+    else:
+        username = user.get_username()
