@@ -3,6 +3,7 @@ from dbuser import User
 import os
 import mimetypes
 import friends
+import auth
 from template_engine import template
 
 
@@ -52,7 +53,8 @@ Upload Profile Picture:<br>
 
 def profile(response, username):
     user = User.get(username)
-    name = clean(response.get_field("user"))
+    auth.require_user(response)
+    name = auth.get_user(response)
 
     print username
     if user is not None:
@@ -70,10 +72,6 @@ def profile(response, username):
 				   'current_Wall':response.get_field('user'), "profile_pic_location":picture,
                    "email":email, "school":school, "css": "profile", "friends":friends.get_friends(username), "User": User}
         template.render_template("templates/profile.html", context, response)
-        
-        
-    else:
-        response.redirect("/signup")
         
 def signup(response):
     username = response.get_field("username")
@@ -106,7 +104,8 @@ photo = ''
 
 def update(response):
     global photo, content_type
-    username = clean(response.get_field("username"))
+    auth.require_user()
+    username = auth.get_user(response)
     firstname = clean(response.get_field("firstname"))
     lastname = clean(response.get_field("lastname"))
     email = clean(response.get_field("email"))
@@ -138,7 +137,6 @@ def update(response):
         
         response.redirect("/profile/" + username)
     else:
-        name = response.get_field("name")
         user = User.get(name)
         password = user.get_password_hash()
         firstname = user.get_first_name()

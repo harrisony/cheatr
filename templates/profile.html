@@ -8,8 +8,7 @@
 <aside>
 	<section>
 		<p>Account Info</p>
-		<ul>
-			
+		<ul>			
 			{% if profile_pic_location != "" %}<li><img src="{{ profile_pic_location }}" width ="180px" /></li>{% end if %}
 			{% if profile_pic_location == "" %}<li><img src="/static/photos/default_male.jpg" width ="180px" /></li>{% end if %}
 			<li>Username: {{ user }}</li>
