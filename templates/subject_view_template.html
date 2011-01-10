@@ -51,21 +51,13 @@
 				</nav>
 				
 				<section id="top-resources">
-					{% include templates/page_navigation.html %}
 					<section>
 						{% for resource in top_resources %}
 							<p><a href="/static/files/{{ resource.fileid }}">{{ resource.ori_filename }}</a></p>
 						{% end for %}
 					</section>
 				</section>
-				<section id="all-resources">
-					{% include templates/page_navigation.html %}
-					<section>
-						{% for resource in all_resources %}
-							<p>{{ resource.ori_filename }}</p>
-						{% end for %}
-					</section>
-				</section>
+				
 			</section>
 			<section id="social">
 				<section id="wall">
