@@ -1,6 +1,6 @@
 from tornado import Server
 from friendsconstants import * 
-from user import User
+from dbuser import User
 import sqlite3
 import os
 

@@ -1,6 +1,6 @@
 from tornado import Server
 from time import time
-from user import User
+from dbuser import User
 from friends import *
 from auth import *
 from template_engine import template
