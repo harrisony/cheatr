@@ -17,6 +17,7 @@ form {
 	width: 850px;
 	display: block;
 	background-color: #D9D8F0;
+	border-radius: 10px;
 }
 
 form label {
