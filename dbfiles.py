@@ -41,14 +41,14 @@ def getFilesUser(userid):
     results_files = []
     for item in repo:
         if repo[item].userid == str(userid):
-            results_files.append(getFile(item))
+            results_files.append(repo[item])
     return results_files
 
 def getFilesSubject(subjectid):
     results_files = []
     for item in repo:
         if repo[item].subjectid == subjectid:
-            results_files.append(item)
+            results_files.append(repo[item])
     return results_files
 
 def _addFileLocal(fileid, userid, ori_filename, subjectid, description, category, rank):
