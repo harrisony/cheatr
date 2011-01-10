@@ -1,5 +1,6 @@
-#friendlist li {
-    padding:25px 50px;
+#friendlist li, #friendlist li a, #friendlist li a:visited {
+    padding:25px;
+	color:rgba(223,181,122,1);
 }
 
 #friendlist form {
@@ -10,4 +11,8 @@
 div#content ul li img {
 	width: 50px;
 	height: auto;
+}
+
+.thumbnail_pic {
+	bottom:0;
 }

@@ -42,8 +42,8 @@ aside section  li {
 	text-align: center;
 }
 
-.friend a {
-	color: black;
+.friend a , .friend a:visited{
+	color: rgba(223,181,122,1);;
 }
 
 .friend:hover a {

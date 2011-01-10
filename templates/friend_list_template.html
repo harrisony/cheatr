@@ -11,15 +11,13 @@
         
         <ul id="friendlist">
         {% for friend in friends %}
-            <li>
+			<form action="/friendsdelete/{{ friend.get_username() }}" method="POST">
+				<li>
                 <img class='thumbnail_pic' src='{{ friend.get_profile_pic_path() }}' />
                 <a href="/profile/{{ friend.get_username() }}">{{ friend.get_first_name() + ' ' + friend.get_last_name() }}</a>
-                <form action="/friendsdelete/{{ friend.get_username() }}" method="POST">
-                    <!--<input type="hidden" name="_method" value="DELETE" /> -->
-                    <input type="submit" value="Remove" />
-                    <!--<a href="/friendsdelete/{{friend.get_username() }}">Delete</a> -->
-                </form>
-            </li>
+                <input type="submit" value="Remove" />
+				</li>
+			</form>
         {% end for %}
         </ul>
     </div>
