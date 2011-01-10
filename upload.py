@@ -95,7 +95,7 @@ def listmyfiles(response):
         return
     else:
         username = user.get_username()
-    context = {"allfiles": dbfiles.getFilesUser("124")}
+    context = {"allfiles": dbfiles.getFilesUser("124"), "user":user}
     print context
     template.render_template("templates/listallfiles.html", context, response)
     
