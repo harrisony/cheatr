@@ -99,7 +99,7 @@ class User(object):
     def set_password(self, pword):
         self._run_db("UPDATE users SET 'passwordhash = ?;", (sha1(pword).hexdigest()),)
         self._passwordhash = sha1(pword).hexdigest()
-    def password_correct(username, password):
+    def password_correct(self, password):
         if sha1(password).hexdigest() == self.get_password_hash():
            return True
         else:
