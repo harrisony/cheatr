@@ -8,48 +8,46 @@
 
 </aside>
 
-<div id="content">
+<div id="content" style="color: #ffffff">
 <section>
 <h1>Subject Creation Field</h1>
 <form method="POST">
 {% if enablebutton==False %}
 	{{notification}}
 {% end if %}
-<input type="text" name="subjectname" value=""/> :Subject Name
+Subject name: <input type="text" name="name" value=""/>
 <p>
-<input type="radio" name="subject" value=1> Mathematics
+<input type="radio" name="KLA" value=1> Mathematics
 </p>
 <p>
-<input type="radio" name="subject" value=2> Computing
+<input type="radio" name="KLA" value=2> Computing
 </p>
 <p>
-<input type="radio" name="subject" value=3> Science
+<input type="radio" name="KLA" value=3> Science
 </p>
 <p>
-<input type="radio" name="subject" value=4> Social Science
+<input type="radio" name="KLA" value=4> Social Science
 </p>
 <p>
-<input type="radio" name="subject" value=5> English/Philosophy
+<input type="radio" name="KLA" value=5> English/Philosophy
 </p>
 <p>
-<input type="radio" name="subject" value=6> Languages
+<input type="radio" name="KLA" value=6> Languages
 </p>
 <p>
-<input type="radio" name="subject" value=7> Other
+<input type="radio" name="KLA" value=7> Other
 </p>
 </section>
-<p>
-Amount of Units or Credits
-<input type="radio" name="unit" value="1"> 1
-<input type="radio" name="unit" value="2"> 2
-<input type="radio" name="unit" value="3"> 3
-<input type="radio" name="unit" value="4"> 4
+<p style="color: #000000">
+Grade: <input type="text" name="grade" value="" /> 
+Jurisdiction: <input type="text" name="jurisdiction" value="" /> 
 </p>
-<p>
-Description of the Course
+<p style="color: #000000">
+Description of the Course:
 </p>
-<p>
-<textarea rows="3" cols="50" name="description"> </textarea>
+<p style="color: #000000">
+<textarea rows="3" cols="50" name="description"> </textarea> <br />
+Max word limit: 255
 </p>
 <p>
 <input type="reset" name="reset" value=Reset>
