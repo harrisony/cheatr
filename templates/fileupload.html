@@ -9,7 +9,6 @@
 	<div id="uploadform">
 	<form method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="ul_flag" value="True">
-		<p>{{ ul_err_msg }}</p>
 		<label>Subject:</label>
 		<br/>
 		<ul>
@@ -29,6 +28,7 @@
 		<label>File:</label>
 		<input type="file" id="file" name="to_upload" size="66">
 		<input type="submit" name="submit" value="Upload">
+		<p><font color="#FF0000">{{ ul_err_msg }}</font></p>
 	</form>
 </div>
 </article>

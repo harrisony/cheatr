@@ -23,8 +23,9 @@ def file_upload(response):
     filename, content_type, data = response.get_file('to_upload')
     if response.get_field("ul_flag") == "True":
         # we did submit a form
-        if filename == None or content_type == None or data == None:
-            ul_error_msg = "Please select a file to upload."
+        print"#####", response.get_field("subject")
+        if data == None or response.get_field("subject") == None or response.get_field("category") == None or response.get_field("description") == None:
+            ul_error_msg = "Make sure you have all fields filled in and have selected a file. If you have joined any subject(s), you cannot upload files."
         else:
             #A form was submitted with content. Proceed with upload
             print "a form was submitted"
@@ -54,9 +55,7 @@ def _do_upload(response):
     while os.path.exists("static\\files\\" + currenttime):
         print "OS Path Exists"
         currenttime = str(int(time()))
-    extension = mimetypes.guess_extension(content_type)
-    if extension is None:
-        extension = filename.split(".")[-1]
+    extension = "." + filename.split(".")[-1]
     serverfilename = currenttime + extension
     ul_file = os.path.join('static', 'files', serverfilename)
     #adding to list of all files
