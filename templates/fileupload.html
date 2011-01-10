@@ -9,16 +9,29 @@
 Aside of main content
 </aside>
 <div id="content">
+	<div id="uploadform">
 	<form method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="ul_flag" value="True">
 		<p>{{ ul_err_msg }}</p>
 		<label>Subject:</label>
-		<input type="text" class="ul_inp_field" name="subject">
+		<br/>
+		<ul>
+			{% for f in ulsubjects %}
+			<li><input type="radio" name="subject" value="{{ f[0] }}"><label>{{ f[1] }}</label></li>
+			{% end for %}
+		</ul>
+		<label>Category:</label>
+		<br/>
+		<ul>
+			{% for f in ulcategories %}
+			<li><input type="radio" name="category" value="{{ f }}"><label>{{ f }}</label></li>
+			{% end for %}
+		</ul>
 		<label>Description:</label>
-		<input type="memo" class="ul_inp_field" name="description">
+		<input type="text" name="description">
 		<label>File:</label>
-		<input type="file" class="ul_inp_field" name="to_upload" size="66">
-		<input type="submit" name="submit">
+		<input type="file" 	name="to_upload" size="66">
+		<input type="submit" name="submit" value="Upload">
 	</form>
 </div>
 </article>

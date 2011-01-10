@@ -1,6 +1,6 @@
 form {
 	width: 700px;
-	background-color: #D9D8F0;
+/*	background-color: #D9D8F0; */
 	border-radius: 10px;
 }
 
@@ -9,14 +9,19 @@ input, label {
 }
 
 label {
-	width: 100px;
+	width: 150px;
 	text-align: right;
 }
 
 input {
-	width: 490px;
+	width: 500px;
 }
 
 input[type=submit] {
 	width: auto;
+}
+
+ul, li {
+	text-align: left;
+	marign-left: 10px;
 }
