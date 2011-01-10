@@ -119,7 +119,7 @@ def update(response):
         photo_path = os.path.join('static', 'photos', username + extension)
         print "updating.."
         open(photo_path, 'wb').write(data)
-        photo_url = '\\' + photo_path.replace("\\","/")
+        photo_url = '/' + photo_path.replace("\\","/")
         print photo_url
         User.get(username).set_profile_pic_path(photo_url)
         fullname = '%s %s' % (username, lastname)
