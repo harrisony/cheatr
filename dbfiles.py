@@ -8,19 +8,22 @@ cur = conn.cursor()
 cur.execute("""
 CREATE TABLE IF NOT EXISTS "Files" ("fileid" TEXT PRIMARY KEY  NOT NULL  UNIQUE ,
 "userid" TEXT NOT NULL , "ori_filename" TEXT NOT NULL , "subjectid" NUMBER NOT NULL ,
-"description" TEXT NOT NULL , "timestamp" DATETIME NOT NULL  DEFAULT CURRENT_TIMESTAMP);
+"description" TEXT NOT NULL , "timestamp" DATETIME NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+"category" TEXT NOT NULL  DEFAULT "Notes" , "rank" FLOAT NOT NULL  DEFAULT 0);
 """)
 
 
 
 #This code will convert the userid and subjectid to a string 
 class UploadedFile(object):
-    def __init__(self, fileid, userid, ori_filename, subjectid, description):
+    def __init__(self, fileid, userid, ori_filename, subjectid, description, category, rank):
         self.fileid = fileid
         self.userid = str(userid)
         self.ori_filename = ori_filename
         self.subjectid = int(subjectid)
         self.description = description
+        self.category = category
+        self.rank = rank
 
     def __repr__(self):
         return """File Object
@@ -29,8 +32,10 @@ class UploadedFile(object):
 Original Filename: %s
         SubjectID: %i
       Description: %s
+         Category: %s
+             Rank: %f
 _________________________________________
-""" % (self.fileid, self.userid, self.ori_filename, self.subjectid, self.description)
+""" % (self.fileid, self.userid, self.ori_filename, self.subjectid, self.description, self.category, self.rank)
     
 def getFilesUser(userid):
     results_files = []
@@ -46,20 +51,23 @@ def getFilesSubject(subjectid):
             results_files.append(item)
     return results_files
 
-def _addFileLocal(fileid, userid, ori_filename, subjectid, description):
-    repo[fileid] = UploadedFile(fileid, userid, ori_filename, subjectid, description)
+def _addFileLocal(fileid, userid, ori_filename, subjectid, description, category, rank):
+    repo[fileid] = UploadedFile(fileid, userid, ori_filename, subjectid, description, category, rank)
 
-def addFile(fileid, userid, ori_filename, subjectid, description):
+def addFile(fileid, userid, ori_filename, subjectid, description, category):
     if fileid in repo:
         raise NameError('This File Already Exists')
-    cur.execute("INSERT into Files (fileid, userid, ori_filename, subjectid, description) VALUES (?, ?, ?, ?, ?);",
-                (fileid, userid, ori_filename, subjectid, description))
+    cur.execute("INSERT into Files (fileid, userid, ori_filename, subjectid, description, category, rank) VALUES (?, ?, ?, ?, ?, ?, 0.0);",
+                (fileid, userid, ori_filename, subjectid, description, category))
     conn.commit()
-    _addFileLocal(fileid, userid, ori_filename, subjectid, description)
+    _addFileLocal(fileid, userid, ori_filename, subjectid, description, category, 0.0)
     
-def changefileinfo(fileid, subjectid, description):
+def changefileinfo(fileid, subjectid, description, category):
+##############################################################################
+    #make sure this modifies the database and dictionary
     if fileid in repo:
         getFile(fileid).subjectid = subjectid
+        getFile(fileid).category = category
         getFile(fileid).description = description
     else:
         NameError('This File Does Not Exist')
@@ -74,13 +82,15 @@ repo = {}
 cur.execute("SELECT * FROM Files")
 
 for row in cur:
-    _addFileLocal(str(row[0]), str(row[1]), str(row[2]), int(row[3]), str(row[4]))
+    _addFileLocal(str(row[0]), str(row[1]), str(row[2]), int(row[3]), str(row[4]), str(row[6]), float(row[7]))
 
 try:
-    addFile("1294464681.png", "123", "appleconf.png", 2, "A Desc")
-    addFile("1294532619.png", "123", "asdf.png", 2, "Another Desc")
-    addFile("1294531867.png", "124", "bbbb.png", 2, "Desc of B")
-    addFile("1294464894.png", "124", "cccc.png", 2, "Desc of C")
+    #add remaining fields
+    addFile("1294464681.png", "123", "appleconf.png", 2, "A Desc", "Notes")
+    addFile("1294532619.png", "123", "asdf.png", 2, "Another Desc", "Notes")
+    addFile("1294531867.png", "124", "bbbb.png", 2, "Desc of B", "Notes")
+    addFile("1294464894.png", "124", "cccc.png", 2, "Desc of C", "Notes")
+    #Set ranks
 except NameError:
     pass
 

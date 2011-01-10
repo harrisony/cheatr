@@ -36,6 +36,9 @@ def file_upload(response):
 def _do_upload(response):
     global ul_file, content_type
     sbjct = response.get_field('subject')
+    categor = response.get_field('categor')
+    ###############
+    categor = "Notes"
     descr = response.get_field('description')
     filename, content_type, data = response.get_file('to_upload')
     currenttime = str(int(time()))
@@ -47,7 +50,7 @@ def _do_upload(response):
     ul_file = os.path.join('static', 'files', serverfilename)
     #adding to list of all files
     print "username", username
-    dbfiles.addFile(serverfilename, username, filename, sbjct, descr)
+    dbfiles.addFile(serverfilename, username, filename, sbjct, descr, categor)
     open(ul_file, 'wb').write(data)
     #Response after file upload success
     context = {"css": "fileupload", "title": "File Uploader", "ori_file_name": filename, "server_file_location": currenttime+extension}
