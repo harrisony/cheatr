@@ -1,40 +1,75 @@
-#account{
-	position: relative;
+header {
+	background-color:white;
+	margin:0px auto 15px auto;
+
+	min-height:50px;
+	-webkit-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	-moz-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	border-radius:2px;
+	border:1px solid #eee;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+	background: -moz-linear-gradient(top,  #fff,  #eee);
+	height: 95px;
+	display: block;
+	position:relative;
 }
 
-header nav ul li:hover {
-	background-color: #9dd8df;
+nav > ul {
+	position:absolute;
+	right:0;
+	bottom:0;
+	color:
 }
 
-header nav ul li {
-	margin: 2px;
-	background-color: #3BB2BF;
-	
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+nav > ul > li {
+	display:inline-block;
+	padding:5px;
+	font-family:Nobile;
+	font-size:16px;
+	width:110px;
+	text-align:center;
+	font-weight:bold;
+	position: relative;	
+	background-color:rgba(0,0,0,0.05);
+	height: 22px;
+}
+
+
+nav > ul > li a, nav > ul > li a:visited {
+	text-decoration:none;
+	color:#333;
+}
+
+nav > ul > li:hover {
+	background-color:rgba(220,137,19,0.5);
 }
 
 #account ul {
 	display: none;
-	background-color: #3BB2BF;
-	padding: 0px;
-	width: 130px;
+	font-size:16px;
+	padding:5px;
+	font-family:Nobile;
+	background-color:rgba(220,137,19,1.0);
+	font-weight: normal;
+	width: 110px;
 	-webkit-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
-	-moz-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
-	border-radius:2px;
+	-moz-box-shadow:2px 3px 6px rgba(0,0,0,0.3);
 	position: absolute;
-}
-
-#account ul  li {
-	display: block;
+	left: 0px;
+	top: 32px;
 }
 
 #account:hover ul {
-	display: block;
-	position: absolute;
-	left: 0px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+  display: block;
+}
+
+#account ul > li  a, ul > li a:visited{
+	margin: 5px;
+	color:rgba(240,240,240,1.0);
+}
+#account ul li:hover {
+	background-color:rgba(223,181,122,1);
+	color:rgba(200,200,200,1.0);
 }
 
 #logged_in {

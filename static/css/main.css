@@ -11,23 +11,10 @@ body {
 	background-color:white;
 	margin:0px auto 15px auto;
 }
-header, footer {
+footer {
 	display: block;
 	margin: 0px;
     text-align:right;
-}
-header {
-	background-color:white;
-	margin:0px auto 15px auto;
-
-	min-height:50px;
-	-webkit-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
-	-moz-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
-	border-radius:2px;
-	border:1px solid #eee;
-	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
-	background: -moz-linear-gradient(top,  #fff,  #eee);
-	height: 95px;
 }
 
 footer {
@@ -39,40 +26,12 @@ footer {
 	width: auto;
 }
 
-header img {
-	border: none;
-	margin: 4px;
-	float:left;
-}
-
-header a {
-	text-decoration:none ;
-	padding: 0px 5px 0px 5px;
-	color: black;
-}
 #profilepic{
 text-align:center;
 position:relative;
 }
 
-header ul li {
-	font-family: Nobile;
-	display: inline;
-	list-style-type: none;
-	padding: 0px 5px 0px 5px;
-}
 
-nav ul {
-	font-family: Nobile;
-	display: inline;
-	width: 100%;
-	margin-right: 80px;
-}
-
-nav ul li ul li {
-	margin: 0px;
-	float: left;
-}
 
 
 h1{
