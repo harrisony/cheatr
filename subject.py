@@ -43,18 +43,18 @@ def createsubject(response):
         database_subject.create_subject(subjectname,subjectcategory,subjectunits,subjectdescription)
         response.write("Saved")
 
-def viewsubject(response, subjectname, resourcetype, page):
+def viewsubject(response, subjectid, resourcetype, page):
     if not resourcetype:
         resourcetype = 'all'
     if not page:
         page = 1
-    info = database_subject.get_subject(subjectname)
+    info = database_subject.get_subject(subjectid)
     lower = (int(page) - 1 )*10 + 1
     upper = int(page)*10
     top_resources = ['top1','top2','top3']
-	#top_resources = database_subject.get_resources(subjectname,resourcetype,lower,upper,True)
+	#top_resources = database_subject.get_resources(subject,resourcetype,lower,upper,True)
     all_resources = ['all1','all2','all3']
-	#all_resources = database_subject.get_resources(subjectname,resourcetype,lower,upper,False)
+	#all_resources = database_subject.get_resources(subject,resourcetype,lower,upper,False)
     template.render_template("templates/subject_view_template.html",{"subject":info,"top_resources":top_resources,"all_resources":all_resources},response)
 
 def listsubject(response):
