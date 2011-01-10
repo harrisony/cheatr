@@ -2,6 +2,8 @@ from tornado import Server
 from template_engine import template
 import database_subject
 import auth
+import dbfiles
+from operator import itemgetter, attrgetter
 
 def createpage(response):
 	
@@ -43,6 +45,14 @@ def createsubject(response):
         database_subject.create_subject(subjectname,subjectcategory,subjectunits,subjectdescription)
         response.write("Saved")
 
+def rankcmp(file1, file2):
+    if file1.rank < file2.rank:
+        return -1
+    elif file1.rank > file2.rank:
+        return 1
+    else:
+        return 0
+		
 def viewsubject(response, subjectid, resourcetype, page):
     auth.require_user(response)
     if not resourcetype:
@@ -51,11 +61,15 @@ def viewsubject(response, subjectid, resourcetype, page):
         page = 1
     user = auth.get_user(response)
     info = database_subject.get_subject(int(subjectid))
-    lower = (int(page) - 1 )*10 + 1
-    upper = int(page)*10
-    top_resources = ['top1','top2','top3']
+    lower = (int(page) - 1 )*10
+    upper = int(page)*10 - 1
+    top_resources = dbfiles.getFilesSubject(subjectid)
+    sorted(top_resources, key=attrgetter('rank'), reverse=True)
+    top_resources = top_resources[lower:upper]
 	#top_resources = database_subject.get_resources(subject,resourcetype,lower,upper,True)
-    all_resources = ['all1','all2','all3']
+    all_resources = dbfiles.getFilesSubject(subjectid)
+    sorted(all_resources, key=attrgetter('name'))
+    all_resources = all_resources[lower:upper]
 	#all_resources = database_subject.get_resources(subject,resourcetype,lower,upper,False)
     template.render_template("templates/subject_view_template.html",{"user":user,"subject":info,"top_resources":top_resources,"all_resources":all_resources},response)
 
@@ -66,3 +80,7 @@ def listsubject(response):
     user = auth.get_user(response)
     template.render_template("templates/subject_list_template.html",{"user":user,"subjectlist":database_subject.list_of_subjects()},response)
     targetsubject=response.get_field("subjectselected")
+
+
+	
+	
