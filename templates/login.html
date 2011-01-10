@@ -5,26 +5,28 @@
 {% include templates/header.html %}
 	<h1>{{ title }}</h1>
 <article>
-<div id="content">
-<div id="aside">
-<form method="post" action="/login">
-	<input name="page" type="hidden" value="{{ page }}" />
-	<label for="username">Username: </label>
-	<input type="text" name="username" value="{{ username }}" />
-	<label for="password">Password: </label>
-	<input type="password" name="password" />
-	<input type="submit" name="submit" value="Login" />
-</form>
-</div>
-<div id="right">
-<br/><br />
-<h1><a href="/signup">Click Here to Signup</a></h1>
-</div>
-<p>{{ output }}</p>
-{% if username %}
-<p>Hello {{ firstname }}</p>
-{% end if %}
-</div>
+	<aside>
+		<form method="post" action="/login">
+			<input name="page" type="hidden" value="{{ page }}" />
+			<label for="username">Username: </label>
+			<input type="text" name="username" value="{{ username }}" />
+			<label for="password">Password: </label>
+			<input type="password" name="password" />
+			<input type="submit" name="submit" value="Login" />
+		</form>
+	</aside>
+	<div id="content">
+		<div id="right">
+		<h1><a href="/signup">Click Here to Signup</a></h1>
+		</div>
+		{% if output %}
+		<p>{{ output }}</p>
+		{% end if %}
+		{% if username %}
+		<p>Hello {{ firstname }}</p>
+		{% end if %}
+		</div>
+	</div>
 </article>
 {% include templates/footer.html %}
 </body>

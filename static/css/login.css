@@ -12,7 +12,7 @@ form input {
 	width:250px;
 }
 
-#aside form {
+aside form {
 	text-align: right;
 	width: 400px;
 	display: block;
@@ -38,6 +38,7 @@ form label {
 	margin-top: 50px;
 	border-left: 3px solid black;
 	text-align: center;
+	border: none;
 }
 
 input[type="submit"] {
@@ -51,6 +52,19 @@ input[type="submit"] {
 	float: left;
 }
 
+article aside {
+	padding: 50px;
+	background-color: white;
+}
+
 #right {
-	margin-left: 450px;
+	text-align: center;
+	padding: 20px;
+	background: transparent;
+	width: auto;
+	font-size: 30px;
+}
+
+#right a {
+	font-size: 40px;
 }
