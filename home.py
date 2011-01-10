@@ -9,7 +9,7 @@ def page(response):
     user = auth.get_user(response)
     print "name: " + str(user)
     if user == None:
-        response.redirect("/login")
+		return
     else:        
         context = {'title': 'Home Page',
                    
