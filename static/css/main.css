@@ -283,6 +283,16 @@ form textarea {
 
 input[type="submit"] {
 	background-color: white;
+	#-webkit-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	#-moz-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	border-radius:2px;
+	border:2px solid #666;
+	padding: 1px;
+	font-family: Nubile;
+}
+
+input[type="submit"]:hover {
+	background-color:rgba(220,137,19,0.5);
 }
 
 #profile_pic {
