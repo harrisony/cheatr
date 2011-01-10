@@ -24,7 +24,7 @@ if __name__ == "__main__":
     server.register("/signup",profile.signup)
     server.register("/update",update.update)
     server.register('/friends/?', friends.my_friends)
-    server.register("/friends/(.*)/?", friends.remove_friend, delete=friends.remove_friend)
+    server.register("/friends/(.*)/?", friends.add_friend_handler, delete=friends.remove_friend_handler)
     server.register("/subject/create/?", subject.createsubject)
     server.register("/subject/?", subject.mysubjects)
     server.register("/subject/([^\/]*)/?([^\/]*)/?([^\/]*)/?", subject.viewsubject)

@@ -26,7 +26,6 @@
                 <form action="/friends/{{ friend.get_username() }}" method="POST">
                     <input type="hidden" name="_method" value="DELETE" />
                     <input type="submit" value="Remove" />
-                    
                 </form>
             </li>
         {% end for %}
