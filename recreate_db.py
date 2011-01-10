@@ -1,7 +1,7 @@
 import os
 import sqlite3
 import recreate_comms_db
-import recreate_users
+import recreate_users_db
 import recreate_subjects_db
 
 

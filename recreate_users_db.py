@@ -8,9 +8,9 @@ CREATE TABLE 'users' ('username' TEXT PRIMARY KEY NOT NULL , 'password' TEXT NOT
 
 CREATE TABLE 'users_subjects'('username' TEXT NOT NULL, 'subject_id' INTEGER NOT NULL);
 
-INSERT INTO 'users' VALUES('svet',    '22837024f941f67c2ff80c49e6bccf110c062149', 'Svetlana', 'Roshenkev', 'a@example.com',            '', 'school of fail');
-INSERT INTO 'users' VALUES('gman',    '22b4468ae6dcf46c36c9622e292c7a3506bb0db4', 'Gustav',   'Olafsen',   'gustav@isacoolperson.com', '', 'unsw');
-INSERT INTO 'users' VALUES('smythey', 'c70ad0b8c4ed390d54062024d514a3c94a5c1851', 'Johan',    'Smythe',    'smythey@usyd.edu.au',      '', 'usyd');
+INSERT INTO 'users' VALUES('svet',    '22837024f941f67c2ff80c49e6bccf110c062149', 'Svetlana', 'Roshenkev', 'a@example.com',            '/static/images/default_avatar.jpeg', 'school of fail');
+INSERT INTO 'users' VALUES('gman',    '22b4468ae6dcf46c36c9622e292c7a3506bb0db4', 'Gustav',   'Olafsen',   'gustav@isacoolperson.com', '/static/images/default_avatar.jpeg', 'unsw');
+INSERT INTO 'users' VALUES('smythey', 'c70ad0b8c4ed390d54062024d514a3c94a5c1851', 'Johan',    'Smythe',    'smythey@usyd.edu.au',      '/static/images/default_avatar.jpeg', 'usyd');
 
 INSERT INTO 'users_subjects' VALUES('svet', 1);
 INSERT INTO 'users_subjects' VALUES('svet', 3);
