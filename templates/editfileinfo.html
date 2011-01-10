@@ -11,13 +11,15 @@ Aside of main content
 <div id="content">
 	<form method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="ul_flag" value="True">
-		<p>{{ ul_err_msg }}</p>
+		<p>Edit File info for: {{ thefilename }}</p>
+		<label>File Name:</label>
+		<input type="text" name="filename" value="{{ thefilename }}">
 		<label>Subject:</label>
-		<input type="text" class="ul_inp_field" name="subject">
+		<input type="text" name="subject" value="{{ thefilesbjct }}">
 		<label>Description:</label>
-		<input type="text" class="ul_inp_field" name="description">
+		<input type="text" name="description" value="{{ thefiledescr }}">
 		<label>File:</label>
-		<input type="file" class="ul_inp_field" name="to_upload" size="66">
+		<input type="file" name="to_upload" size="66">
 		<input type="submit" name="submit">
 	</form>
 </div>

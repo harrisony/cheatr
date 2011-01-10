@@ -34,8 +34,10 @@ if __name__ == "__main__":
 
 
     # file upload stuff
-    server.register("/fileupload", upload.chk_ul_fields)
-    server.register("/filesearch", upload.file_search)
-    server.register("/fileedit/(.*)", upload.file_edit)        
-    server.register("/listallfiles", upload.listallfiles) 
+    server.register("/files/upload", upload.chk_ul_fields)
+    server.register("/files/search", upload.file_search)
+    server.register("/files/edit/(.*)", upload.file_edit)
+    server.register("/files", upload.listmyfiles) #lists all files for current user
+    server.register("/files/user/(.*)", upload.listuserfiles)
+    server.register("/files/subject/(.*)", upload.listsubjectfiles)
     server.run()
