@@ -2,7 +2,7 @@
 {% include templates/head.html %}
 <body>
 {% include templates/header.html %}
-<h1>{{ title }}</h1>
+<h1>Subject Creation Page</h1>
 <article>
 <aside>
 
@@ -15,34 +15,29 @@
 {% if enablebutton==False %}
 	{{notification}}
 {% end if %}
+<p style="color:black">
 Subject name: <input type="text" name="name" value=""/>
+</p>
 <p style="color: #000000">
-<p>
 <input type="radio" name="KLA" value=1> Mathematics
-</p>
-<p>
+<br />
 <input type="radio" name="KLA" value=2> Computing
-</p>
-<p>
+<br />
 <input type="radio" name="KLA" value=3> Science
-</p>
-<p>
+<br />
 <input type="radio" name="KLA" value=4> Social Science
-</p>
-<p>
+<br />
 <input type="radio" name="KLA" value=5> English/Philosophy
-</p>
-<p>
+<br />
 <input type="radio" name="KLA" value=6> Languages
-</p>
-<p>
+<br />
 <input type="radio" name="KLA" value=7> Other
-</p>
+<br />
 </p>
 </section>
 <p style="color: #000000">
-Grade: <input type="text" name="grade" value="" /> 
-Jurisdiction: <input type="text" name="jurisdiction" value="" /> 
+Year: <input type="text" name="grade" value="" /> 
+Certificate/Degree: <input type="text" name="jurisdiction" value="" /> 
 </p>
 <p style="color: #000000">
 Description of the Course:
