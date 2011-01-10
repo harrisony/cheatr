@@ -135,7 +135,6 @@ def update(response):
         
         response.redirect("/profile/" + name)
     else:
-        password = user.get_password_hash()
         firstname = user.get_first_name()
         lastname = user.get_last_name()
         email = user.get_email()
@@ -144,7 +143,7 @@ def update(response):
         #response.write(UPDATE % (name,firstname,lastname,email,school))
         title = "Updating " + firstname + " " + lastname
         context = {"title":title, "user":name, "username":name, "firstname":firstname,
-                   "lastname":lastname, "email":email, "school":school,"password":password}
+                   "lastname":lastname, "email":email, "school":school,"css":"update"}
         template.render_template("templates/update.html", context, response)
 
 

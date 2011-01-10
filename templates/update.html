@@ -18,13 +18,11 @@
 
 </aside>
 <div id="content">
-{{ content }}
 	<form method="POST" action="update_info" enctype="multipart/form-data"> 
-		<input type="text" value="{{ username }}" name="username" hidden="true" style="display:none;" /><br />
 		First Name: <input type="text" value="{{ firstname }}" name="firstname" /><br />
 		Last Name: <input type="text" value="{{ lastname }}" name="lastname" /><br />
 		Email: <input type="text" value="{{ email }}" name="email" /><br />
-		Create a Password: <input type="password" value="{{ password }}" name="password" /><br />
+		Change Password: <input type="password" name="password" /><br />
 		Current School: <input type="text" value="{{ school }}" name="school" /><br />
 
 		Upload Profile Picture:<br>
