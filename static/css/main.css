@@ -8,7 +8,7 @@ body {
 	width:1200px;
 	margin-left:auto;
 	margin-right:auto;
-	background-color:white;
+	background-color:#EEE;
 	margin:0px auto 15px auto;
 }
 footer {
@@ -129,10 +129,7 @@ nav#subjects li a p {
 article aside {	
     font-family: Nobile;
 	width:250px;
-	
-	
 	padding: 0px 5px 0px 5px;
-	margin-right: 4px;
 	background-color: #eee;
 	height: inherit;
 	display: block;
@@ -143,6 +140,19 @@ div#main{
 	-moz-box-flex: 1;
 	font-family: Nobile;
 	padding-left: 22px;
+	-webkit-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	-moz-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	border-radius:2px;
+	border:1px solid #eee;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+	background: -moz-linear-gradient(top,  #fff,  #eee);
+}
+
+#profilepic {
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	font-family: Nobile;
+	padding: 10px;
 	-webkit-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
 	-moz-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
 	border-radius:2px;
@@ -225,10 +235,15 @@ margin-bottom: 250px;
 	background: -moz-linear-gradient(top,  #fff,  #eee);
 }
 #wall_content_data li p {
-font-size:12px;
+font-size:14px;
 padding:10px 15px;
 text-align:left;
 }
+
+#wall_content_data li p a, #wall_content_data li p a:visited {
+	color:rgba(220,137,19,1.0);
+}
+
 #wall_content_data span {
 	font-size:11px;
 	color:#888;
@@ -239,6 +254,10 @@ text-align:left;
 	font-weight:bold;
 	display:block; 
 	margin-bottom:3px;
+}
+
+.wall_text {
+	padding:10px;
 }
 
 .subject {
