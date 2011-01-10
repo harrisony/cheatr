@@ -5,74 +5,76 @@
 	<body>
 
 		{% include templates/header.html %}
-		
-		<aside>
-		
-			<section id="years">
-				<h1>Past Papers</h1>
-				<ul>
-					{% for year in range(2000,2010) %}
-					<li>
-						{{ year }}
-					</li>
-					{% end for %}
-					
-				</ul>
-			</section>
-			<section id="years">
-				<h1>Recommended Papers</h1>
-				<ul>
-					{% for year in range(2000,2010) %}
-					<li>
-						{{ year }}
-					</li>
-					{% end for %}
-					
-				</ul>
-			</section>
-		
-			<section id="upload">
-				<p>This is where the upload section goes</p>
-			</section>
-			
-			
-			<section id="papers">
-				Discussions
-			</section>
-			
-			<section id="external links">
-				External Links
-			</section>
-
-		</aside>
-	
 		<article>
-		
-			<h1 id='title'>{{ subjectname }}</h1>
-			<nav id='subjects'>
-				<ul>
-					{% for subject in subjectlist %}
-					<li>
-						<a href=''> <img src=''> {{ subject }}</a>
-					</li>
-					{% end for %}
-				</ul>			
-			</nav>
+		<aside id="info">
+			<section id="subject-info">
+				<h1 id='title'>{{ subject.name }}</h1>
+				<div id="membership">
+					{% if 1 %}
+					<form method="POST">
+						<input type="submit" value="Join Subject">
+					</form>
+					{% end if %}
+					{% if not 1 %}
+					<form method="POST">
+						<input type="submit" value="Leave Subject">
+					</form>
+					{% end if %}
+				</div>
+			</section>
+			<section id="description">
+				<dl>
+				<dt>Description</dt><dd>{{ subject.description }}</dd>
+				<dt>State</dt><dd>{{ subject.jurisdiction }}</dd>
+				<dt>Faculty Area</dt><dd>{{ subject.kla }}</dd>
+				</dl>
+			</section>
+			<section id="members">
+			<h1>members</h1>
+			</section>
+		</aside>
+		<div id="study">
+			<section id="resources">
+				<h1>Resources</h1>
+				<nav class="type-nav">
+					<ul>
+						<li><a href="/subject/{{ subject.name }}/all/1">All</a></li>
+						<li><a href="/subject/{{ subject.name }}/notes/1">Notes</a></li>
+						<li><a href="/subject/{{ subject.name }}/exercises/1">Exercises</a></li>
+						<li><a href="/subject/{{ subject.name }}/papers/1">Past Papers</a></li>
+					</ul>
+				</nav>
+				<section id="top-resources">
+					<nav class="page-nav">
+						
+					</nav>
+					<section>
+						{% for resource in top_resources %}
+							<p>{{ resource }}</p>
+						{% end for %}
+					</section>
+				</section>
+				<section id="all-resources">
+					<nav class="page-nav">
+						
+					</nav>
+					<section>
+						{% for resource in all_resources %}
+							<p>{{ resource }}</p>
+						{% end for %}
+					</section>
+				</section>
+			</section>
+			<section id="social">
+				<section id="wall">
+					<h1>Wall</h1>
+				</section>
+			</section>
+			<section id="links">
+			</section>
+		</div>
 			
-			
-			<div id="content">
-				<h1>Subject Details</h1>
-				{% for detail in info %} 
-				<p>Category- {{detail}}</p>
-				{% end for %}
-				<form method="POST">
-					<!--if subject is in subject list then disable the button -->
-					<!--(below as this page allows to view AND build subjects -->
-					<input type="submit" value="Confirm Subject Creation">
-				</form>
-			</div>
 		</article>
-
 			 
 		{% include templates/footer.html %}
 	</body>

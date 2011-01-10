@@ -1,0 +1,31 @@
+#resources nav ul li{
+	display: inline;
+	list-style-type: none;
+	padding: 5px 6px 5px 6px;
+}
+
+#resources nav li a {
+	text-decoration: none;
+	display: inline-block;
+	text-align: center;
+}
+
+dl {
+  font-family: "Lucida Bright";
+}
+
+#resources h1, #resources nav {
+  display: inline;
+}
+
+dl > dt {
+  font-size: small;
+  font-weight: bold;
+  display: block;
+}
+
+dl > dd{
+  font-size: x-small;
+  font-style:italic;
+  display: inline;
+}
