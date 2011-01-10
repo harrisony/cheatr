@@ -93,10 +93,10 @@ class User(object):
     def get_subjects(self):
         return tuple(self._subjects)
     def is_friend_of(self, inp):
-        if isinstanceof(inp, User):
+        if isinstance(inp, User):
             # user
             return True
-        elif isinstanceof(inp,Subject):
+        elif isinstance(inp,Subject):
             return True
         else:
             return False
