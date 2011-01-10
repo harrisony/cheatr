@@ -43,7 +43,7 @@ aside section  li {
 }
 
 .friend a , .friend a:visited{
-	color: rgba(223,181,122,1);;
+	color: rgba(223,181,122,1);
 }
 
 .friend:hover a {
