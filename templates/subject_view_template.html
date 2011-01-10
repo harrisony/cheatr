@@ -13,12 +13,12 @@
 				
 				<div id="membership">
 					{% if not user.is_in_subject(current_Wall) %}
-					<form method="POST">
+					<form method="POST" action="/subject/join/{{ subject.id }}">
 						<input type="submit" value="Join Subject">
 					</form>
 					{% end if %}
 					{% if user.is_in_subject(current_Wall) %}
-					<form method="POST">
+					<form method="POST" action="/subject/join/{{ subject.id }}">
 						<input type="submit" value="Leave Subject">
 					</form>
 					{% end if %}
@@ -51,9 +51,10 @@
 					</ul>
 				</nav>
 			<section id="resources">
+				<h1>Resources</h1>
 				{% if len(all_resources) %}
 				<section id="top-resources">
-					<h1>Top Resources</h1>
+					<h2>Top Resources</h2>
 					<section>
 						{% for resource in top_resources %}
 							<p><a href="/static/files/{{ resource.fileid }}">{{ resource.ori_filename }}</a></p>
@@ -61,7 +62,7 @@
 					</section>
 				</section>
 				<section id="all-resources">
-					<h1>All Resources</h1>
+					<h2>All Resources</h2>
 					<section>
 						{% for resource in all_resources %}
 							<p><a href="/static/files/{{ resource.fileid }}">{{ resource.ori_filename }}</a></p>
@@ -72,7 +73,6 @@
 				
 				{% if not len(all_resources) %}
 				<section id="all-resources">
-					<h1>Resources</h1>
 					<section>
 						<p>No resources attached to this subject</p>
 					</section>
