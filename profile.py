@@ -106,8 +106,9 @@ photo = ''
 
 def update(response):
     global photo, content_type
-    auth.require_user()
-    username = auth.get_user(response)
+    auth.require_user(response)
+    user = auth.get_user(response)
+    name = user.get_username()
     firstname = clean(response.get_field("firstname"))
     lastname = clean(response.get_field("lastname"))
     email = clean(response.get_field("email"))
@@ -115,31 +116,22 @@ def update(response):
     school = clean(response.get_field("school"))
     filename, content_type, data = response.get_file('photo')
         
-    if username:
+    if name and content_type:
         extension = mimetypes.guess_extension(content_type)
-        photo_path = os.path.join('static', 'photos', username + extension)
+        photo_path = os.path.join('static', 'photos', name + extension)
         print "updating.."
         open(photo_path, 'wb').write(data)
         photo_url = '/' + photo_path.replace("\\","/")
         print photo_url
-        User.get(username).set_profile_pic_path(photo_url)
-        fullname = '%s %s' % (username, lastname)
-        
-        user = User.get(username)
-	#print user
-        newUser = {"username": username, "firstname":firstname,"lastname":lastname,
+        user.set_profile_pic_path(photo_url)
+        fullname = '%s %s' % (name, lastname)
+        newUser = {"username": name, "firstname":firstname,"lastname":lastname,
                    "email":email,"password":password,"school":school, "profilepath":photo_url}
         print "NEW USER: " + str(newUser)
-        #user = User.get(username)
-        #print "User is " + user
         user.set_first_name(firstname)
-        #User.add(newUser)
-        #set_mutiple
-        #x = User.get(username)
         
-        response.redirect("/profile/" + username)
+        response.redirect("/profile/" + name)
     else:
-        user = User.get(name)
         password = user.get_password_hash()
         firstname = user.get_first_name()
         lastname = user.get_last_name()
