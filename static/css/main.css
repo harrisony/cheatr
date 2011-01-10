@@ -1,8 +1,5 @@
 /* Header Page CSS */
-@font-face {
-	font-family: calibri;
-	src: url('../font/CALIBRI.ttf');
-}
+
 html {
 	background-color: #F2EEEB;
 }
@@ -41,14 +38,14 @@ header a {
 }
 
 header ul li {
-	font-family: calibri;
+	font-family: Nobile;
 	display: inline;
 	list-style-type: none;
 	padding: 0px 5px 0px 5px;
 }
 
 nav ul {
-	font-family: calibri;
+	font-family: Nobile;
 	display: inline;
 	width: 100%;
 	margin-right: 80px;
@@ -61,7 +58,7 @@ nav ul li ul li {
 
 
 h1{
-	font-family: calibri;
+	font-family: Nobile;
 	padding: 0px 5px 0px 5px;
 	margin: 15px;
 	display: inline;
@@ -100,7 +97,7 @@ nav#subjects li img {
 }
 
 nav#subjects li a {
-	font-family: calibri;
+	font-family: Nobile;
 	text-decoration: none;
 	display: inline-block;
 	text-align: center;
@@ -154,7 +151,7 @@ nav#subjects li a p {
 }
 
 article aside {	
-    font-family: calibri;
+    font-family: Nobile;
 	width:250px;
 	border-left: 2px solid black;
 	border-right: 2px solid black;
@@ -168,7 +165,7 @@ article aside {
 div#content{
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
-	font-family: calibri;
+	font-family: Nobile;
 }
 
 section#subjects ul img {
@@ -196,7 +193,7 @@ article aside section h1 {
 }
 
 article section {
-	font-family: calibri;
+	font-family: Nobile;
 	margin: 5px;
 }
 
@@ -209,19 +206,41 @@ article section {
 #wall_content_data img {
 	width:50px;
 	height:50px;
+	position:absolute;
+	left:50%;
+	margin-left:-315px;
+	top: 0px;
 }
+#wall_content_data {
+margin-top:25px;
 
+}
 #wall_content_data li {
 	list-style-type:none;
 	background-color:#eee;
+	margin:0px auto 15px auto;
+	position:relative;
+	width:500px;
+	min-height:50px;
+	-webkit-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	border-radius:2px;
+	
+}
+#wall_content_data li p {
+font-size:12px;
+padding:10px 15px;
+text-align:left;
 }
 #wall_content_data span {
-	font-size:13px;
+	font-size:11px;
 	color:#888;
 	display:block;
+	text-align:right;
 }
 #wall_content_data em {
 	font-weight:bold;
+	display:block; 
+	margin-bottom:3px;
 }
 
 .subject {

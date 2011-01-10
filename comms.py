@@ -118,6 +118,7 @@ class FeedConnection:
 def _getWallData(response):
 	
 	current_Wall = response.get_field('current_Wall')
+
 	w = WallConnection(current_Wall)
 
 	context = {"posts":w.get_wall()}
