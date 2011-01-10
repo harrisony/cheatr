@@ -4,23 +4,25 @@
 {% include templates/header.html %}
 <h1>Subjects</h1>
 <article>
-<div id="content">
+	<div id="content">
 <br />
 <!--<li><a href="http://localhost:8888/subject" + {{subject_name}}></li>-->
 
 <!--{% if len(subjectlist)>2 %}-->
 
 <!--{% end if %}-->
-
-{% for i in subjectlist %}
-	<p><a href="/subject/{{ i.get_id() }}">{{ i.get_name() }}</a><br />
-	{{ i.get_grade()}}, {{ i.get_jurisdiction() }}.</p>
-	<br />
-{% end for %}
-<form action="/subject/create">
-<input type="submit" value="Add a Subject">
-</form>
-</div>
+		<div id="subjects">
+			{% for i in subjectlist %}
+				<div>
+				<p><a href="/subject/{{ i.get_id() }}">{{ i.get_name() }}</a></p>
+				<p>{{ i.get_grade()}}, {{ i.get_jurisdiction() }}.</p>
+				</div>
+			{% end for %}
+			<form action="/subject/create" id="subject">
+			<input type="submit" value="Add a Subject" />
+			</form>
+		</div>
+	</div>
 </article>
 
      
