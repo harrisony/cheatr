@@ -40,9 +40,7 @@ def upload(response):
     ul_file = os.path.join('static', 'files', serverfilename)
     #adding to list of all files
     dbfiles.addFile(serverfilename, username, filename, sbjct, descr)
-###     all_files[currenttime + extension] = [filename, content_type, sbjct, descr]
     open(ul_file, 'wb').write(data)
-###    file_url = ul_file.replace("\\", "/") # URLs don't like backslashes
     #Response after file upload success
     context = {"css": "fileupload", "title": "File Uploader", "ori_file_name": filename, "server_file_location": currenttime+extension}
     template.render_template("templates/uploadconfirmed.html", context, response)
