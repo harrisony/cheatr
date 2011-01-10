@@ -66,7 +66,8 @@ def profile(response, username):
         fullname = firstname + " " + lastname
         print fullname
         #response.write(OUTPUT % (username,username, picture,firstname,lastname,email,school,username))
-        context = {"title":fullname, "user":username, "content":"Content", "profile_pic_location":picture,
+        context = {"title":fullname, "user":username, 'wallorfeed':'feedupdate',
+				   'current_Wall':response.get_field('user'), "profile_pic_location":picture,
                    "email":email, "school":school, "css": "profile", "friends":friends.get_friends(username), "User": User}
         template.render_template("templates/profile.html", context, response)
         

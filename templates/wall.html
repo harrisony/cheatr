@@ -1,22 +1,20 @@
-	<html>
-	<head>
-		<title>{{title}}</title>
-<script src="../static/js/prototype.js"></script>	
-		
-	</head>
-	<form id="message" style="text-align:center" action="/submit?user={{user}}" method=POST></input><br />
+
+
+	<h1> News Feed </h1>	
+
+	<form id="message" style="text-align:center" action="/submit?user={{current_User}}" method=POST></input><br />
 	Post a message: <br /><textarea id="msg" name="msg"></textarea><input type="hidden" value="{{current_Wall}}" name="current_Wall"><br /><input type="submit" value="Submit" ></input>
 	<br />
 	<div id="wallcontent"></div>
 	
-
+<script src="../static/js/prototype.js"></script>	
 	<script type="text/javascript">	
 	Event.observe(window, 'load',init,false);
 	function init(){
 	Event.observe('message','submit',submit);
 	new Ajax.PeriodicalUpdater('wallcontent', '/{{wallorfeed}}', {
 		method: 'post', frequency: 20, decay: 0,
-		parameters: {'current_Wall':'{{current_Wall}}','user':'{{user}}'},
+		parameters: {'current_Wall':'{{current_Wall}}','user':'{{current_User}}'},
 		});
 	}
 	
@@ -24,7 +22,7 @@
 $('message').request();
 	new Ajax.Updater('wallcontent','/{{wallorfeed}}',{
 			method: 'post',
-			parameters: {'current_Wall':'{{current_Wall}}','user':'{{user}}'}});			
+			parameters: {'current_Wall':'{{current_Wall}}','user':'{{current_User}}'}});			
 $('message').msg.clear();	
 		
 	

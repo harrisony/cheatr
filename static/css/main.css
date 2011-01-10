@@ -204,6 +204,34 @@ article section {
 	background-color: #03588C;
 }
 
+
+
+
+/* news feed */
+#wall_content_data img {
+	width:50px;
+	height:50px;
+}
+
+#wall_content_data li {
+	list-style-type:none;
+	background-color:#eee;
+}
+#wall_content_data span {
+	font-size:13px;
+	color:#888;
+	display:block;
+}
+#wall_content_data em {
+	font-weight:bold;
+}
+
+
+
+
+
+
+
 .subject {
 	list-style-type: none;
 	display: inline;
