@@ -138,15 +138,6 @@ def _getFeedData(response):
 	context = {"posts":f.get_feed()}
 	template.render_template('templates/wallcontent.html', context, response)
 	
-def _wall(response,current_Wall):
-	require_user(response)
-	user = User.get(current_Wall)
-	if user == None:
-		return
-	fullname = user.get_first_name() + " " + user.get_last_name() 
-	context = {'title': fullname+'\'s Wall', 'username': get_user(response).get_username(), 'wallorfeed':'wallupdate','current_Wall':current_Wall}
-	template.render_template('templates/wall.html', context, response)
-
 
 def _submit(response):
 
@@ -156,12 +147,3 @@ def _submit(response):
 	w.set_wall(m)
 	return
 	 
-
-def _feed(response):
-	user = User.get(get_user(response))
-	if user == False:
-		response.redirect("/signup")
-	else:
-		context = {'title':'Feed','username':get_user(response).get_username(),'wallorfeed':'feedupdate','current_Wall':get_user(response)}
-		template.render_template('templates/wall.html', context, response)
-		
