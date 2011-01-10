@@ -5,7 +5,7 @@ import sqlite3
 
 #auth.require_user
 
-class subject:
+class Subject(object):
 	def __init__(self,row):
 		self.row = row
 		self.id = row[0]
@@ -38,7 +38,7 @@ def get_subject(subjectsid):
         cursor=connection.cursor()
         cursor.execute("SELECT * FROM subjectlist WHERE id = '%s';" % subjectsid)
         result = cursor.fetchall()
-        return subject(result[0])
+        return Subject(result[0])
 ##	output = []
 ##	for row in result:
 ##		output.append(subject(row))
@@ -62,7 +62,7 @@ def list_of_subjects():
 	result = cursor.fetchall()
 	tempoutput = []
 	for row in result:
-		tempoutput.append(subject(row))
+		tempoutput.append(Subject(row))
 	cursor.close() 
 	return tempoutput
 	
