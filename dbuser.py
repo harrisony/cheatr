@@ -32,7 +32,15 @@ class User(object):
         else:          
             q = User(args,nu=True)
             return True
-
+    @staticmethod
+    def get_from_email(email):
+        conn = sqlite3.connect('users.sqlite')
+        cur = conn.cursor()
+        q = cur.execute('SELECT username FROM users where email = ?', (email,)).fetchone()
+        if q:
+            return User(q[0])
+        else:
+            return None
     def __init__(self, inp,nu=False):
         if nu:
             print inp
