@@ -10,6 +10,7 @@ import upload
 import home
 import auth
 import update
+import password
 
 
 if __name__ == "__main__":
@@ -23,8 +24,9 @@ if __name__ == "__main__":
     server.register("/profile/?([^\/]*)", profile.profile)
     server.register("/signup",profile.signup)
     server.register("/update",update.update)
+    server.register("/change_password",password.change_password)
     server.register('/friends/?', friends.my_friends)
-    server.register("/friends/(.*)/?", friends.add_friend_handler, delete=friends.remove_friend_handler)
+    server.register("/friends/(.*)/?", friends.remove_friend, delete=friends.remove_friend)
     server.register("/subject/create/?", subject.createsubject)
     server.register("/subject/?", subject.mysubjects)
     server.register("/subject/([^\/]*)/?([^\/]*)/?([^\/]*)/?", subject.viewsubject)
