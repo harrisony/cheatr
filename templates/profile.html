@@ -39,7 +39,7 @@
 	<section>
 		<p>Friends</p>
 		<ul>
-		{% for f in friends %}<li class="friend"><a href="/profile/{{ f }}">
+		{% for f in friends %}<li class="friend"><a href="/profile/{{ f.get_username() }}">
 		{% if f.get_profile_pic_path() %}
 		<img src="{{ f.get_profile_pic_path() }}"> {{f.get_username()}}</a></li>
 		{% end if %}
