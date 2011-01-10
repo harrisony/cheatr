@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% include templates/head.html %}
+<body>
+{% include templates/header.html %}
+
+<article>
+    {% include templates/user_profile_pic.html %}
+
+    <div id="content">
+        <h1>My Friends</h1>
+        <p>{{ friend.get_first_name() }} {{ friend.get_last_name() }} ({{ friend.get_username() }}) has been successfully added to your friends.</p>
+    </div>
+</article>
+
+     
+{% include templates/footer.html %}
+</body>
+</html>

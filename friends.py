@@ -68,15 +68,17 @@ def is_friend(username, friend):
             return False
  
 def add_friend_handler(response, friend_username):
+    raise Exception('Error!')
+        
+def add_friend_email(response):
         auth.require_user(response)
         user = auth.get_user(response)
         if user == None:
             return
-        username = user.get_username()
-        friend = User.get(friend_username)
-        add_friend(username, friend_username)
+        friend = User.get_from_email(response.get_field("email"))
+        add_friend(user.get_username(), friend.get_username())
         context = {'user':user, 'friend':friend}
-        template.render_template('templates/confirmation.html', context, response)
+        template.render_template('templates/addconfirmation.html', context, response)
                 
 def remove_friend_handler(response, friend_username):
         auth.require_user(response)

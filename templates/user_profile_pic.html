@@ -7,9 +7,12 @@
 				<img id='profile_pic' src='/static/images/default_avatar.jpeg' />
 			{% end if %}
             <h3>{{ user.get_first_name() }} {{ user.get_last_name() }} ({{ user.get_username() }})</h3>
-            <form name="input" action="html_form_action.asp" method="get">
-                Username: <input type="text" name="user" />
-                <input type="submit" value="Submit" />
-            </form> 
+             
+         
         </a>
+        <h1>Add Friend</h1>
+        <form name="input" action="/addfriendemail" method="get">
+            E-mail: <input type="text" name="email" />
+            <input type="submit" value="Submit" />
+        </form> 
     </aside>
