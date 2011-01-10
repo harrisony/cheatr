@@ -1,8 +1,12 @@
 	{% if len(allfiles)==0 %}
 		You have no files
 	{% end if %}
-<ul id="files">
+<ul id="fileslist">
 	{% for f in allfiles %}
-		<li><a href="/static/files/{{ f.fileid }}" target="_blank">{{ f.ori_filename }}</a></li>
+		<li>
+			<img src="/static/images/{{ f.category }}.png">
+			<a href="/static/files/{{ f.fileid }}" target="_blank">{{ f.ori_filename }}</a>
+			<p>Text</p>
+		</li>
 	{% end for %}
 </ul>

@@ -42,7 +42,71 @@ ul, li {
 }
 
 a {
-	color: #333;
 	font-family: Nobile;
 	font-size: 18px;
+}
+
+#fileslist img {
+	width:50px;
+	height:50px;
+	position:absolute;
+	left:50%;
+	margin-left:-315px;
+	top: 0px;
+}
+#fileslist {
+margin-top:25px;
+margin-bottom: 250px;
+}
+#fileslist li {
+	list-style-type:none;
+	background-color:white;
+	margin:0px auto 15px auto;
+	position:relative;
+	width:500px;
+	min-height:50px;
+	-webkit-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	-moz-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	border-radius:2px;
+	border:1px solid #eee;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+	background: -moz-linear-gradient(top,  #fff,  #eee);
+}
+#fileslist li p {
+	font-size:14px;
+	padding:10px 50px;
+	text-align:left;
+}
+
+#fileslist li img {
+	display: inline-block;
+	padding: 4px 60px;
+	text-align:left;
+}
+
+#fileslist li a, #fileslist li a:visited {
+	display: inline-block;
+	padding: 3px 40px;
+	color: #DC8913;
+}
+
+#fileslist span {
+	font-size:11px;
+	color:#888;
+	display:block;
+	text-align:right;
+}
+#fileslist em {
+	font-weight:bold;
+	display:block; 
+	margin-bottom:3px;
+}
+
+.wall_text {
+	padding:10px;
+}
+
+.subject {
+	list-style-type: none;
+	display: inline;
 }
