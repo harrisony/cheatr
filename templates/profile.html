@@ -14,25 +14,13 @@
 			<li>Username: {{ username }}</li>
 			<li>Email: {{ email }}</li>		
 			<li id="submenu">Education
-				<ul>
-					{% for thing in education.keys() %}					
-						<li>{{ thing.capitalize() }}: {{ education[thing] }}</li>
-					{% end for %}
-				</ul>
+
 			</li>
 			<li id="submenu">Activities And Interests
-				<ul>
-					{% for interest in interests.keys() %}					
-						<li>Favourite {{ interest.capitalize() }}: {{ interests[interest] }}</li>
-					{% end for %}
-				</ul>
+
 			</li>
 			<li id="submenu">About Me
-				<ul>
-					{% for thing in about.keys() %}					
-						<li>{{ thing.capitalize() }}: {{ about[thing] }}</li>
-					{% end for %}
-				</ul>
+
 			</li>
 		</ul>
 	</section>
