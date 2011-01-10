@@ -42,7 +42,7 @@ def getFilesUser(userid):
 def getFilesSubject(subjectid):
     results_files = []
     for item in repo:
-        if repo[item].subjectid == str(subjectid):
+        if repo[item].subjectid == subjectid:
             results_files.append(item)
     return results_files
 
@@ -76,9 +76,11 @@ cur.execute("SELECT * FROM Files")
 for row in cur:
     _addFileLocal(str(row[0]), str(row[1]), str(row[2]), int(row[3]), str(row[4]))
 
-#if __name__ == "__main__":
-#    addFile("applefinf.jpe", "123", "appleconf.jpg", 2, "A Desc")
-#    addFile("asdf.jpe", "123", "asdf.jpg", 2, "Another Desc")
-#    addFile("bbbb.jpe", "124", "bbbb.jpg", 2, "Desc of B")
-#    addFile("cccc.jpe", "124", "cccc.jpg", 2, "Desc of C")
+try:
+    addFile("1294464681.png", "123", "appleconf.png", 2, "A Desc")
+    addFile("1294532619.png", "123", "asdf.png", 2, "Another Desc")
+    addFile("1294531867.png", "124", "bbbb.png", 2, "Desc of B")
+    addFile("1294464894.png", "124", "cccc.png", 2, "Desc of C")
+except NameError:
+    pass
 
