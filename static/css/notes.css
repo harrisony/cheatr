@@ -1,0 +1,18 @@
+#files{
+	font-size: 18px;
+	font-family: Nobile;
+	list-style-type:circle;
+	padding: 10px 0px 0px 50px;
+}
+
+#files li {
+	margin: 10px;
+}
+#files a {
+	text-decoration: none;
+	color: #333;
+}
+
+#files a:hover {
+	background-color: rgba(223,181,122,1);
+}
