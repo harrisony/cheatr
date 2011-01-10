@@ -26,7 +26,7 @@ if __name__ == "__main__":
     server.register('/friends/', friends.my_friends_list)
     server.register('/friends/(.*)',friends.per_friends_list)
     server.register("/subject/create/?", subject.createsubject)
-    server.register("/subject/(.*)", subject.mysubjects)
+    server.register("/subject/?", subject.mysubjects)
     server.register("/subject/([^\/]*)/?([^\/]*)/?([^\/]*)/?", subject.viewsubject)
     server.register("/subjects", subject.listsubject)
     server.register('/wallupdate',comms._getWallData)
