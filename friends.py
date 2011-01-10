@@ -106,7 +106,19 @@ def show_all_friends(response):
         for i in FRIENDS.keys():
             html += "<a href='/friends/%s?user=%s'>%s</a><br />" % (i,currentuser,i)
         response.write(ALLFRIENDS % html)
-    
+def can_use_wall(user,userorsubject):
+	#user = User object
+	#userorsubject = string or int
+	if user.is_in_subject(userorsubject):
+		return True
+	elif is_friend(user.get_username(),userorsubject):
+		return True
+	elif user.get_username() == userorsubject:
+		return True
+	else:
+		return False
+	
+	
 conn = sqlite3.connect(DATANAME)
 cur = conn.cursor()
 cur.execute("""
@@ -136,3 +148,5 @@ if __name__ == "__main__":
         print "after add\n", FRIENDS
         remove_friend('gman', 'svet')
         print "after delete\n", FRIENDS
+
+		

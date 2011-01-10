@@ -95,19 +95,14 @@ class User(object):
         return self._profilepicpath
     def get_subjects(self):
         return tuple(self._subjects)
-#    def is_friend_of(self, inp):
-#        if type(inp) == int:
-#            if inp in self._subjects:
-#                return True
-#            else:
-#                return False
-#        elif type(inp) == str:
-#            if friends.is_friend(inp,self._username):
-#                return True
-#            else:
-#                return False
-#        else:
-#            return False
+    def is_in_subject(self, inp):
+        if type(inp) == int:
+            print 'HIHIHIHIHIH: '+self._subjects
+            if inp in self._subjects:
+                return True
+            else:
+                return False
+        return False
     def set_multiple(self, args):
         mapping = {'firstname': self.set_first_name, 'lastname': self.set_last_name, 'email': self.set_email, 'school': self.set_school,
                    'password': self.set_password, 'profilepath': self.set_profile_pic_path}

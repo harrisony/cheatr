@@ -18,7 +18,8 @@ def page(response):
                    'subjects' : ['maths', 'english', 'physics', 'chemistry'],
 				   'wallorfeed':'feedupdate',
 				   'user':user,
-				   'current_Wall':user.get_username()
+				   'current_Wall':user.get_username(),
+				   'can_use_wall':'True'
 				   }
 
                    

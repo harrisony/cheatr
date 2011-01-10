@@ -10,12 +10,12 @@
 			<section id="subject-info">
 				<h1 id='title'>{{ subject.name }}</h1>
 				<div id="membership">
-					{% if not user.is_friend_of(subject) %}
+					{% if not can_use_wall %}
 					<form method="POST">
 						<input type="submit" value="Join Subject">
 					</form>
 					{% end if %}
-					{% if user.is_friend_of(subject) %}
+					{% if can_use_wall %}
 					<form method="POST">
 						<input type="submit" value="Leave Subject">
 					</form>
