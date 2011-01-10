@@ -29,3 +29,22 @@ dl > dd{
   font-style:italic;
   display: inline;
 }
+
+a:visited{
+	color:rgba(220,137,19,1.0);
+}
+
+a {
+	font-family: Nubile;
+	color: #333;
+}
+
+p {
+	margin-left: 30px;
+	-webkit-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	-moz-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
+	border-radius:2px;
+	border:1px solid #eee;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+	background: -moz-linear-gradient(top,  #fff,  #eee);
+}
