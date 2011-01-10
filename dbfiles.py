@@ -52,9 +52,11 @@ def getFilesSubject(subjectid):
     return results_files
 
 def _addFileLocal(fileid, userid, ori_filename, subjectid, description, category, rank):
+    print "userid in _addfilesLocal", userid
     repo[fileid] = UploadedFile(fileid, userid, ori_filename, subjectid, description, category, rank)
 
 def addFile(fileid, userid, ori_filename, subjectid, description, category):
+    print "userid in dbfiles", userid
     if fileid in repo:
         raise NameError('This File Already Exists')
     cur.execute("INSERT into Files (fileid, userid, ori_filename, subjectid, description, category, rank) VALUES (?, ?, ?, ?, ?, ?, 0.0);",

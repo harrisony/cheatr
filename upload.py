@@ -58,11 +58,17 @@ def _do_upload(response):
     serverfilename = currenttime + extension
     ul_file = os.path.join('static', 'files', serverfilename)
     #adding to list of all files
-    print "username", username
+    user = auth.get_user(response)
+    if user == None:
+        return
+    else:
+        username = user.get_username()
+    print "username in _do_upload()", username
     dbfiles.addFile(serverfilename, username, filename, sbjct, descr, categor)
     open(ul_file, 'wb').write(data)
     #Response after file upload success
-    context = {"css": "fileupload", "title": "File Uploader", "ori_file_name": filename, "server_file_location": currenttime+extension, "user":""}
+    user = auth.get_user(response)
+    context = {"css": "fileupload", "title": "File Uploader", "ori_file_name": filename, "server_file_location": currenttime+extension, "user": user}
     template.render_template("templates/uploadconfirmed.html", context, response)
 
 def file_search(response):
