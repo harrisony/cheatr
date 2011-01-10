@@ -179,30 +179,23 @@ article section {
 	margin: 5px;
 }
 
-#message{
-position:relative;
+#message {
+	width:500px;
+	margin: 5px auto;
+	position:relative;
 }
-#message > p {
-position:absolute;
-left:15%;
-top:20px;
 
-
-}
 #submit {
-position:absolute;
-left:50%;
-margin-left:14%;
-margin-right:auto;
-top:95px;
-display:inline;
-
+	position:absolute;
+	right:0;
 }
+
 #msg {
-height:70px;
-max-height:70px;
-max-width:40%;
-width:40%;
+	width:500px;
+	height:70px;
+	max-height:70px;
+	resize:none;
+
 }
 /* news feed */
 #wall_content_data img {
@@ -255,7 +248,6 @@ text-align:left;
 
 form textarea {
 	background-color:white;
-	margin:0px auto 15px auto;
 
 	min-height:50px;
 	#-webkit-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 

@@ -1,9 +1,9 @@
 
 
-	<form id="message" style="text-align:center" action="/submit?user={{user.get_username()}}" method=POST></input><br />
-	<textarea id="msg" placeholder="Write a message..." name="msg"></textarea><input type="hidden" value="{{current_Wall}}" name="current_Wall"><br /><input type="submit" value="Submit" id="submit"></input>
-	
-	<br />
+	<form id="message" action="/submit?user={{user.get_username()}}" method=POST>
+	<textarea id="msg" placeholder="Write a message..." name="msg"></textarea>
+	<input type="hidden" value="{{current_Wall}}" name="current_Wall"/>
+	<input type="submit" value="Submit" id="submit"/></form>
 	<div id="wallcontent"></div>
 	
 <script src="../static/js/prototype.js"></script>	
