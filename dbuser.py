@@ -82,22 +82,22 @@ class User(object):
             func = mapping[k]
             func(v)
     def set_email(self, email):
-        self._run_db("UPDATE users SET email = ?;", (email,))
+        self._run_db("UPDATE users SET email = ? WHERE username = ?;", (email,self._username))
         self._email = email
     def set_first_name(self, fname):
-        self._run_db("UPDATE users SET firstname = ?;", (fname,))
+        self._run_db("UPDATE users SET firstname = ?  WHERE username = ?;", (fname,self._username))
         self._firstname = fname
     def set_last_name(self, lname):
-        self._run_db("UPDATE users SET lastname = ?;", (lname,))
+        self._run_db("UPDATE users SET lastname = ? WHERE username = ?;", (lname,self._username))
         self._lastname = lname
     def set_profile_pic_path(self, path):
-        self._run_db("UPDATE users SET profilepicpath = ?;", (path,))
+        self._run_db("UPDATE users SET profilepicpath = ? WHERE username = ?;", (path,self._username))
         self._profile_pic_path = path
     def set_school(self, school):
-        self._run_db("UPDATE users SET school = ?;", (school,))
+        self._run_db("UPDATE users SET school = ? WHERE username = ?;", (school,self._username))
         self._school = school
     def set_password(self, pword):
-        self._run_db("UPDATE users SET 'passwordhash = ?;", (sha1(pword).hexdigest()),)
+        self._run_db("UPDATE users SET 'passwordhash = ? WHERE username = ?;", (sha1(pword).hexdigest()),self._username)
         self._passwordhash = sha1(pword).hexdigest()
     def password_correct(self, password):
         if sha1(password).hexdigest() == self.get_password_hash():
