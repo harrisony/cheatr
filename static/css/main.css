@@ -4,9 +4,6 @@
 	src: url('../font/CALIBRI.ttf');
 }
 html {
-
-
-
 	background-color: #F2EEEB;
 }
 header, footer {
@@ -55,6 +52,11 @@ nav ul {
 	display: inline;
 	width: 100%;
 	margin-right: 80px;
+}
+
+nav ul li ul li {
+	margin: 0px;
+	float: left;
 }
 
 
@@ -143,6 +145,14 @@ nav#subjects li a p {
 	padding: 15px 11px 15px 11px;
 }
 
+#ul_inp_field {
+	size="50";
+}
+
+#ul_inp_fieldname {
+	align: right;
+}
+
 article aside {	
     font-family: calibri;
 	width:250px;
@@ -159,6 +169,12 @@ div#content{
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
 	font-family: calibri;
+}
+
+section#subjects ul img {
+	height: 64px;
+	width: 64px;
+	text-decoration: none;
 }
 
 article {
@@ -191,4 +207,13 @@ article section {
 .subject {
 	list-style-type: none;
 	display: inline;
+}
+
+form textarea {
+	border: 1px solid #03588C;
+	-moz-box-shadow: 0px 0px 6px #03588C;
+}
+
+input[type="submit"] {
+	background-color: white;
 }
