@@ -1,7 +1,7 @@
 
 
 	<form id="message" style="text-align:center" action="/submit?user={{user.get_username()}}" method=POST></input><br />
-	<p>Share</p><textarea id="msg" name="msg"></textarea><input type="hidden" value="{{current_Wall}}" name="current_Wall"><br /><input type="submit" value="Submit" ></input>
+	<textarea id="msg" placeholder="Write a message..." name="msg"></textarea><input type="hidden" value="{{current_Wall}}" name="current_Wall"><br /><input type="submit" value="Submit" id="submit"></input>
 	
 	<br />
 	<div id="wallcontent"></div>
@@ -12,7 +12,7 @@
 	function init(){
 	Event.observe('message','submit',submit);
 	new Ajax.PeriodicalUpdater('wallcontent', '/{{wallorfeed}}', {
-		method: 'post', frequency: 20, decay: 0,
+		method: 'post', frequency: 5, decay: 0,
 		parameters: {'current_Wall':'{{current_Wall}}','user':'{{user.get_username()}}'},
 		});
 	}

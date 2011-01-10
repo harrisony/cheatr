@@ -220,9 +220,30 @@ article section {
 	margin: 5px;
 }
 
-
+#message{
+position:relative;
+}
 #message > p {
 position:absolute;
+left:15%;
+top:20px;
+
+
+}
+#submit {
+position:absolute;
+left:50%;
+margin-left:14%;
+margin-right:auto;
+top:95px;
+display:inline;
+
+}
+#msg {
+height:70px;
+max-height:70px;
+max-width:40%;
+width:40%;
 }
 /* news feed */
 #wall_content_data img {
