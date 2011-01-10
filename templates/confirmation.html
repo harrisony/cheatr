@@ -4,12 +4,7 @@
 {% include templates/header.html %}
 
 <article>
-    <aside>
-        <a href='/profile/'>
-            <img id='profile_pic' src='{{user.get_profile_pic_path()}}' />
-            <h3>{{ user.get_first_name() }} {{ user.get_last_name() }} ({{ user.get_username() }})</h3>
-        </a>
-    </aside>
+    {% include templates/user_profile_pic.html %}
 
     <div id="content">
         <h1>My Friends</h1>

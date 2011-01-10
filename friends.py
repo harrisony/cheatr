@@ -20,14 +20,15 @@ def _oneway_remove_friend(username, friend):
     print "one way remove after: " , FRIENDS
         
 def _remove_friend_local(username, friend):
-        _oneway_remove_friend(friend, username)
-        _oneway_remove_friend(username, friend)
+    _oneway_remove_friend(friend, username)
+    _oneway_remove_friend(username, friend)
         
 def remove_friend(username, friend_username):
     _remove_friend_local(username, friend_username)
     cur.execute("DELETE FROM friends WHERE friend = ? AND partner = ?;",(username, friend_username))
     cur.execute("DELETE FROM friends WHERE friend = ? AND partner = ?;",(friend_username, username))
     conn.commit()
+    print "After full remove complete: " , FRIENDS
     
 def _oneway_add_friend(username, friend):
         if username in FRIENDS:
@@ -50,6 +51,7 @@ def add_friend(username, friend_username):
     conn.commit()
     
 def get_friends(username):
+        print "In get friends: " , FRIENDS
         friendlist = []
         if username in FRIENDS:
             for friend in FRIENDS[username]: 
