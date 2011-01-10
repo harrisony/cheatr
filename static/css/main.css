@@ -3,6 +3,11 @@
 html {
 	background-color: #F2EEEB;
 }
+body {
+	width:1200px;
+	margin-left:auto;
+	margin-right:auto;
+}
 header, footer {
 	display: block;
 	margin: 0px;

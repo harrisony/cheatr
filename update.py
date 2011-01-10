@@ -55,5 +55,5 @@ def update(response):
         #response.write(UPDATE % (name,firstname,lastname,email,school))
         title = "Updating " + firstname + " " + lastname
         context = {"title":title, "user":username, "username":username, "username":username, "firstname":firstname,
-                   "lastname":lastname, "email":email, "school":school,"password":password}
+                   "lastname":lastname, "email":email, "school":school,"password":password, "css":"update"}
         template.render_template("templates/update.html", context, response)

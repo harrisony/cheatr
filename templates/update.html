@@ -5,18 +5,39 @@
 {% include templates/header.html %}
 	<h1>{{ title }}</h1>
 <article>
-<div id="content">
+<div id="content" style="">
 	<form method="POST" action="update" enctype="multipart/form-data"> 
 		<input type="hidden" name="username" value="{{ username }}" />
-		First Name: <input type="text" value="{{ firstname }}" name="firstname" /><br />
-		Last Name: <input type="text" value="{{ lastname }}" name="lastname" /><br />
-		Email: <input type="text" value="{{ email }}" name="email" /><br />
-		Change Password: <input type="password" name="password" /><br />
-		Current School: <input type="text" value="{{ school }}" name="school" /><br />
-
-		Upload Profile Picture:
-		<input type="file" placeholder="Hello" name="photo" size="20"><br>
-		<input type="Submit" value="Update" name="submit" />
+		<label for="firstname">First Name: </label>
+		<input type="text" value="{{ firstname }}" name="firstname" />
+		<label for="lastname">Last Name: </label>
+		<input type="text" value="{{ lastname }}" name="lastname" />
+		<label for="email">Email: </label>
+		<input type="text" value="{{ email }}" name="email" />
+		<label for="password">Password: </label>
+		<input type="password" name="password" />
+		<label for="activities">Activities: </label>
+		<input type="text" value="{{ activities }}" name="activities" />
+		<label for="tv">Favourite TV Shows: </label>
+		<input type="text" value="{{ tv }}" name="tv" />
+		<label for="birthday">Birthdate: </label>
+		<input type="" value="{{ birthday }}" name="birthday" />
+		<label for="age">Age: </label>
+		<input type="text" value="{{ age }}" name="age" />
+		<label for="website">Website: </label>
+		<input type="text" value="{{ website }}" name="website" />
+		<label for="school">Current School: </label>
+		<input type="text" value="{{ school }}" name="school" />
+		<label for="subjects">Subjects: </label>
+		<input type="text" value="{{ subjects }}" name="subjects" />
+		<label for="state">State: </label>
+		<input type="text" value="{{ state }}" name="state" />
+		<label for="grade">Grade: </label>
+		<input type="text" value="{{ grade }}" name="grade" />
+		<br /><br />
+		<label for="file">Upload Profile Picture:</label>
+		<input style="width:111px;" type="file" name="photo" size="20"><br>
+		<input style="width:100px;" type="Submit" value="Update" name="submit" />
 	</form>
 </div>
 </article>

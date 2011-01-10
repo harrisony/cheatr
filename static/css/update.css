@@ -1,30 +1,43 @@
+article aside{
+	width: auto;
+	 border: 0px solid black;
+}
+
 form input {
 	border: 1px solid #03588C;
-	-webkit-box-shadow: 0px 0px 6px #03588C;
 	-moz-box-shadow: 0px 0px 6px #03588C;
 	margin: 6px;
 	font-size: 18px;
+	display:inline-block;
+	width:630px;
 }
 
 form {
 	text-align: right;
-	width: 535px;
+	width: 850px;
 	display: block;
 	background-color: #D9D8F0;
 }
 
 form label {
-	text-align: left;
+	text-align: right;
 	font-size: 17px;
+	display:inline-block;
+	width: 200px;
 }
 
 #content {
 	font-family: lucida bright;
 	padding: 5px;
-	border-left: 3px solid black;
-	text-align: left;
+	margin-top: 50px;
+	text-align: center;
+	width:850px;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 input[type="submit"] {
 	background-color: white;
+	display:inline-block;
+
 }
