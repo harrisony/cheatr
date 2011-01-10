@@ -4,10 +4,27 @@ from user import User
 import sqlite3
 import os
 
-DATANAME = os.path.join("data","friends.sqlite")
+DATANAME = os.path.join("data","friends.sqlite")    
 
+def _oneway_remove_friend(username, friend):
+        if username in FRIENDS:
+            friendslist = FRIENDS[username]
+            if friend in friendslist:
+                friendslist.remove(friend)
+        else:
+            friendslist = [friend]
+        FRIENDS[username] = friendslist
+        
+def _remove_friend_local(username, friend):
+        _oneway_remove_friend(friend, username)
+        _oneway_remove_friend(username, friend)
+        
+def remove_friend(username, friend):
+        _remove_friend_local(username, friend)
+        cur.execute("DELETE FROM friends WHERE friend = ? AND partner = ?;",(username, friend))
+        cur.execute("DELETE FROM friends WHERE friend = ? AND partner = ?;",(friend, username))
+        conn.commit()
 
-#from person import Person, example_person1, example_person2, example_person3    
 
 def _oneway_add_friend(username, friend):
         if username in FRIENDS:
@@ -104,10 +121,12 @@ WHERE status ='f';
 for row in cur:
     _add_friend_local(str(row[0]), str(row[1]))
 
-add_friend('gman', 'svet')
-add_friend('gman', 'smythey')
+#add_friend('gman', 'svet')
+#add_friend('gman', 'smythey')
 
-if __name__ == "__main__":
-        print FRIENDS
-        add_friend('gman', 'svet')
-        print FRIENDS
+#if __name__ == "__main__":
+        #print "before add\n", FRIENDS
+        #add_friend('gman', 'svet')
+        #print "after add\n", FRIENDS
+        #remove_friend('gman', 'svet')
+        #print "after delete\n", FRIENDS
