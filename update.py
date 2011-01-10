@@ -39,6 +39,6 @@ def update(response):
         email = user.get_email()
         school = user.get_school()
         title = "Updating " + firstname + " " + lastname
-        context = {"title":title, "user":username, "username":username, "firstname":firstname,
-                   "lastname":lastname, "email":email, "school":school, "css":"update"}
+        context = {"title":title, "user":user, "username":username, "firstname":firstname,
+                   "lastname":lastname, "email":email, "school":school,"css":"update"}
         template.render_template("templates/update.html", context, response)
