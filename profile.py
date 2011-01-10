@@ -55,8 +55,8 @@ def profile(response, username):
     user = User.get(username)
     auth.require_user(response)
     name = auth.get_user(response)
+    if name: user = name
 
-    
     if user is not None:
         firstname = user.get_first_name()
         lastname = user.get_last_name()
@@ -73,7 +73,7 @@ def profile(response, username):
         
         #response.write(OUTPUT % (username,username, picture,firstname,lastname,email,school,username))
         context = {"title":fullname, "user":username, 'wallorfeed':'wallupdate',
-				   'current_User':user.get_username(),'current_Wall':username, "profile_pic_location":picture,
+                   'current_User':user.get_username(),'current_Wall':username, "profile_pic_location":picture,
                    "email":email, "school":school, "css": "profile", "friends":friends.get_friends(username), "User": User,
                    "interests": interests, "about": about, "education":education}
         template.render_template("templates/profile.html", context, response)
