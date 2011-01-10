@@ -1,5 +1,9 @@
 from hashlib import sha1
 import sqlite3
+try:
+    import cPickle as pickle
+except:
+    import pickle
 class User(object):
     @staticmethod
     def exists(username): 
@@ -78,7 +82,7 @@ class User(object):
         return self._profilepicpath
     def get_subjects(self):
         return tuple(self._subjects)
-    def set_mutiple(self, args):
+    def set_multiple(self, args):
         mapping = {'firstname': self.set_first_name, 'lastname': self.set_last_name, 'email': self.set_email, 'school': self.set_school,
                    'password': self.set_password, 'profilepath': self.set_profile_pic_path}
         if 'username' in args: 
