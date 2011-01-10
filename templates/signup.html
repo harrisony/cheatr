@@ -6,6 +6,9 @@
 	<h1>{{ title }}</h1>
 	
 <style>
+	
+	article img#mainlogo {
+	}
 
 	form input {
 	border: 1px solid #03588C;
@@ -14,7 +17,8 @@
 	
 	#content {
 	font-family: lucida bright;
-	margin-left: 750px;
+	padding: 5px;
+	margin-left: 200px;
 	margin-top: 50px;
 	border-left: 3px solid black;
 	}
@@ -27,9 +31,8 @@
 	
 <article>
 
-
+<img src="/static/images/logo.png" id="mainlogo"/>
 <div id="content">
-{{ content }}
 <form action="/signup" method="post">
 	<label for="username">Username: </label>
 	<input type="text" name="username" />
@@ -50,8 +53,6 @@
 	<input type="text" name="school" />
 	<p>
 	<input type="submit" name="submit" value="Sign Up!" />
-	
-	
 </form>
 </div>
 </article>
