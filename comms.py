@@ -70,11 +70,17 @@ class WallConnection:
 		if not data:
 			return 0
 		for row in data:
-			current_Row = [[row[0],row[1],row[1],row[4],age(int(row[3]))]];
+			current_Row = [[row[0],row[1],row[1],row[4],age(int(row[3])),'']];
 			if row[2] == self.current_Wall:
 				
 				author = User.get(row[1])
 				fullname = author.get_first_name() + " " + author.get_last_name()
+				path = author.get_profile_pic_path()
+				if path == '':
+					current_Row[0][5] = '/static/images/default_avatar.jpeg'
+				else:
+					current_Row[0][5] = path
+				
 				current_Row[0][1] = fullname
 				final.append(current_Row[0])
 			
@@ -96,14 +102,21 @@ class FeedConnection:
 		if not data:
 			return 0
 		for row in data:
-			current_Row = [[row[0],row[1],row[1],row[4],age(int(row[3]))]]		
+			current_Row = [[row[0],row[1],row[1],row[4],age(int(row[3])),'']]		
 			for user in friendsList:
 				if user == row[1]:
 					if current_Row not in final:
 						author = User.get(current_Row[0][1])
 
 						fullname = author.get_first_name() + " " + author.get_last_name()
-						current_Row[0][1] = fullname	
+						current_Row[0][1] = fullname
+						#set the picture
+						path = author.get_profile_pic_path()
+						if path == '':
+							current_Row[0][5] = '/static/images/default_avatar.jpeg'
+							
+						else:
+							current_Row[0][5] = path
 						final.append(current_Row[0])
 						
 			if row[1] == self.current_User:
