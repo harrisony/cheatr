@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% include templates/head.html %}
+<body>
+{% include templates/header.html %}
+
+<article>
+    <aside>
+        <a href='/profile/'>
+            <img id='profile_pic' src='{{user.get_profile_pic_path()}}' />
+            <h3>{{ user.get_first_name() }} {{ user.get_last_name() }} ({{ user.get_username() }})</h3>
+        </a>
+    </aside>
+
+    <div id="content">
+        <h1>My Friends</h1>
+        <p>{{ friend.get_first_name() }} {{ friend.get_last_name() }} ({{ friend.get_username() }}) has been successfully removed from your friends.</p>
+        <p>{{ add }}</p>
+    </div>
+</article>
+
+     
+{% include templates/footer.html %}
+</body>
+</html>

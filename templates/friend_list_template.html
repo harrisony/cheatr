@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% include templates/head.html %}
+<body>
+{% include templates/header.html %}
+
+<article>
+    <aside>
+        <a href='/profile/'>
+            <img id='profile_pic' src='{{user.get_profile_pic_path()}}' />
+            <h3>{{ user.get_first_name() }} {{ user.get_last_name() }} ({{ user.get_username() }})</h3>
+        </a>
+    </aside>
+
+    <div id="content">
+        <h1>My Friends</h1>
+        <ul id="friendlist">
+        {% for friend in friends %}
+            <li>
+                <img class='thumbnail_pic' src='{{ friend.get_profile_pic_path() }}' />
+                <a href="/profile/{{ friend.get_username() }}">{{ friend.get_first_name() + ' ' + friend.get_last_name() }}</a>
+                <form action="/friends/{{ friend.get_username() }}" method="POST">
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <input type="submit" value="Remove" />
+                    
+                </form>
+            </li>
+        {% end for %}
+        </ul>
+    </div>
+</article>
+
+     
+{% include templates/footer.html %}
+</body>
+</html>

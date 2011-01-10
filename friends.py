@@ -55,7 +55,8 @@ def add_friend(response, friend_username):
         user = auth.get_user(response)
         if user == None:
             return
-        friend = User.get(friend_username)
+        else:
+            friend = User.get(friend_username)
         #if is_friend(username, friend):
             #return 
         #_add_friend_local(username, friend)
@@ -114,8 +115,8 @@ WHERE status ='f';
 for row in cur:
     _add_friend_local(str(row[0]), str(row[1]))
 
-add_friend('gman', 'svet')
-add_friend('gman', 'smythey')
+#add_friend('gman', 'svet')
+#add_friend('gman', 'smythey')
 
 if __name__ == "__main__":
         print "before add\n", FRIENDS

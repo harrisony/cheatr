@@ -1,0 +1,8 @@
+#friendlist li {
+    padding:25px 50px;
+}
+
+#friendlist form {
+    display:inline;
+    float:right;
+}
