@@ -46,7 +46,7 @@ def signup(response):
     password = response.get_field("password")
     school = response.get_field("school")
     print username
-    if username:
+    if username and email and firstname and lastname and password:
         newUser = {"username": username, "firstname":firstname,"lastname":lastname,"email":email,"password":password,"school":school}
         User.add(newUser)
         print " I am here"
