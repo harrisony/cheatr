@@ -1,0 +1,50 @@
+article aside{
+	width: auto;
+	 border: 0px solid black;
+}
+
+form input {
+	border: 1px solid #03588C;
+	-moz-box-shadow: 0px 0px 6px #03588C;
+	margin: 6px;
+	font-size: 18px;
+	display:inline-block;
+	width:250px;
+}
+
+form {
+	text-align: right;
+	width: 400px;
+	display: block;
+	background-color: #D9D8F0;
+}
+
+form label {
+	text-align: left;
+	font-size: 17px;
+	display:inline-block;
+	width: 100px;
+}
+
+#content {
+	font-family: lucida bright;
+	padding: 5px;
+	margin-top: 50px;
+	border-left: 3px solid black;
+	text-align: center;
+}
+
+input[type="submit"] {
+	background-color: white;
+	display:inline-block;
+
+}
+
+#aside {
+	width:450px;
+	float: left;
+}
+
+#right {
+	margin-left: 450px;
+}
