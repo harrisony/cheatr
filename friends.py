@@ -25,6 +25,7 @@ def _remove_friend_local(username, friend):
         
 def remove_friend(username, friend_username):
     _remove_friend_local(username, friend_username)
+    print username, friend_username
     cur.execute("DELETE FROM friends WHERE friend = ? AND partner = ?;",(username, friend_username))
     cur.execute("DELETE FROM friends WHERE friend = ? AND partner = ?;",(friend_username, username))
     conn.commit()
@@ -51,6 +52,7 @@ def add_friend(username, friend_username):
     conn.commit()
     
 def get_friends(username):
+        print "IN BLOODY GET_FRIENDS"
         print "In get friends: " , FRIENDS
         friendlist = []
         if username in FRIENDS:
@@ -66,7 +68,7 @@ def is_friend(username, friend):
             return True
         else:
             return False
- 
+    
 def add_friend_handler(response, friend_username):
     raise Exception('Error!')
         
@@ -81,17 +83,20 @@ def add_friend_email(response):
         template.render_template('templates/addconfirmation.html', context, response)
                 
 def remove_friend_handler(response, friend_username):
+        print "IN REMOVE_FRIEND_HANDLER"
         auth.require_user(response)
         user = auth.get_user(response)
         if user == None:
             return
         username = user.get_username()
+        print '\n\n',username, friend_username, '\n\n'
         friend = User.get(friend_username)
         remove_friend(username, friend_username)
         context = {'user':user, 'friend':friend}
         template.render_template('templates/confirmation.html', context, response)
 
 def my_friends(response):
+        print 'IN MY_FRIENDS'
         auth.require_user(response)
         user = auth.get_user(response)
         if user == None:
