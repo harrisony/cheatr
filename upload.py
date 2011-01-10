@@ -55,6 +55,8 @@ def _do_upload(response):
         print "OS Path Exists"
         currenttime = str(int(time()))
     extension = mimetypes.guess_extension(content_type)
+    if extension is None:
+        extension = filename.split(".")[-1]
     serverfilename = currenttime + extension
     ul_file = os.path.join('static', 'files', serverfilename)
     #adding to list of all files
@@ -63,13 +65,14 @@ def _do_upload(response):
         return
     else:
         username = user.get_username()
-    print "username in _do_upload()", username
     dbfiles.addFile(serverfilename, username, filename, sbjct, descr, categor)
     open(ul_file, 'wb').write(data)
     #Response after file upload success
     user = auth.get_user(response)
     context = {"css": "fileupload", "title": "File Uploader", "ori_file_name": filename, "server_file_location": currenttime+extension, "user": user}
     template.render_template("templates/uploadconfirmed.html", context, response)
+##########################################################
+    #dbfiles.increaseRank(serverfilename)
 
 def file_search(response):
     auth.require_user(response)

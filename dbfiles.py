@@ -52,11 +52,9 @@ def getFilesSubject(subjectid):
     return results_files
 
 def _addFileLocal(fileid, userid, ori_filename, subjectid, description, category, rank):
-    print "userid in _addfilesLocal", userid
     repo[fileid] = UploadedFile(fileid, userid, ori_filename, subjectid, description, category, rank)
 
 def addFile(fileid, userid, ori_filename, subjectid, description, category):
-    print "userid in dbfiles", userid
     if fileid in repo:
         raise NameError('This File Already Exists')
     cur.execute("INSERT into Files (fileid, userid, ori_filename, subjectid, description, category, rank) VALUES (?, ?, ?, ?, ?, ?, 0.0);",
@@ -79,6 +77,14 @@ def getFile(fileid):
         return repo[fileid]
     else:
         return None
+
+def increaseRank(fileid):
+    if fileid in repo:
+        getFile(fileid).rank += 1.0
+        cur.execute("UPDATE Files SET rank = (rank + 1) WHERE fileid = ?;", (str(fileid)))
+        conn.commit()
+    else:
+        NameError('This File Does Not Exist')
 
 repo = {}
 cur.execute("SELECT * FROM Files")

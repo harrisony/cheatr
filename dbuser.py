@@ -97,7 +97,6 @@ class User(object):
         return tuple(self._subjects)
     def is_in_subject(self, inp):
         if type(inp) == int:
-            print 'HIHIHIHIHIH: '+self._subjects
             if inp in self._subjects:
                 return True
             else:
