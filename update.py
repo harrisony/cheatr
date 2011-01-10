@@ -9,8 +9,10 @@ from template_engine import template
 def update(response):
     auth.require_user(response)
     user = auth.get_user(response)
+    if not user:
+      return
     global photo, content_type
-    username = response.get_field("username")
+    username = user.get_username()
     firstname = response.get_field("firstname")
     lastname = response.get_field("lastname")
     email = response.get_field("email")
