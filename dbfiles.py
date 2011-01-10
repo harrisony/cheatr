@@ -84,13 +84,3 @@ cur.execute("SELECT * FROM Files")
 for row in cur:
     _addFileLocal(str(row[0]), str(row[1]), str(row[2]), int(row[3]), str(row[4]), str(row[6]), float(row[7]))
 
-try:
-    #add remaining fields
-    addFile("1294464681.png", "123", "appleconf.png", 2, "A Desc", "Notes")
-    addFile("1294532619.png", "123", "asdf.png", 2, "Another Desc", "Notes")
-    addFile("1294531867.png", "124", "bbbb.png", 2, "Desc of B", "Notes")
-    addFile("1294464894.png", "124", "cccc.png", 2, "Desc of C", "Notes")
-    #Set ranks
-except NameError:
-    pass
-
