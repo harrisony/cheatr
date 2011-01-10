@@ -2,7 +2,7 @@ from tornado import Server
 from time import time
 from dbuser import User
 from friends import *
-from auth import *
+import auth
 from template_engine import template
 import sqlite3
 #users = {'Jordan':['hello', 'world']}
@@ -89,8 +89,8 @@ class WallConnection:
 		
 class FeedConnection: 
 	def __init__(self, response):
-		User = get_user(response);
-		self.current_User = User.get_username()
+		self.currentUserObject = auth.get_user(response);
+		self.current_User = self.currentUserObject.get_username()
 		self.connection = sqlite3.connect('./commsdb.sqlite')
 		self.cursor = self.connection.cursor()
 		self.cursor.execute('CREATE TABLE IF NOT EXISTS "WALL" ("ID" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "author" TEXT NOT NULL , "target" TEXT NOT NULL , "time" INTEGER NOT NULL , "message" TEXT NOT NULL )')
@@ -98,22 +98,22 @@ class FeedConnection:
 		
 		final = []
 		friendsList = get_friends(self.current_User)
+		
 		data = self.cursor.execute('SELECT * FROM WALL ORDER BY time DESC LIMIT 15;')
 		if not data:
 			return 0
 		for row in data:
 			current_Row = [[row[0],row[1],row[1],row[4],age(int(row[3])),'']]		
 			for user in friendsList:
-				if user == row[1]:
+				if user.get_username() == row[1]:
 					if current_Row not in final:
-						print current_Row[0]
-						author = User.get(current_Row[0][1])
+						
 						
 
-						fullname = author.get_first_name() + " " + author.get_last_name()
+						fullname = user.get_first_name() + " " + user.get_last_name()
 						current_Row[0][1] = fullname
 						#set the picture
-						path = author.get_profile_pic_path()
+						path = user.get_profile_pic_path()
 						
 						if not path:
 							current_Row[0][5] = '/static/images/default_avatar.jpeg'
@@ -122,21 +122,23 @@ class FeedConnection:
 							current_Row[0][5] = path
 						final.append(current_Row[0])
 						
-			if row[1] == self.current_User:
-				author = User.get(current_Row[0][1])
-				fullname = author.get_first_name() + " " + author.get_last_name()
+						
+			if self.currentUserObject.get_username() == row[1]:
+				currentuser = self.currentUserObject
+				fullname = currentuser.get_first_name() + " " + currentuser.get_last_name()
 				current_Row[0][1] = fullname
-				path = author.get_profile_pic_path()
+				path = user.get_profile_pic_path()
 				if not path:
 					current_Row[0][5] = '/static/images/default_avatar.jpeg'
-							
+						
 				else:
 					current_Row[0][5] = path				
-					final.append(current_Row[0])
+				final.append(current_Row[0])
 				
 						
 				#	elif row[0] not in final[0]:
 				#		print final[0]
+		
 		return final
 		
 		
@@ -156,6 +158,7 @@ def _getWallData(response):
 		
 		
 def _getFeedData(response):
+	
 	f = FeedConnection(response)
 	context = {"posts":f.get_feed()}
 	template.render_template('templates/wallcontent.html', context, response)
@@ -164,7 +167,7 @@ def _getFeedData(response):
 def _submit(response):
 
 	now = time()
-	m = Message(get_user(response).get_username(), now, response.get_field('msg'))
+	m = Message(auth.get_user(response).get_username(), now, response.get_field('msg'))
 	w = WallConnection(response.get_field('current_Wall'))
 	w.set_wall(m)
 	return
