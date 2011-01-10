@@ -70,7 +70,7 @@ class WallConnection:
 		if not data:
 			return 0
 		for row in data:
-			current_Row = [[row[0],row[1],row[4],age(int(row[3]))]];
+			current_Row = [[row[0],row[1],row[1],row[4],age(int(row[3]))]];
 			if row[2] == self.current_Wall:
 				
 				author = User.get(row[1])
@@ -96,7 +96,7 @@ class FeedConnection:
 		if not data:
 			return 0
 		for row in data:
-			current_Row = [[row[0],row[1],row[4],age(int(row[3]))]]		
+			current_Row = [[row[0],row[1],row[1],row[4],age(int(row[3]))]]		
 			for user in friendsList:
 				if user == row[1]:
 					if current_Row not in final:
