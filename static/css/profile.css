@@ -11,3 +11,8 @@
 	aside section ul li:hover ul {
 		display: block;
 	}
+	
+	.friend img{
+		width: 50px;
+		border: 1px solid black;
+	}
