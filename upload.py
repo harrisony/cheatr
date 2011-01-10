@@ -30,7 +30,7 @@ def file_upload(response):
             return
     # we did not submit a form or it's wrong
     print "loading page first time"
-    context = {"css": "fileupload", "title": "File Uploader", "ul_err_msg": ul_error_msg}
+    context = {"css": "fileupload", "title": "File Uploader", "ul_err_msg": ul_error_msg, "user":user}
     template.render_template("templates/fileupload.html", context, response)
 
 def _do_upload(response):
