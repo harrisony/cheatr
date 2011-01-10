@@ -35,7 +35,7 @@ def createsubject(response):
         not response.get_field("unit") or 
         not response.get_field("description")):
         template.render_template("templates/subject_create_template.html",
-                                {"notification":"One or more of the fields are missing! ","enablebutton":True},
+                                {"notification":"One or more of the fields are missing!","user":'',"enablebutton":True},
                                 response)
     else:
         subjectname = response.get_field("subjectname")

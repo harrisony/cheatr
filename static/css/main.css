@@ -221,7 +221,9 @@ article section {
 }
 
 
-
+#message > p {
+position:absolute;
+}
 /* news feed */
 #wall_content_data img {
 	width:50px;
