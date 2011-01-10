@@ -20,8 +20,10 @@
 <div id="content">
 <form method="post" action="/login">
 	<input name="page" type="hidden" value="{{ page }}" />
-	Username: <input type="text" name="username" value="{{ username }}" />
-	Password: <input type="password" name="password" />
+	<label for="username">Username: </label>
+	<input type="text" name="username" value="{{ username }}" />
+	<label for="password">Password: </label>
+	<input type="password" name="password" />
 	<input type="submit" name="submit" />
 </form>
 <p>{{ output }}</p>
