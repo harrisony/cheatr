@@ -121,12 +121,12 @@ WHERE status ='f';
 for row in cur:
     _add_friend_local(str(row[0]), str(row[1]))
 
-#add_friend('gman', 'svet')
-#add_friend('gman', 'smythey')
+add_friend('gman', 'svet')
+add_friend('gman', 'smythey')
 
-#if __name__ == "__main__":
-        #print "before add\n", FRIENDS
-        #add_friend('gman', 'svet')
-        #print "after add\n", FRIENDS
-        #remove_friend('gman', 'svet')
-        #print "after delete\n", FRIENDS
+if __name__ == "__main__":
+        print "before add\n", FRIENDS
+        add_friend('gman', 'svet')
+        print "after add\n", FRIENDS
+        remove_friend('gman', 'svet')
+        print "after delete\n", FRIENDS
