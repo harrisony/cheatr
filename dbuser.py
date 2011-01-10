@@ -5,6 +5,7 @@ try:
     import cPickle as pickle
 except:
     import pickle
+import friends
 class User(object):
     @staticmethod
     def exists(username): 
@@ -99,7 +100,10 @@ class User(object):
             else:
                 return False
         elif type(inp) == str:
-            raise Exception("WTF YOU DOING FOOL!")
+            if friends.is_friend(inp,self._username):
+                return True
+            else:
+                return False
         else:
             return False
     def set_multiple(self, args):
