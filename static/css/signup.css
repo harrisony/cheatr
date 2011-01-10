@@ -18,6 +18,7 @@ form input {
 form {
 	text-align: right;
 	width: 400px;
+	margin-left: 40px;
 	display: block;
 	background-color: #D9D8F0;
 	-webkit-box-shadow:2px 3px 6px rgba(0,0,0,0.3); 
