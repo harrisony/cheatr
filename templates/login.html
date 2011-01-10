@@ -6,6 +6,7 @@
 	<h1>{{ title }}</h1>
 <article>
 <div id="content">
+<div id="aside">
 <form method="post" action="/login">
 	<input name="page" type="hidden" value="{{ page }}" />
 	<label for="username">Username: </label>
@@ -14,7 +15,11 @@
 	<input type="password" name="password" />
 	<input type="submit" name="submit" value="Login" />
 </form>
-<a href="/signup">Click Here to Singup</a>
+</div>
+<div id="right">
+<br/><br />
+<h1><a href="/signup">Click Here to Signup</a></h1>
+</div>
 <p>{{ output }}</p>
 {% if username %}
 <p>Hello {{ firstname }}</p>

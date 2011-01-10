@@ -6,7 +6,7 @@ def loginpage(response):
     page = response.get_field("page")
     if not page:
         page = "/"
-    context = {"title":"Login", "output":"", "username":"", "page":page, "css":"signup"}    
+    context = {"title":"Login", "output":"", "username":"", "page":page, "css":"login"}    
     if username:
         user = User.get(username)
         context["output"] = "Hello " + user.get_first_name()
@@ -31,7 +31,7 @@ def login(response, context):
         user = User.get(username)
         context["firstname"] = user.get_first_name()
         context["username"] = username
-        context["css"] = "signup"
+        context["css"] = "login"
         if user.password_correct(password):
             message = "username: " + username + " password: " + password
             firstname = user.get_first_name()
