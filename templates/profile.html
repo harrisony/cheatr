@@ -6,11 +6,11 @@
 	<h1>{{ title }}</h1>
 <article>
 <aside>
+	<div id="profile_sidebar">
 	<section>
-		<p>Account Info</p>
 		<ul>			
-			{% if profile_pic_location != "" %}<li><img src="{{ profile_pic_location }}" width ="180px" /></li>{% end if %}
-			{% if profile_pic_location == "" %}<li><img src="/static/photos/Default/default_male.jpg" width ="180px" /></li>{% end if %}
+			{% if profile_pic_location != "" %}<li style="text-align:center;"><img src="{{ profile_pic_location }}" width ="180px" /></li>{% end if %}
+			{% if profile_pic_location == "" %}<li style="text-align:center;"><img src="/static/photos/Default/default_male.jpg" width ="180px" /></li>{% end if %}
 			<li>Username: {{ username }}</li>
 			<li>Email: {{ email }}</li>		
 			<li id="submenu">Education
@@ -38,10 +38,7 @@
 		
 		</ul>
 	</section>
-	<section>
-		<p>Chat</p>
-	</section>
-
+	</div>
 </aside>
 <div id="main">
 {%include templates/wall.html %}

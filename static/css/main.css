@@ -31,7 +31,9 @@ text-align:center;
 position:relative;
 }
 
-
+h3 {
+	margin:5px;
+}
 
 
 h1{
@@ -41,7 +43,7 @@ h1{
 	display: inline;
 	width: auto;
 	font-size: 0.9cm; 
-	color: #8EB4E6;
+	color: rgba(223,181,122,1);
 }
 
 div#title { 

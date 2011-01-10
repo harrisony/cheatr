@@ -2,13 +2,13 @@
 {% include templates/head.html %}
 <body>
 {% include templates/header.html %}
-
+<h1>Friends</h1>
 <article>
 
     {% include templates/user_profile_pic.html %}
 
     <div id="content">
-        <h1>My Friends</h1>
+        
         <ul id="friendlist">
         {% for friend in friends %}
             <li>

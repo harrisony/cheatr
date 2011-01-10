@@ -1,4 +1,5 @@
     <aside>
+		<div id="profilepic"
         <a href='/profile/'>
 			{% if user.get_profile_pic_path() %}
 				<img id='profile_pic' src='{{user.get_profile_pic_path()}}' />
@@ -10,9 +11,10 @@
              
          
         </a>
-        <h1>Add Friend</h1>
+        <h3>Add Friend:</h3>
         <form name="input" action="/addfriendemail" method="get">
-            E-mail: <input type="text" name="email" />
-            <input type="submit" value="Submit" />
-        </form> 
+            E-mail: <input type="text" name="email" id="email"/>
+            <input type="submit" value="Submit"/>
+        </form>
+		</div>
     </aside>
