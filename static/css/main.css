@@ -179,7 +179,7 @@ article aside {
 	display: block;
 }
 
-div#content{
+div#main{
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
 	font-family: Nobile;
