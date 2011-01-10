@@ -9,15 +9,10 @@ from template_engine import template
 
 def profile(response, username):
     auth.require_user(response)
-    name = auth.get_user(response)
-    if name == None:
+    user = auth.get_user(response)
+    if user == None:
         return
-    if username == "":
-        username = name.get_username()
-    user = User.get(username)
 
-    if not user:
-        user = name
     if user is not None:
         firstname = user.get_first_name()
         lastname = user.get_last_name()
