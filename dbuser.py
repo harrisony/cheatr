@@ -48,6 +48,8 @@ class User(object):
         self._set_blank()
         x = self._run_db("SELECT * FROM users WHERE username = ?;", (username,))
         (self._username, self._passwordhash, self._firstname, self._lastname, self._email, self._profilepicpath, self._school) = x[0]
+        x = self._run_db("SELECT subject_id FROM users_subjects WHERE username = ?;", (username,))
+        self._subjects = [i[0] for i in x]
     def _set_blank(self):
         self._args = {}
         self._username = ''
@@ -57,6 +59,7 @@ class User(object):
         self._school = ''
         self._passwordhash = ''
         self._profilepicpath = ''
+        self._subjects = []
     def __repr__(self):
         return "<Person username:%s>" % self._username
     def get_username(self):
@@ -73,6 +76,8 @@ class User(object):
         return self._passwordhash
     def get_profile_pic_path(self):
         return self._profilepicpath
+    def get_subjects(self):
+        return tuple(self._subjects)
     def set_mutiple(self, args):
         mapping = {'firstname': self.set_first_name, 'lastname': self.set_last_name, 'email': self.set_email, 'school': self.set_school,
                    'password': self.set_password, 'profilepath': self.set_profile_pic_path}
@@ -99,6 +104,12 @@ class User(object):
     def set_password(self, pword):
         self._run_db("UPDATE users SET 'passwordhash = ? WHERE username = ?;", (sha1(pword).hexdigest()),self._username)
         self._passwordhash = sha1(pword).hexdigest()
+    def add_subject(self, sid):
+        self._run_db("INSERT INTO users_subjects VALUES(?,?);", (self._username, sid))
+        self._subjects.append(sid)
+    def remove_subject(self, sid):
+        self._run_db("DELETE FROM users_subjects WHERE username = ? AND subject_id = ?", (self._username, sid))
+        del self._subjects[self._subjects.index(sid)]
     def password_correct(self, password):
         if sha1(password).hexdigest() == self.get_password_hash():
            return True
