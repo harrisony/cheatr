@@ -3,6 +3,10 @@
 		padding: 0px;
 	}
 	
+	aside section ul li {
+		text-decoration: underline;
+	}
+	
 	aside section ul li ul {
 		display: none;
 		margin:0px;
@@ -14,5 +18,24 @@
 	
 	.friend img{
 		width: 50px;
-		border: 1px solid black;
+		border: 2px solid black;
+		display: block;
+	}
+	
+	.friend {
+		display: inline-block;
+		margin: 3px;
+		text-align: center;
+	}
+	
+	.friend a {
+		color: black;
+	}
+	
+	.friend:hover a {
+		color:white;
+	}
+	
+	.friend:hover {
+		background-color: #03588C;
 	}
