@@ -5,7 +5,7 @@
 	<body>
 		
 		{% include templates/header.html %}
-		<h1 id='title'>{{ subject.name }}</h1>
+		<h1 id='title'>{{ subject.name.replace("_"," ") }}</h1>
 		<article>
 		<aside id="info">
 			<div id="profilepic"
@@ -51,16 +51,33 @@
 					</ul>
 				</nav>
 			<section id="resources">
-				<h1>Resources</h1>
-				
-				
+				{% if len(all_resources) %}
 				<section id="top-resources">
+					<h1>Top Resources</h1>
 					<section>
 						{% for resource in top_resources %}
 							<p><a href="/static/files/{{ resource.fileid }}">{{ resource.ori_filename }}</a></p>
 						{% end for %}
 					</section>
 				</section>
+				<section id="all-resources">
+					<h1>All Resources</h1>
+					<section>
+						{% for resource in all_resources %}
+							<p><a href="/static/files/{{ resource.fileid }}">{{ resource.ori_filename }}</a></p>
+						{% end for %}
+					</section>
+				</section>
+				{% end if %}
+				
+				{% if not len(all_resources) %}
+				<section id="all-resources">
+					<h1>Resources</h1>
+					<section>
+						<p>No resources attached to this subject</p>
+					</section>
+				</section>
+				{% end if %}
 				
 			</section>
 			<div style="width:950px;">
