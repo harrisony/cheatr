@@ -1,4 +1,4 @@
-from hashlib import sha256
+from hashlib import sha1
 import sqlite3
 class User(object):
     @staticmethod
@@ -21,17 +21,17 @@ class User(object):
     @staticmethod
     def add(args):
         if 'username' not in args:
-            return Exception('No username provided')
+            raise Exception('No username provided')
         elif User.exists(args['username']):
             raise Exception('There is already a user called "%s"' % (args['username']))
         else:          
             q = User(args,nu=True)
-    
+            return True
+
     def __init__(self, inp,nu=False):
         if nu:
-            #TODO: insert encrypted password hash
             print inp
-            self._run_db("INSERT INTO users VALUES(?,?,?,?,?,?,?);", (inp['username'], sha256(inp['password']).hexdigest(), inp['firstname'], inp['lastname'], inp['email'], '', inp['school']))
+            self._run_db("INSERT INTO users VALUES(?,?,?,?,?,?,?);", (inp['username'], sha1(inp['password']).hexdigest(), inp['firstname'], inp['lastname'], inp['email'], '', inp['school']))
         else:
             self._username = inp
             self._update_db(inp)
@@ -97,10 +97,10 @@ class User(object):
         self._run_db("UPDATE users SET school = ?;", (school,))
         self._school = school
     def set_password(self, pword):
-        self._run_db("UPDATE users SET 'passwordhash = ?;", (sha256(pword).hexdigest()),)
-        self._passwordhash = sha256(pword).hexdigest()
-    def password_correct(self, password):
-        if sha256(password).hexdigest() == self.get_password_hash():
+        self._run_db("UPDATE users SET 'passwordhash = ?;", (sha1(pword).hexdigest()),)
+        self._passwordhash = sha1(pword).hexdigest()
+    def password_correct(username, password):
+        if sha1(password).hexdigest() == self.get_password_hash():
            return True
         else:
             return False
