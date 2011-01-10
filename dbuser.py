@@ -91,7 +91,7 @@ class User(object):
         self._run_db("UPDATE users SET lastname = ?;", (lname,))
         self._lastname = lname
     def set_profile_pic_path(self, path):
-        self.run_db("UPDATE users SET profilepath = ?;", (profilepath,))
+        self._run_db("UPDATE users SET profilepicpath = ?;", (path,))
         self._profile_pic_path = path
     def set_school(self, school):
         self._run_db("UPDATE users SET school = ?;", (school,))

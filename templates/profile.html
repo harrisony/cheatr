@@ -45,7 +45,8 @@
 	<section>
 		<p>Friends</p>
 		<ul>
-		{% for f in friends %}<li class="friend"><a href="/profile/{{ f }}">{{ f }}</a></li>{% end for %}
+		{% for f in friends %}<li class="friend"><a href="/profile/{{ f }}"><img src="{{ User.get(f).get_profile_pic_path() }}"> {{f}}</a></li>{% end for %}
+		
 		</ul>
 	</section>
 	<section>

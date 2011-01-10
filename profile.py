@@ -61,9 +61,10 @@ def profile(response, username):
         email = user.get_email()
         school = user.get_school()
         #picture = user.get_profile_pic_path()
-        picture = "/static/photos/gman.jpe"
+        picture = user.get_profile_pic_path()
         print "PICTURE IS: " + picture
         fullname = firstname + " " + lastname
+        print fullname
         #response.write(OUTPUT % (username,username, picture,firstname,lastname,email,school,username))
         context = {"title":fullname, "user":username, "content":"Content", "profile_pic_location":picture,
                    "email":email, "school":school, "css": "profile", "friends":friends.get_friends(username), "User": User}
@@ -113,13 +114,13 @@ def update(response):
     filename, content_type, data = response.get_file('photo')
         
     if username:
-        try:
-            extension = mimetypes.guess_extension(content_type)
-            photo_path = os.path.join('static', 'photos', username + extension)
-            open(photo_path, 'wb').write(data)
-            photo_url = photo_path.replace("\\","/")
-        except:
-            photo_url = "/static/photos/default_male.jpg"
+        extension = mimetypes.guess_extension(content_type)
+        photo_path = os.path.join('static', 'photos', username + extension)
+        print "updating.."
+        open(photo_path, 'wb').write(data)
+        photo_url = photo_path.replace("\\","/")
+        print photo_url
+        User.get(username).set_profile_pic_path(photo_url)
         fullname = '%s %s' % (username, lastname)
         
         user = User.get(username)
