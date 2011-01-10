@@ -10,10 +10,10 @@ Aside of main content
 </aside>
 
 <div id='content'>
-	<section>
+	<section id='subjects'>
 		Subjects
 		<ul>
-			{% for subject in subjects %}{% if subject == "Maths" %}<li class="subject">{{ subject + ' '}}</li>{% end if %}{% end for %}
+			{% for subject in subjects %}<li class="subject">{{ ' ' }}<a href='/{{ subject }}.html'><img src='/static/images/{{ subject }}-icon.png'></a></li>{% end for %}
 		</ul>
 	</section>
 {% include templates/wall.html %}
