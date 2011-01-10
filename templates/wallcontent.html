@@ -2,7 +2,7 @@
 	{% for f in posts %}
 		<li>
 			<img class="avatar" src="/static/images/default_avatar.jpeg">
-			<p> <em><a href=./{{f[2]}}>{{f[1]}}</a> says:</em>{{ f[3] }} <span>{{f[4]}}</span></p>
+			<p> <em><a href=../profile/{{f[2]}}>{{f[1]}}</a> says:</em>{{ f[3] }} <span>{{f[4]}}</span></p>
 		</li>
 	{% end for %}
 </ul>
