@@ -127,7 +127,7 @@ class FeedConnection:
 				currentuser = self.currentUserObject
 				fullname = currentuser.get_first_name() + " " + currentuser.get_last_name()
 				current_Row[0][1] = fullname
-				path = user.get_profile_pic_path()
+				path = currentuser.get_profile_pic_path()
 				if not path:
 					current_Row[0][5] = '/static/images/default_avatar.jpeg'
 						
