@@ -16,7 +16,7 @@ if __name__ == "__main__":
     # Register your urls here
     # e.g. server.register("/foo", mymodule.foohandler)
 
-    server.register("/", auth.loginpage)
+    server.register("/", home.page)
     server.register("/login", auth.loginpage)
     server.register("/logout",auth.logout)
     server.register("/profile/(.*)", profile.profile)

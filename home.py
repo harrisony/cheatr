@@ -1,20 +1,24 @@
 from template_engine import template
 from tornado import Server
 import user
+import auth
 
 def page(response):
-    currentuser = user.User.get(response.get_field("user"))
-    if currentuser == None:
-        response.redirect("/signup")
+    #user = User.get(username)
+    auth.require_user(response)
+    user = auth.get_user(response)
+    print "name: " + str(user)
+    if user == None:
+        response.redirect("/login")
     else:        
         context = {'title': 'Home Page',
-                   'user': currentuser.get_username(),
-                   'firstname': currentuser.get_first_name(),
-                   'lastname' : currentuser.get_last_name(),
+                   'user': user.get_username(),
+                   'firstname': user.get_first_name(),
+                   'lastname' : user.get_last_name(),
                    'subjects' : ['maths', 'english', 'physics', 'chemistry'],
 				   'wallorfeed':'feedupdate',
-				   'current_User':currentuser.get_username(),
-				   'current_Wall':response.get_field('user')
+				   'current_User':user.get_username(),
+				   'current_Wall':user.get_username()
 				   }
 
                    
