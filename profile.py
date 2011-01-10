@@ -55,7 +55,7 @@ def signup(response):
     else:
         #response.write(SIGNUP)
         title = "Sign Up"
-        context = {"title":title, "css":"signup"}
+        context = {"title":title, "css":"signup", "user":None}
         template.render_template("templates/signup.html", context, response)
 
 def clean(string):
