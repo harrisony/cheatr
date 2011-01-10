@@ -8,7 +8,12 @@
 
     <div id="content">
         <h1>My Friends</h1>
-        <p>{{ friend.get_first_name() }} {{ friend.get_last_name() }} ({{ friend.get_username() }}) has been successfully added to your friends.</p>
+        {% if friend %}
+            <p>{{ friend.get_first_name() }} {{ friend.get_last_name() }} ({{ friend.get_username() }}) has been successfully added to your friends.</p>
+        {% end if %}
+        {% if not friend %}
+            <p>Sorry, your friend doesn't use Cheatr, you should tell them about it.</p>
+        {% end if %}
     </div>
 </article>
 

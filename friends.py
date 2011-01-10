@@ -78,7 +78,10 @@ def add_friend_email(response):
         if user == None:
             return
         friend = User.get_from_email(response.get_field("email"))
-        add_friend(user.get_username(), friend.get_username())
+        if friend == None:
+            pass
+        else:
+            add_friend(user.get_username(), friend.get_username())
         context = {'user':user, 'friend':friend}
         template.render_template('templates/addconfirmation.html', context, response)
                 
