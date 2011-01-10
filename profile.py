@@ -65,8 +65,9 @@ def profile(response, username):
         interests = {"activities":None, "tv":None}
         about = {"birthday":None, "age":None, "website":None}
         education = {"school":None,"subjects":None,"state":None,"grade":None}
-        #picture = user.get_profile_pic_path()
         picture = user.get_profile_pic_path()
+        if not picture:
+            picture = "/static/images/default_avatar.jpeg"
         print "PICTURE IS: " + picture
         fullname = firstname + " " + lastname
         print fullname
