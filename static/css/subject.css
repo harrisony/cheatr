@@ -73,12 +73,12 @@ section#members h1 {
 	text-align:center;
 }
 
-#study ul {
+#study nav ul {
 	list-style-type: none;
 	display: inline;
 }
 
-#study ul li{
+#study nav ul li{
 	list-style-type: none;
 	display: inline-block;
 	width: 150px;
