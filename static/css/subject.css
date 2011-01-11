@@ -63,3 +63,7 @@ a, a:visited{
 	
 	position:absolute;
 }
+
+section#members h1 {
+	font-weight: bold;
+}

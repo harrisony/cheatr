@@ -33,7 +33,7 @@
 			</section>
 			<section id="members">
 			{% if subject.has_member(user) %}
-			<h1>members</h1>
+			<h1>Members</h1>
 				{% for member in subject.get_members() %}
 				<p>{{ member.get_first_name() }} {{ member.get_last_name() }}</p>
 				{% end for %}

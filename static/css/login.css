@@ -1,6 +1,5 @@
 article aside{
 	width: auto;
-	 border: 0px solid black;
 }
 
 form input {
@@ -36,7 +35,6 @@ form label {
 	font-family: lucida bright;
 	padding: 5px;
 	margin-top: 50px;
-	border-left: 3px solid black;
 	text-align: center;
 	border: none;
 }
@@ -44,7 +42,6 @@ form label {
 input[type="submit"] {
 	background-color: white;
 	display:inline-block;
-
 }
 
 #aside {
