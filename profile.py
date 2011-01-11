@@ -12,7 +12,10 @@ def profile(response, username):
     user = auth.get_user(response)
     if user == None:
         return
-    username = User.get(username)
+    if not username:
+        username = user
+    else:
+        username = User.get(username)
     if user is not None:
         firstname = username.get_first_name()
         lastname = username.get_last_name()
