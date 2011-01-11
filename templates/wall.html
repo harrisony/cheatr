@@ -22,12 +22,20 @@
 	}
 	
 		function submit(e){
-$('message').request();
+		if(document.getElementById("msg").value != ''){
+		$('message').request();
 	new Ajax.Updater('wallcontent','/{{wallorfeed}}',{
 			method: 'post',
 			parameters: {'current_Wall':'{{current_Wall}}','user':'{{user.get_username()}}'}});			
 $('message').msg.clear();	
 		
+		}
+		else{
+		alert('The message you enetered was empty.');
+		
+		}
+	
+
 	
 
 					
