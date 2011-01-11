@@ -160,7 +160,7 @@ class FeedConnection:
 				elif current_Row[0][3] == current_Row[0][2]:
 						current_Row[0][3] = ''
 				else:
-					current_Row[0][3] = 'Posted to ' + current_Row[0][3]
+					current_Row[0][3] = 'Posted to ' + current_Row[0][3]+'\'s wall'
 				final.append(current_Row[0])
 				
 						
