@@ -42,7 +42,10 @@
 			</div>
 		</aside>
 		<div id="study">
-			<nav style="top:0;">
+			
+			<section id="resources">
+				<h1>Resources</h1>
+				<nav>
 					<ul>
 						<li><a href="/subject/{{ subject.id }}/All/1">All</a></li>
 						<li><a href="/subject/{{ subject.id }}/Notes/1">Notes</a></li>
@@ -50,23 +53,34 @@
 						<li><a href="/subject/{{ subject.id }}/Papers/1">Past Papers</a></li>
 					</ul>
 				</nav>
-			<section id="resources">
-				<h1>Resources</h1>
+				
 				{% if len(all_resources) %}
 				<section id="top-resources">
 					<h2>Top Resources</h2>
 					<section>
+						<ul id="fileslist">
 						{% for resource in top_resources %}
-							<p><a href="/static/files/{{ resource.fileid }}">{{ resource.ori_filename }}</a></p>
+							<li>
+								<img src="/static/images/{{ resource.category }}.png">
+								<a href="/static/files/{{ resource.fileid }}" target="_blank">{{ resource.ori_filename }}</a><span class="rating">Rated: {{resource.rank}}</span>
+								<p>{{ resource.getsubjectname() }} - {{ resource.description }}</p>
+							</li>
 						{% end for %}
+						</ul>
 					</section>
 				</section>
 				<section id="all-resources">
 					<h2>All Resources</h2>
 					<section>
+						<ul id="fileslist">
 						{% for resource in all_resources %}
-							<p><a href="/static/files/{{ resource.fileid }}">{{ resource.ori_filename }}</a></p>
+							<li>
+								<img src="/static/images/{{ resource.category }}.png">
+								<a href="/static/files/{{ resource.fileid }}" target="_blank">{{ resource.ori_filename }}</a><span class="rating">Rated: {{resource.rank}}</span>
+								<p>{{ resource.getsubjectname() }} - {{ resource.description }}</p>
+							</li>
 						{% end for %}
+						</ul>
 					</section>
 				</section>
 				{% end if %}

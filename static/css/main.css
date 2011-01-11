@@ -38,7 +38,7 @@ h3 {
 
 h1{
 	font-family: Nobile;
-	padding: 0px 5px 0px 5px;
+	padding: 5px;
 	margin: 15px;
 	display: inline-block;
 	width: auto;
@@ -46,6 +46,16 @@ h1{
 	color: rgba(220,137,19,1.0);
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+
+h2{
+	font-family: Nobile;
+	padding: 5px;
+	margin: 15px;
+	display: inline;
+	width: auto;
+	font-size: 0.6cm; 
+	color: rgba(220,137,19,1.0);;
 }
 
 div#title { 
