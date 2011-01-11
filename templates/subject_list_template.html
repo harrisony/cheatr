@@ -12,12 +12,19 @@
 
 <!--{% end if %}-->
 		<div id="subjects">
-			{% for i in subjectlist %}
+			{% if len(subjectlist) %}
+				{% for i in subjectlist %}
 				<div>
 				<p><a href="/subject/{{ i.get_id() }}">{{ i.get_name().replace("_"," ") }}</a></p>
 				<p>{{ i.get_grade()}}, {{ i.get_jurisdiction() }}.</p>
 				</div>
-			{% end for %}
+				{% end for %}
+			{% end if %}
+			{% if not len(subjectlist) %}
+				<div>
+				<p>No Subjects Yet</p>
+				</div>
+			{% end if %}
 		</div>
 	</div>
 </article>

@@ -40,10 +40,12 @@ h1{
 	font-family: Nobile;
 	padding: 0px 5px 0px 5px;
 	margin: 15px;
-	display: inline;
+	display: inline-block;
 	width: auto;
 	font-size: 0.9cm; 
-	color: rgba(220,137,19,1.0);;
+	color: rgba(220,137,19,1.0);
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 div#title { 

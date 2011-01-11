@@ -43,7 +43,7 @@ header {
 	background-color:rgba(220,137,19,0.5);
 }
 
-#account ul {
+#account ul, #subjects_menu ul {
 	display: none;
 	font-size:16px;
 	padding:5px;
@@ -58,15 +58,15 @@ header {
 	top: 32px;
 }
 
-#account:hover ul {
+#account:hover ul, #subjects_menu:hover ul {
   display: block;
 }
 
-#account ul > li  a, ul > li a:visited{
+#account ul > li  a, ul > li a:visited, #subjects_menu ul > li  a, ul > li a:visited{
 	margin: 5px;
 	color:rgba(240,240,240,1.0);
 }
-#account ul li:hover {
+#account ul li:hover, #subjects_menu ul li:hover{
 	background-color:rgba(223,181,122,1);
 	color:rgba(200,200,200,1.0);
 }

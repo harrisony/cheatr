@@ -67,3 +67,19 @@ a, a:visited{
 section#members h1 {
 	font-weight: bold;
 }
+
+#study nav{
+	display: block;
+	text-align:center;
+}
+
+#study ul {
+	list-style-type: none;
+	display: inline;
+}
+
+#study ul li{
+	list-style-type: none;
+	display: inline-block;
+	width: 150px;
+}
