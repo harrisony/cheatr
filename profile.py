@@ -7,6 +7,7 @@ from friends import *
 import auth
 from template_engine import template
 
+
 def profile(response, username):
     auth.require_user(response)
     user = auth.get_user(response)

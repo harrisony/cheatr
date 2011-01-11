@@ -1,8 +1,8 @@
 <ul id="wall_content_data">
 	{% for f in posts %}
-		<li>
-			<img class="avatar" src="{{f[5]}}">
-			<p><a href=../profile/{{f[2]}}>{{f[1]}}</a> says:<div class="wall_text">{{ f[3] }}</div> <span>{{f[4]}}</span></p>
+		<li>                                                                 
+			<img class="avatar" src="{{f[6]}}">
+			<p><a href=../profile/{{f[2]}}>{{f[1]}}</a> says:<div class="wall_text">{{ f[4] }}<span>{{f[3]}}</span> </div><span>{{f[5]}}</span></p>
 		</li>
 	{% end for %}
 </ul>

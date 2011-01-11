@@ -3,6 +3,7 @@ from time import time
 from dbuser import User
 from friends import *
 import auth
+import database_subject
 from template_engine import template
 import sqlite3
 #users = {'Jordan':['hello', 'world']}
@@ -70,17 +71,26 @@ class WallConnection:
 		if not data:
 			return 0
 		for row in data:
-			current_Row = [[row[0],row[1],row[1],row[4],age(int(row[3])),'']];
+			current_Row = [[row[0],row[1],row[1],row[2],row[4],age(int(row[3])),'']];
 			if row[2] == self.current_Wall:
 				
 				author = User.get(row[1])
 				fullname = author.get_first_name() + " " + author.get_last_name()
 				path = author.get_profile_pic_path()
-				if not path:
-					current_Row[0][5] = '/static/images/default_avatar.jpeg'
-				else:
-					current_Row[0][5] = path
 				
+				if not path:
+					current_Row[0][6] = '/static/images/default_avatar.jpeg'
+				else:
+					current_Row[0][6] = path
+				if current_Row[0][3].isdigit():
+					current_Row[0][3] = database_subject.get_subject(current_Row[0][3]).get_name()
+					current_Row[0][3] = current_Row[0][3].replace('_',' ')
+					current_Row[0][3] = 'Posted to ' + current_Row[0][3]
+				elif current_Row[0][3] == current_Row[0][2]:
+						current_Row[0][3] = ''
+				else:
+					current_Row[0][3] = 'Posted to ' + current_Row[0][3]
+					
 				current_Row[0][1] = fullname
 				final.append(current_Row[0])
 			
@@ -103,7 +113,7 @@ class FeedConnection:
 		if not data:
 			return 0
 		for row in data:
-			current_Row = [[row[0],row[1],row[1],row[4],age(int(row[3])),'']]		
+			current_Row = [[row[0],row[1],row[1],row[2],row[4],age(int(row[3])),'']]		
 			for user in friendsList:
 				if user.get_username() == row[1]:
 					if current_Row not in final:
@@ -116,10 +126,20 @@ class FeedConnection:
 						path = user.get_profile_pic_path()
 						
 						if not path:
-							current_Row[0][5] = '/static/images/default_avatar.jpeg'
+							current_Row[0][6] = '/static/images/default_avatar.jpeg'
 							
 						else:
-							current_Row[0][5] = path
+							current_Row[0][6] = path
+						
+							
+						if current_Row[0][3].isdigit():
+							current_Row[0][3] = database_subject.get_subject(current_Row[0][3]).get_name()
+							current_Row[0][3] = current_Row[0][3].replace('_',' ')
+							current_Row[0][3] = 'Posted to ' + current_Row[0][3]
+						elif current_Row[0][3] == current_Row[0][2]:
+							current_Row[0][3] = ''
+						else:
+							current_Row[0][3] = 'Posted to ' + current_Row[0][3]
 						final.append(current_Row[0])
 						
 						
@@ -129,10 +149,18 @@ class FeedConnection:
 				current_Row[0][1] = fullname
 				path = currentuser.get_profile_pic_path()
 				if not path:
-					current_Row[0][5] = '/static/images/default_avatar.jpeg'
+					current_Row[0][6] = '/static/images/default_avatar.jpeg'
 						
 				else:
-					current_Row[0][5] = path				
+					current_Row[0][6] = path
+				if current_Row[0][3].isdigit():
+					current_Row[0][3] = database_subject.get_subject(current_Row[0][3]).get_name()
+					current_Row[0][3] = current_Row[0][3].replace('_',' ')
+					current_Row[0][3] = 'Posted to ' + current_Row[0][3]
+				elif current_Row[0][3] == current_Row[0][2]:
+						current_Row[0][3] = ''
+				else:
+					current_Row[0][3] = 'Posted to ' + current_Row[0][3]
 				final.append(current_Row[0])
 				
 						
