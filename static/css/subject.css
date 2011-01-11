@@ -95,3 +95,7 @@ section#members h1 {
 	display: inline-block;
 	width: 150px;
 }
+
+#wall {
+	padding-bottom: 25px;
+}
