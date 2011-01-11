@@ -9,7 +9,6 @@ from template_engine import template
 DATANAME = os.path.join("data","friends.sqlite")    
 
 def _oneway_remove_friend(username, friend):
-    print "one way remove before: " , FRIENDS
     if username in FRIENDS:
         friendslist = FRIENDS[username]
         if friend in friendslist:
@@ -17,7 +16,6 @@ def _oneway_remove_friend(username, friend):
     else:
         friendslist = [friend]
     FRIENDS[username] = friendslist
-    print "one way remove after: " , FRIENDS
         
 def _remove_friend_local(username, friend):
     _oneway_remove_friend(friend, username)
@@ -52,8 +50,6 @@ def add_friend(username, friend_username):
     conn.commit()
     
 def get_friends(username):
-        print "IN BLOODY GET_FRIENDS"
-        print "In get friends: " , FRIENDS
         friendlist = []
         if username in FRIENDS:
             for friend in FRIENDS[username]: 
@@ -98,7 +94,6 @@ def add_friend_user(response):
         context = {'user':user, 'friend':friend}
         template.render_template('templates/addconfirmation.html', context, response)                
 def remove_friend_handler(response, friend_username):
-        print "IN REMOVE_FRIEND_HANDLER"
         auth.require_user(response)
         user = auth.get_user(response)
         if user == None:
@@ -111,7 +106,6 @@ def remove_friend_handler(response, friend_username):
         template.render_template('templates/confirmation.html', context, response)
 
 def my_friends(response):
-        print 'IN MY_FRIENDS'
         auth.require_user(response)
         user = auth.get_user(response)
         if user == None:
