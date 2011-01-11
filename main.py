@@ -27,6 +27,7 @@ if __name__ == "__main__":
     server.register("/change_password",password.change_password)
     
     server.register("/addfriendemail/?", friends.add_friend_email)
+    server.register("/addfrienduser/?", friends.add_friend_user)
     server.register("/friendsdelete/(.*)/?", friends.remove_friend_handler, delete=friends.remove_friend)
     server.register('/friends/?', friends.my_friends)
     #server.register("/friends/(.*)/?", friends.remove_friend)
