@@ -5,8 +5,8 @@
 	{% for f in allfiles %}
 		<li>
 			<img src="/static/images/{{ f.category }}.png">
-			<a href="/static/files/{{ f.fileid }}" target="_blank">{{ f.ori_filename }}</a>
-			<p>{{ f.description }}</p>
+			<a href="/static/files/{{ f.fileid }}" target="_blank">{{ f.ori_filename }}</a><span class="rating">Rated: {{f.rank}}</span>
+			<p>{{ f.getsubjectname() }} - {{ f.description }}</p>
 		</li>
 	{% end for %}
 </ul>

@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import database_subject
 
 DATANAME = os.path.join("data","DB_Files.sqlite")
 
@@ -24,7 +25,10 @@ class UploadedFile(object):
         self.description = description
         self.category = category
         self.rank = rank
-
+    
+    def getsubjectname(self):
+        return database_subject.get_subject(self.subjectid).get_name().replace("_", " ")
+        
     def __repr__(self):
         return """File Object
            Fileid: %s
@@ -36,7 +40,7 @@ Original Filename: %s
              Rank: %f
 _________________________________________
 """ % (self.fileid, self.userid, self.ori_filename, self.subjectid, self.description, self.category, self.rank)
-    
+
 def getFilesUser(userid):
     results_files = []
     for item in repo:
