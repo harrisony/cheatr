@@ -103,10 +103,11 @@ def listsubject(response):
     targetsubject=response.get_field("subjectselected")
 
 def subjectmembership(response, action, subjectid):
+    print action, subjectid
     user = auth.get_user(response)
     if action == 'join':
-        user.add_subject(subjectid)
+        user.add_subject(int(subjectid))
     elif action == 'leave':
-        user.remove_subject(subjectid)
+        user.remove_subject(int(subjectid))
     response.redirect("/subject/"+subjectid)
 	
